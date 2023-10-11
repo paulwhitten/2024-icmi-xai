@@ -6,6 +6,8 @@ from skimage.feature import corner_harris, corner_subpix, corner_peaks
 from skimage.transform import warp, AffineTransform
 from skimage.draw import ellipse
 
+# from example https://scikit-image.org/docs/stable/auto_examples/features_detection/plot_corner.html#sphx-glr-auto-examples-features-detection-plot-corner-py
+
 # Sheared checkerboard
 tform = AffineTransform(scale=(1.3, 1.1), rotation=1, shear=0.7,
                         translation=(110, 30))
