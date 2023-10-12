@@ -32,7 +32,7 @@ def set_neighborhood(img, x, y, pixels_away, intensity):
 
 # load image
 print("opening file:", sys.argv[1])
-filename = os.path.join("data", sys.argv[1])
+filename = os.path.join("skel_data", sys.argv[1])
 image = skimage.io.imread(filename)
 
 # find corners

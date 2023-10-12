@@ -51,7 +51,7 @@ home_folder = "/Users/pcw"
 print("Loading training data")
 N, rows, columns, training_digits, training_labels = load_mnist_float(
     home_folder + "/mnist/combined_image", home_folder + "/mnist/combined_label")
-print("loaded training", N)
+print("loaded combined training", N)
 
 print("Loading test data.")
 n, rows, columns, test_digits, test_labels = load_mnist_float(

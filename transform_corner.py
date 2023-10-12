@@ -22,7 +22,7 @@ def set_neighborhood(img, x, y, pixels_away, intensity):
         for xi in range(x-pixels_away, x+pixels_away+1):
             if (valid_pixel(img, xi, yi)):
                 dist = math.sqrt(abs(x-xi) + abs(y-yi))
-                pixel_intensity = int(intensity / (dist + 1))
+                pixel_intensity = int(intensity / (dist + 2))
                 if (img[yi, xi] < pixel_intensity):
                     img[yi, xi] = pixel_intensity
 
@@ -47,9 +47,12 @@ for d in digits:
     coords = corner_peaks(corner_harris(raw), min_distance=5, threshold_rel=0.02)
     corner_image = np.zeros((rows, columns), np.uint8)
     for coord in coords:
-        set_neighborhood(corner_image, coord[1], coord[0], 2, 255)
+        set_neighborhood(corner_image, coord[1], coord[0], 1, 255)
     
     corners.append(corner_image.flatten())
+    digit_count += 1
+    if digit_count % 1000 == 0:
+        print("count:", digit_count)
 
 write_partial_mnist_data(corners, labels, N, "corners-image",  "corners-labels")
 

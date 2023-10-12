@@ -50,12 +50,12 @@ home_folder = "/home/pcw"
 # original
 print("Loading training data")
 N, rows, columns, training_digits, training_labels = load_mnist_float(
-    "./train/corners-image", "./train/corners-labels")
+    "./skel-training/corners-image", "./skel-training/corners-labels")
 print("loaded training", N)
 
 print("Loading test data.")
 n, rows, columns, test_digits, test_labels = load_mnist_float(
-    "./test/corners-image", "./train/corners-labels")
+    "./skel-testing/corners-image", "./skel-testing/corners-labels")
 print("loaded test", n)
 
 print("Fitting SVM")
