@@ -435,17 +435,12 @@ def get_image_name(folder, transform_name, label, d_count, classes):
     return folder + "/" + transform_name + "/" + classes[label] + "-" + str(d_count) + ".png"
 
 
-
-
-
 def get_corners(image):
     coords = corner_peaks(corner_harris(image), min_distance=5, threshold_rel=0.02)
     corner_image = np.zeros((image.shape[0], image.shape[1]), np.uint8)
     for coord in coords:
         set_neighborhood(corner_image, coord[1], coord[0], 1, 255)
     return image
-
-
 
 
 def process_image(data):
