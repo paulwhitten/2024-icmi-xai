@@ -102,4 +102,33 @@ def load_mnist_labels(label_file):
         labels.append(label[0])
     return labels
 
+# this method will write mnist data to file
+#  images is the input  array of images to write
+#  labels is the input array of image lables to write
+#  count is the number of items to write to the file. expected to be <= sice of input arrays
+#  image and label filnames are the files to output to.  overwrites existing data
+def write_partial_mnist_data(images, labels, count, image_filename, label_filename):
+    rows = 28
+    columns = 28
+    max = count
+    image_buffer_pos = 16
+    label_buffer_pos = 8
+    image_buffer = bytearray(image_buffer_pos + max * rows * columns)
+    label_buffer = bytearray(label_buffer_pos + max)
 
+    struct.pack_into(">iiii", image_buffer, 0, 2051, max, 28, 28)
+    struct.pack_into(">ii", label_buffer, 0, 2049, max)
+    pixels_in_image = rows * columns
+    for x in range(max):
+        struct.pack_into("B" * pixels_in_image, image_buffer, image_buffer_pos, *images[x])
+        struct.pack_into("B", label_buffer, label_buffer_pos, labels[x])
+        image_buffer_pos += pixels_in_image
+        label_buffer_pos += 1
+
+    f=open(image_filename,"wb")
+    f.write(image_buffer)
+    f.close()
+
+    f=open(label_filename,"wb")
+    f.write(label_buffer)
+    f.close()

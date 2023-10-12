@@ -5,8 +5,6 @@ import skimage
 import numpy as np
 from matplotlib import pyplot as plt
 from skimage.feature import corner_harris, corner_subpix, corner_peaks
-from skimage.transform import warp, AffineTransform
-from skimage.draw import ellipse
 
 # from example https://scikit-image.org/docs/stable/auto_examples/features_detection/plot_corner.html#sphx-glr-auto-examples-features-detection-plot-corner-py
 
@@ -26,10 +24,11 @@ def set_neighborhood(img, x, y, pixels_away, intensity):
         for xi in range(x-pixels_away, x+pixels_away+1):
             if (valid_pixel(img, xi, yi)):
                 dist = math.sqrt(abs(x-xi) + abs(y-yi))
-                pixel_intensity = int(intensity / (dist + 1))
+                pixel_intensity = intensity
+                if dist > 0:
+                        pixel_intensity = int(intensity / (dist + 2))
                 if (img[yi, xi] < pixel_intensity):
                     img[yi, xi] = pixel_intensity
-
 
 # load image
 print("opening file:", sys.argv[1])
