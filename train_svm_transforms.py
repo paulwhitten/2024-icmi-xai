@@ -6,11 +6,42 @@ from sklearn import svm
 from datetime import datetime
 from multiprocessing import Process
 from sklearn.metrics import accuracy_score
-from load_mnist_data import load_mnist_float
+from load_mnist_data import load_mnist_float, get_num_classes
 #from joblib import dump, load # more efficient serialization
 
+def analyze_results(batch, labels, predictions):
+    print("\n################################")
+    print(batch, "accuracy analysis ")
+    num_classes = get_num_classes(labels)
+    class_counts = [0.0] * num_classes
+    class_correct = [0.0] * num_classes
+    conf_matrix = []
+    class_header = []
+    for i in range(num_classes):
+        class_header.append(i)
+        conf_matrix.append([0] * num_classes)
+    for pred_ix, p in enumerate(predictions):
+        if labels[pred_ix] == p:
+            class_correct[labels[pred_ix]] += 1.0
+        class_counts[labels[pred_ix]] += 1.0
+        conf_matrix[labels[pred_ix]][p] += 1
+    # output results
+    print("\n\nAccuracy per class:\n| class | accuracy |\n| :---: | :---: |")
+    for i in range(num_classes):
+        print("|", i, " | ", class_correct[i] / class_counts[i], " |")
+    print("\n")
+    print("confusion matrix:")
+    conf_matrix_string = str(class_header) + "\n"
+    for row_ix, row in enumerate(conf_matrix):
+        conf_matrix_string += str(row_ix)
+        for n in row:
+            conf_matrix_string += ", " + str(n)
+        conf_matrix_string += "\n"
+    print(conf_matrix_string)
+    print("\n################################")
+
 """
-This program trains all of the transform resnet 50 NNAs
+This program trains all of the transform models
 """
 
 def train_batch(batch):
@@ -31,6 +62,8 @@ def train_batch(batch):
     pred = rbf_svc.predict(test_images)
     t_labels = np.argmax(test_labels, axis=-1)
     print(batch[0], "SVM Radial Bias Function accuracy:", accuracy_score(t_labels, pred))
+
+    analyze_results(batch[0], t_labels, pred)
 
     # save https://scikit-learn.org/stable/model_persistence.html
     # https://machinelearningmastery.com/save-load-machine-learning-models-python-scikit-learn/
@@ -85,7 +118,10 @@ if __name__ == '__main__':
         f'{args.test_folder}/ellipse_circle-image', f'{args.test_folder}/ellipse_circle-labels', args.output_folder],
 
         ["chull", f'{args.train_folder}/chull-image', f'{args.train_folder}/chull-labels',
-        f'{args.test_folder}/chull-image', f'{args.test_folder}/chull-labels', args.output_folder]
+        f'{args.test_folder}/chull-image', f'{args.test_folder}/chull-labels', args.output_folder],
+
+        ["corner", f'{args.train_folder}/corner-image', f'{args.train_folder}/corner-labels',
+        f'{args.test_folder}/corner-image', f'{args.test_folder}/corner-labels', args.output_folder]
     ]
 
     start_time = datetime.now()

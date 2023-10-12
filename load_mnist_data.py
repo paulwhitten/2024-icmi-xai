@@ -132,3 +132,10 @@ def write_partial_mnist_data(images, labels, count, image_filename, label_filena
     f=open(label_filename,"wb")
     f.write(label_buffer)
     f.close()
+
+def get_num_classes(train_labels):
+    train_label_min = min(train_labels)
+    train_label_max = max(train_labels)
+    print("Class labels, min:", train_label_min, "max:", train_label_max)
+    # assuming class labels are zero through train_label_max giving train_label_max + 1 classes
+    return train_label_max + 1
