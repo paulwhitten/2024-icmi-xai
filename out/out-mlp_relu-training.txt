@@ -1,0 +1,2682 @@
+==== raw ====
+Fitting MLP
+Iteration 1, loss = 0.51585906
+Iteration 2, loss = 0.19307737
+Iteration 3, loss = 0.13805007
+Iteration 4, loss = 0.11098814
+Iteration 5, loss = 0.08776269
+Iteration 6, loss = 0.06989209
+Iteration 7, loss = 0.05795015
+Iteration 8, loss = 0.05131321
+Iteration 9, loss = 0.04167530
+Iteration 10, loss = 0.03528748
+Iteration 11, loss = 0.02619763
+Iteration 12, loss = 0.02147764
+Iteration 13, loss = 0.01753366
+Iteration 14, loss = 0.01423859
+Iteration 15, loss = 0.01481079
+Iteration 16, loss = 0.01148569
+Iteration 17, loss = 0.00555962
+Iteration 18, loss = 0.00538825
+Iteration 19, loss = 0.00340802
+Iteration 20, loss = 0.00181041
+Iteration 21, loss = 0.00125050
+Iteration 22, loss = 0.00112964
+Iteration 23, loss = 0.00102099
+Iteration 24, loss = 0.00094998
+Iteration 25, loss = 0.00090960
+Iteration 26, loss = 0.00087181
+Iteration 27, loss = 0.00083891
+Iteration 28, loss = 0.00081307
+Iteration 29, loss = 0.00079068
+Iteration 30, loss = 0.00076866
+Iteration 31, loss = 0.00075089
+Iteration 32, loss = 0.00073537
+Iteration 33, loss = 0.00072103
+Iteration 34, loss = 0.00070698
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:00:30.748985
+Test MLP in: 0:00:00.306863
+MLP Accuracy: 0.9788
+
+################################
+raw accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  0.9948979591836735  |
+| 1  |  0.9911894273127754  |
+| 2  |  0.9757751937984496  |
+| 3  |  0.9811881188118812  |
+| 4  |  0.9816700610997964  |
+| 5  |  0.9730941704035875  |
+| 6  |  0.9749478079331941  |
+| 7  |  0.9795719844357976  |
+| 8  |  0.9681724845995893  |
+| 9  |  0.9653121902874133  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 975, 1, 1, 0, 1, 0, 1, 1, 0, 0
+1, 4, 1125, 0, 2, 0, 0, 1, 1, 2, 0
+2, 15, 0, 1007, 2, 1, 0, 1, 3, 3, 0
+3, 7, 1, 4, 991, 0, 3, 0, 1, 3, 0
+4, 6, 0, 2, 0, 964, 0, 2, 3, 0, 5
+5, 11, 0, 0, 5, 1, 868, 4, 0, 2, 1
+6, 11, 2, 1, 1, 4, 5, 934, 0, 0, 0
+7, 12, 0, 4, 2, 0, 0, 0, 1007, 0, 3
+8, 15, 0, 2, 2, 2, 3, 2, 2, 943, 3
+9, 14, 3, 0, 5, 9, 0, 0, 3, 1, 974
+
+
+################################
+raw done in: 0:00:34.982529
+==== crossing ====
+Fitting MLP
+Iteration 1, loss = 2.60779285
+Iteration 2, loss = 2.37728891
+Iteration 3, loss = 2.35124110
+Iteration 4, loss = 2.33774183
+Iteration 5, loss = 2.32719435
+Iteration 6, loss = 2.31721010
+Iteration 7, loss = 2.31290546
+Iteration 8, loss = 2.30503539
+Iteration 9, loss = 2.30120789
+Iteration 10, loss = 2.29687941
+Iteration 11, loss = 2.29326601
+Iteration 12, loss = 2.28986360
+Iteration 13, loss = 2.28656748
+Iteration 14, loss = 2.28226166
+Iteration 15, loss = 2.28181809
+Iteration 16, loss = 2.27948695
+Iteration 17, loss = 2.27661767
+Iteration 18, loss = 2.27424533
+Iteration 19, loss = 2.27191340
+Iteration 20, loss = 2.27000382
+Iteration 21, loss = 2.26767889
+Iteration 22, loss = 2.26545699
+Iteration 23, loss = 2.26504468
+Iteration 24, loss = 2.26146141
+Iteration 25, loss = 2.25988524
+Iteration 26, loss = 2.25779944
+Iteration 27, loss = 2.25643904
+Iteration 28, loss = 2.25442642
+Iteration 29, loss = 2.25151311
+Iteration 30, loss = 2.25109685
+Iteration 31, loss = 2.25028209
+Iteration 32, loss = 2.24832519
+Iteration 33, loss = 2.24690630
+Iteration 34, loss = 2.24486108
+Iteration 35, loss = 2.24237337
+Iteration 36, loss = 2.24119541
+Iteration 37, loss = 2.24111189
+Iteration 38, loss = 2.23927074
+Iteration 39, loss = 2.23709148
+Iteration 40, loss = 2.23580518
+Iteration 41, loss = 2.23419064
+Iteration 42, loss = 2.23196052
+Iteration 43, loss = 2.23169424
+Iteration 44, loss = 2.22937703
+Iteration 45, loss = 2.22912076
+Iteration 46, loss = 2.22732911
+Iteration 47, loss = 2.22662496
+Iteration 48, loss = 2.22570543
+Iteration 49, loss = 2.22451062
+Iteration 50, loss = 2.22293452
+Iteration 51, loss = 2.22120088
+Iteration 52, loss = 2.21977915
+Iteration 53, loss = 2.21875497
+Iteration 54, loss = 2.21766741
+Iteration 55, loss = 2.21764193
+Iteration 56, loss = 2.21468910
+Iteration 57, loss = 2.21459347
+Iteration 58, loss = 2.21333566
+Iteration 59, loss = 2.21268934
+Iteration 60, loss = 2.21089670
+Iteration 61, loss = 2.21061966
+Iteration 62, loss = 2.20970123
+Iteration 63, loss = 2.20854980
+Iteration 64, loss = 2.20793388
+Iteration 65, loss = 2.20548988
+Iteration 66, loss = 2.20545758
+Iteration 67, loss = 2.20385667
+Iteration 68, loss = 2.20286207
+Iteration 69, loss = 2.20161838
+Iteration 70, loss = 2.20197905
+Iteration 71, loss = 2.20048366
+Iteration 72, loss = 2.19992921
+Iteration 73, loss = 2.19910273
+Iteration 74, loss = 2.19809846
+Iteration 75, loss = 2.19808364
+Iteration 76, loss = 2.19686501
+Iteration 77, loss = 2.19667875
+Iteration 78, loss = 2.19554630
+Iteration 79, loss = 2.19578600
+Iteration 80, loss = 2.19362140
+Iteration 81, loss = 2.19319023
+Iteration 82, loss = 2.19299342
+Iteration 83, loss = 2.19228224
+Iteration 84, loss = 2.19251098
+Iteration 85, loss = 2.19014407
+Iteration 86, loss = 2.18988173
+Iteration 87, loss = 2.19103847
+Iteration 88, loss = 2.18900955
+Iteration 89, loss = 2.18794759
+Iteration 90, loss = 2.18789400
+Iteration 91, loss = 2.18615834
+Iteration 92, loss = 2.18696795
+Iteration 93, loss = 2.18622201
+Iteration 94, loss = 2.18611053
+Iteration 95, loss = 2.18623222
+Iteration 96, loss = 2.18537898
+Iteration 97, loss = 2.18417702
+Iteration 98, loss = 2.18314470
+Iteration 99, loss = 2.18343365
+Iteration 100, loss = 2.18395744
+Iteration 101, loss = 2.18324773
+Iteration 102, loss = 2.18125788
+Iteration 103, loss = 2.18217606
+Iteration 104, loss = 2.18198133
+Iteration 105, loss = 2.17987370
+Iteration 106, loss = 2.17948677
+Iteration 107, loss = 2.18003197
+Iteration 108, loss = 2.17937607
+Iteration 109, loss = 2.17908231
+Iteration 110, loss = 2.17943724
+Iteration 111, loss = 2.17803801
+Iteration 112, loss = 2.17811083
+Iteration 113, loss = 2.17683339
+Iteration 114, loss = 2.17797357
+Iteration 115, loss = 2.17684297
+Iteration 116, loss = 2.17700442
+Iteration 117, loss = 2.17637506
+Iteration 118, loss = 2.17637255
+Iteration 119, loss = 2.17500806
+Iteration 120, loss = 2.17671687
+Iteration 121, loss = 2.17493089
+Iteration 122, loss = 2.17472306
+Iteration 123, loss = 2.17493710
+Iteration 124, loss = 2.17533756
+Iteration 125, loss = 2.17354903
+Iteration 126, loss = 2.17369552
+Iteration 127, loss = 2.17383795
+Iteration 128, loss = 2.17335885
+Iteration 129, loss = 2.17317016
+Iteration 130, loss = 2.17338718
+Iteration 131, loss = 2.17253538
+Iteration 132, loss = 2.17255180
+Iteration 133, loss = 2.17173568
+Iteration 134, loss = 2.17223139
+Iteration 135, loss = 2.17141258
+Iteration 136, loss = 2.17106549
+Iteration 137, loss = 2.16982863
+Iteration 138, loss = 2.17102338
+Iteration 139, loss = 2.17158566
+Iteration 140, loss = 2.17086598
+Iteration 141, loss = 2.17102203
+Iteration 142, loss = 2.16984001
+Iteration 143, loss = 2.16945369
+Iteration 144, loss = 2.16982796
+Iteration 145, loss = 2.16939005
+Iteration 146, loss = 2.16944374
+Iteration 147, loss = 2.16893728
+Iteration 148, loss = 2.16809405
+Iteration 149, loss = 2.16863781
+Iteration 150, loss = 2.16814520
+Iteration 151, loss = 2.16828823
+Iteration 152, loss = 2.16810978
+Iteration 153, loss = 2.16830156
+Iteration 154, loss = 2.16775614
+Iteration 155, loss = 2.16860400
+Iteration 156, loss = 2.16659288
+Iteration 157, loss = 2.16726289
+Iteration 158, loss = 2.16726170
+Iteration 159, loss = 2.16822553
+Iteration 160, loss = 2.16702873
+Iteration 161, loss = 2.16601608
+Iteration 162, loss = 2.16606741
+Iteration 163, loss = 2.16589076
+Iteration 164, loss = 2.16755260
+Iteration 165, loss = 2.16569239
+Iteration 166, loss = 2.16532948
+Iteration 167, loss = 2.16591260
+Iteration 168, loss = 2.16603968
+Iteration 169, loss = 2.16551555
+Iteration 170, loss = 2.16540551
+Iteration 171, loss = 2.16530908
+Iteration 172, loss = 2.16430139
+Iteration 173, loss = 2.16517463
+Iteration 174, loss = 2.16507641
+Iteration 175, loss = 2.16432586
+Iteration 176, loss = 2.16446281
+Iteration 177, loss = 2.16418519
+Iteration 178, loss = 2.16389940
+Iteration 179, loss = 2.16483742
+Iteration 180, loss = 2.16454527
+Iteration 181, loss = 2.16377636
+Iteration 182, loss = 2.16470079
+Iteration 183, loss = 2.16457129
+Iteration 184, loss = 2.16358860
+Iteration 185, loss = 2.16326515
+Iteration 186, loss = 2.16415979
+Iteration 187, loss = 2.16317791
+Iteration 188, loss = 2.16209764
+Iteration 189, loss = 2.16274024
+Iteration 190, loss = 2.16257212
+Iteration 191, loss = 2.16275822
+Iteration 192, loss = 2.16320185
+Iteration 193, loss = 2.16235815
+Iteration 194, loss = 2.16287921
+Iteration 195, loss = 2.16270441
+Iteration 196, loss = 2.16282945
+Iteration 197, loss = 2.16260393
+Iteration 198, loss = 2.16263827
+Iteration 199, loss = 2.16186720
+Iteration 200, loss = 2.16295360
+Iteration 201, loss = 2.16283844
+Iteration 202, loss = 2.16127521
+Iteration 203, loss = 2.16211728
+Iteration 204, loss = 2.16118746
+Iteration 205, loss = 2.16166463
+Iteration 206, loss = 2.16167757
+Iteration 207, loss = 2.16156065
+Iteration 208, loss = 2.16104715
+Iteration 209, loss = 2.16097237
+Iteration 210, loss = 2.16147534
+Iteration 211, loss = 2.16161819
+Iteration 212, loss = 2.16134012
+Iteration 213, loss = 2.16044568
+Iteration 214, loss = 2.16123873
+Iteration 215, loss = 2.16065919
+Iteration 216, loss = 2.16081896
+Iteration 217, loss = 2.16006069
+Iteration 218, loss = 2.16136099
+Iteration 219, loss = 2.16074979
+Iteration 220, loss = 2.15921717
+Iteration 221, loss = 2.16089852
+Iteration 222, loss = 2.16053575
+Iteration 223, loss = 2.16073108
+Iteration 224, loss = 2.15915006
+Iteration 225, loss = 2.15993207
+Iteration 226, loss = 2.15977315
+Iteration 227, loss = 2.16043417
+Iteration 228, loss = 2.15975335
+Iteration 229, loss = 2.15882049
+Iteration 230, loss = 2.15980115
+Iteration 231, loss = 2.15924300
+Iteration 232, loss = 2.15976551
+Iteration 233, loss = 2.15851731
+Iteration 234, loss = 2.15949079
+Iteration 235, loss = 2.15890375
+Iteration 236, loss = 2.15933665
+Iteration 237, loss = 2.15939310
+Iteration 238, loss = 2.15847630
+Iteration 239, loss = 2.15910354
+Iteration 240, loss = 2.15782601
+Iteration 241, loss = 2.15804962
+Iteration 242, loss = 2.15908973
+Iteration 243, loss = 2.15857692
+Iteration 244, loss = 2.15875653
+Iteration 245, loss = 2.15913755
+Iteration 246, loss = 2.15788250
+Iteration 247, loss = 2.15833604
+Iteration 248, loss = 2.15840931
+Iteration 249, loss = 2.15850405
+Iteration 250, loss = 2.15754749
+Iteration 251, loss = 2.15780722
+Iteration 252, loss = 2.15857588
+Iteration 253, loss = 2.15767745
+Iteration 254, loss = 2.15757008
+Iteration 255, loss = 2.15853367
+Iteration 256, loss = 2.15785245
+Iteration 257, loss = 2.15725698
+Iteration 258, loss = 2.15752524
+Iteration 259, loss = 2.15776510
+Iteration 260, loss = 2.15793056
+Iteration 261, loss = 2.15702904
+Iteration 262, loss = 2.15798216
+Iteration 263, loss = 2.15705552
+Iteration 264, loss = 2.15704304
+Iteration 265, loss = 2.15769614
+Iteration 266, loss = 2.15779236
+Iteration 267, loss = 2.15747731
+Iteration 268, loss = 2.15719545
+Iteration 269, loss = 2.15664666
+Iteration 270, loss = 2.15716844
+Iteration 271, loss = 2.15675861
+Iteration 272, loss = 2.15728296
+Iteration 273, loss = 2.15687296
+Iteration 274, loss = 2.15598872
+Iteration 275, loss = 2.15666839
+Iteration 276, loss = 2.15602140
+Iteration 277, loss = 2.15621119
+Iteration 278, loss = 2.15727915
+Iteration 279, loss = 2.15647686
+Iteration 280, loss = 2.15605441
+Iteration 281, loss = 2.15638781
+Iteration 282, loss = 2.15607356
+Iteration 283, loss = 2.15675524
+Iteration 284, loss = 2.15759575
+Iteration 285, loss = 2.15598300
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:04:21.857777
+Test MLP in: 0:00:00.294241
+MLP Accuracy: 0.2683
+
+################################
+crossing accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  0.9622448979591837  |
+| 1  |  0.0  |
+| 2  |  0.12596899224806202  |
+| 3  |  0.3564356435643564  |
+| 4  |  0.18737270875763748  |
+| 5  |  0.05717488789237668  |
+| 6  |  0.48851774530271397  |
+| 7  |  0.04571984435797665  |
+| 8  |  0.42505133470225875  |
+| 9  |  0.08523290386521308  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 943, 0, 1, 3, 1, 16, 2, 5, 7, 2
+1, 1127, 0, 0, 4, 0, 1, 2, 0, 1, 0
+2, 708, 2, 130, 4, 28, 0, 125, 1, 17, 17
+3, 567, 0, 4, 360, 1, 5, 21, 16, 28, 8
+4, 632, 0, 15, 21, 184, 0, 41, 3, 29, 57
+5, 785, 0, 2, 14, 2, 51, 33, 0, 4, 1
+6, 416, 0, 23, 1, 16, 17, 468, 1, 9, 7
+7, 887, 0, 8, 23, 29, 7, 10, 47, 14, 3
+8, 401, 1, 8, 49, 33, 1, 41, 1, 414, 25
+9, 754, 0, 5, 104, 15, 0, 11, 8, 26, 86
+
+
+################################
+crossing done in: 0:04:25.573398
+==== endpoint ====
+Fitting MLP
+Iteration 1, loss = 1.49282901
+Iteration 2, loss = 0.89005405
+Iteration 3, loss = 0.82541949
+Iteration 4, loss = 0.79360982
+Iteration 5, loss = 0.77179201
+Iteration 6, loss = 0.75355478
+Iteration 7, loss = 0.73800958
+Iteration 8, loss = 0.72512619
+Iteration 9, loss = 0.71331242
+Iteration 10, loss = 0.70303471
+Iteration 11, loss = 0.69396906
+Iteration 12, loss = 0.68365589
+Iteration 13, loss = 0.67727992
+Iteration 14, loss = 0.66873927
+Iteration 15, loss = 0.66062501
+Iteration 16, loss = 0.65562735
+Iteration 17, loss = 0.64704395
+Iteration 18, loss = 0.64142702
+Iteration 19, loss = 0.63587562
+Iteration 20, loss = 0.62992248
+Iteration 21, loss = 0.62389594
+Iteration 22, loss = 0.61872378
+Iteration 23, loss = 0.61196176
+Iteration 24, loss = 0.60704808
+Iteration 25, loss = 0.60231141
+Iteration 26, loss = 0.59631457
+Iteration 27, loss = 0.59299649
+Iteration 28, loss = 0.58806093
+Iteration 29, loss = 0.58165727
+Iteration 30, loss = 0.57915615
+Iteration 31, loss = 0.57349487
+Iteration 32, loss = 0.56972968
+Iteration 33, loss = 0.56661954
+Iteration 34, loss = 0.56170381
+Iteration 35, loss = 0.55929882
+Iteration 36, loss = 0.55605603
+Iteration 37, loss = 0.55278838
+Iteration 38, loss = 0.54746197
+Iteration 39, loss = 0.54500258
+Iteration 40, loss = 0.54387102
+Iteration 41, loss = 0.53914370
+Iteration 42, loss = 0.53843043
+Iteration 43, loss = 0.53493129
+Iteration 44, loss = 0.53178807
+Iteration 45, loss = 0.52836673
+Iteration 46, loss = 0.52771385
+Iteration 47, loss = 0.52628453
+Iteration 48, loss = 0.52370710
+Iteration 49, loss = 0.51962564
+Iteration 50, loss = 0.51924613
+Iteration 51, loss = 0.51573350
+Iteration 52, loss = 0.51402651
+Iteration 53, loss = 0.51291975
+Iteration 54, loss = 0.51073192
+Iteration 55, loss = 0.51018183
+Iteration 56, loss = 0.50790836
+Iteration 57, loss = 0.50651914
+Iteration 58, loss = 0.50351756
+Iteration 59, loss = 0.50228077
+Iteration 60, loss = 0.50372663
+Iteration 61, loss = 0.50116762
+Iteration 62, loss = 0.49834255
+Iteration 63, loss = 0.49627025
+Iteration 64, loss = 0.49482366
+Iteration 65, loss = 0.49159928
+Iteration 66, loss = 0.49283220
+Iteration 67, loss = 0.48960806
+Iteration 68, loss = 0.49204386
+Iteration 69, loss = 0.48837732
+Iteration 70, loss = 0.48617668
+Iteration 71, loss = 0.48705869
+Iteration 72, loss = 0.48738722
+Iteration 73, loss = 0.48539545
+Iteration 74, loss = 0.48544965
+Iteration 75, loss = 0.48499395
+Iteration 76, loss = 0.48232083
+Iteration 77, loss = 0.48124087
+Iteration 78, loss = 0.47925061
+Iteration 79, loss = 0.47751500
+Iteration 80, loss = 0.47763989
+Iteration 81, loss = 0.47887793
+Iteration 82, loss = 0.47568683
+Iteration 83, loss = 0.47460854
+Iteration 84, loss = 0.47885431
+Iteration 85, loss = 0.47591719
+Iteration 86, loss = 0.47379906
+Iteration 87, loss = 0.47367304
+Iteration 88, loss = 0.47142536
+Iteration 89, loss = 0.47246661
+Iteration 90, loss = 0.46891678
+Iteration 91, loss = 0.47175819
+Iteration 92, loss = 0.47058545
+Iteration 93, loss = 0.47086350
+Iteration 94, loss = 0.46932438
+Iteration 95, loss = 0.46702163
+Iteration 96, loss = 0.46737076
+Iteration 97, loss = 0.46552735
+Iteration 98, loss = 0.46712603
+Iteration 99, loss = 0.46553404
+Iteration 100, loss = 0.46683074
+Iteration 101, loss = 0.46659633
+Iteration 102, loss = 0.46537540
+Iteration 103, loss = 0.46576585
+Iteration 104, loss = 0.46546041
+Iteration 105, loss = 0.46468678
+Iteration 106, loss = 0.46205943
+Iteration 107, loss = 0.46476307
+Iteration 108, loss = 0.46228703
+Iteration 109, loss = 0.46081492
+Iteration 110, loss = 0.46052060
+Iteration 111, loss = 0.46019667
+Iteration 112, loss = 0.45997488
+Iteration 113, loss = 0.45960717
+Iteration 114, loss = 0.45974623
+Iteration 115, loss = 0.46039069
+Iteration 116, loss = 0.45878486
+Iteration 117, loss = 0.45827771
+Iteration 118, loss = 0.45885926
+Iteration 119, loss = 0.45689392
+Iteration 120, loss = 0.45619394
+Iteration 121, loss = 0.45754576
+Iteration 122, loss = 0.45573705
+Iteration 123, loss = 0.45663694
+Iteration 124, loss = 0.45496768
+Iteration 125, loss = 0.45442712
+Iteration 126, loss = 0.45482656
+Iteration 127, loss = 0.45415555
+Iteration 128, loss = 0.45327234
+Iteration 129, loss = 0.45370171
+Iteration 130, loss = 0.45362679
+Iteration 131, loss = 0.45419498
+Iteration 132, loss = 0.45261370
+Iteration 133, loss = 0.45324211
+Iteration 134, loss = 0.45192691
+Iteration 135, loss = 0.45230080
+Iteration 136, loss = 0.45189982
+Iteration 137, loss = 0.45116315
+Iteration 138, loss = 0.45099117
+Iteration 139, loss = 0.45000075
+Iteration 140, loss = 0.45188348
+Iteration 141, loss = 0.45197281
+Iteration 142, loss = 0.45065955
+Iteration 143, loss = 0.45023166
+Iteration 144, loss = 0.45024145
+Iteration 145, loss = 0.45051937
+Iteration 146, loss = 0.45142538
+Iteration 147, loss = 0.44791445
+Iteration 148, loss = 0.45006362
+Iteration 149, loss = 0.44834848
+Iteration 150, loss = 0.44860644
+Iteration 151, loss = 0.44834173
+Iteration 152, loss = 0.44893351
+Iteration 153, loss = 0.44872144
+Iteration 154, loss = 0.44804391
+Iteration 155, loss = 0.44769966
+Iteration 156, loss = 0.44616715
+Iteration 157, loss = 0.44684112
+Iteration 158, loss = 0.44581418
+Iteration 159, loss = 0.44593238
+Iteration 160, loss = 0.44754317
+Iteration 161, loss = 0.44473926
+Iteration 162, loss = 0.44587455
+Iteration 163, loss = 0.44638549
+Iteration 164, loss = 0.44570383
+Iteration 165, loss = 0.44685813
+Iteration 166, loss = 0.44524362
+Iteration 167, loss = 0.44586793
+Iteration 168, loss = 0.44544877
+Iteration 169, loss = 0.44406166
+Iteration 170, loss = 0.44551962
+Iteration 171, loss = 0.44456719
+Iteration 172, loss = 0.44294433
+Iteration 173, loss = 0.44281116
+Iteration 174, loss = 0.44450470
+Iteration 175, loss = 0.44289326
+Iteration 176, loss = 0.44377114
+Iteration 177, loss = 0.44301119
+Iteration 178, loss = 0.44311414
+Iteration 179, loss = 0.44444241
+Iteration 180, loss = 0.44416250
+Iteration 181, loss = 0.44317368
+Iteration 182, loss = 0.44358550
+Iteration 183, loss = 0.44153258
+Iteration 184, loss = 0.44335358
+Iteration 185, loss = 0.44170562
+Iteration 186, loss = 0.44256013
+Iteration 187, loss = 0.44368402
+Iteration 188, loss = 0.44267977
+Iteration 189, loss = 0.44234550
+Iteration 190, loss = 0.44300735
+Iteration 191, loss = 0.44132090
+Iteration 192, loss = 0.44169518
+Iteration 193, loss = 0.44050827
+Iteration 194, loss = 0.44121632
+Iteration 195, loss = 0.44069753
+Iteration 196, loss = 0.44070001
+Iteration 197, loss = 0.44095267
+Iteration 198, loss = 0.44098007
+Iteration 199, loss = 0.43988080
+Iteration 200, loss = 0.44044282
+Iteration 201, loss = 0.44026197
+Iteration 202, loss = 0.44031355
+Iteration 203, loss = 0.44094278
+Iteration 204, loss = 0.43911595
+Iteration 205, loss = 0.43916384
+Iteration 206, loss = 0.43875443
+Iteration 207, loss = 0.44046944
+Iteration 208, loss = 0.43920616
+Iteration 209, loss = 0.43768318
+Iteration 210, loss = 0.43829810
+Iteration 211, loss = 0.43944863
+Iteration 212, loss = 0.43860078
+Iteration 213, loss = 0.44020004
+Iteration 214, loss = 0.43865164
+Iteration 215, loss = 0.43826636
+Iteration 216, loss = 0.43943581
+Iteration 217, loss = 0.43778209
+Iteration 218, loss = 0.43798974
+Iteration 219, loss = 0.43932337
+Iteration 220, loss = 0.43778100
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:03:30.522837
+Test MLP in: 0:00:00.299272
+MLP Accuracy: 0.8066
+
+################################
+endpoint accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  0.8969387755102041  |
+| 1  |  0.879295154185022  |
+| 2  |  0.8284883720930233  |
+| 3  |  0.8732673267326733  |
+| 4  |  0.8818737270875764  |
+| 5  |  0.7432735426008968  |
+| 6  |  0.872651356993737  |
+| 7  |  0.8132295719844358  |
+| 8  |  0.3480492813141684  |
+| 9  |  0.9038652130822596  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 879, 0, 4, 6, 1, 1, 29, 2, 58, 0
+1, 27, 998, 15, 0, 5, 74, 4, 0, 4, 8
+2, 80, 21, 855, 19, 12, 3, 26, 9, 4, 3
+3, 37, 7, 12, 882, 2, 13, 0, 54, 3, 0
+4, 37, 5, 7, 3, 866, 15, 2, 14, 11, 22
+5, 44, 113, 3, 17, 13, 663, 6, 4, 17, 12
+6, 50, 11, 17, 9, 3, 19, 836, 0, 13, 0
+7, 51, 5, 8, 87, 24, 7, 0, 836, 1, 9
+8, 569, 3, 7, 7, 7, 11, 12, 4, 339, 15
+9, 34, 9, 4, 1, 16, 20, 0, 7, 6, 912
+
+
+################################
+endpoint done in: 0:03:34.353737
+==== fill ====
+Fitting MLP
+Iteration 1, loss = 2.11060836
+Iteration 2, loss = 1.97605147
+Iteration 3, loss = 1.95703307
+Iteration 4, loss = 1.94761884
+Iteration 5, loss = 1.93650671
+Iteration 6, loss = 1.92943461
+Iteration 7, loss = 1.92312199
+Iteration 8, loss = 1.91699868
+Iteration 9, loss = 1.91173188
+Iteration 10, loss = 1.90622732
+Iteration 11, loss = 1.90154112
+Iteration 12, loss = 1.89640162
+Iteration 13, loss = 1.89251739
+Iteration 14, loss = 1.88658924
+Iteration 15, loss = 1.88382006
+Iteration 16, loss = 1.87989861
+Iteration 17, loss = 1.87644451
+Iteration 18, loss = 1.87147518
+Iteration 19, loss = 1.86717262
+Iteration 20, loss = 1.86109948
+Iteration 21, loss = 1.85762920
+Iteration 22, loss = 1.85440841
+Iteration 23, loss = 1.85242797
+Iteration 24, loss = 1.84883805
+Iteration 25, loss = 1.84400306
+Iteration 26, loss = 1.84298443
+Iteration 27, loss = 1.84130634
+Iteration 28, loss = 1.83565842
+Iteration 29, loss = 1.83182369
+Iteration 30, loss = 1.82909269
+Iteration 31, loss = 1.82667829
+Iteration 32, loss = 1.82449109
+Iteration 33, loss = 1.82001548
+Iteration 34, loss = 1.81867314
+Iteration 35, loss = 1.81692311
+Iteration 36, loss = 1.81406991
+Iteration 37, loss = 1.81305326
+Iteration 38, loss = 1.81043022
+Iteration 39, loss = 1.80586462
+Iteration 40, loss = 1.80761013
+Iteration 41, loss = 1.80487214
+Iteration 42, loss = 1.80275554
+Iteration 43, loss = 1.79779485
+Iteration 44, loss = 1.79682747
+Iteration 45, loss = 1.79542377
+Iteration 46, loss = 1.79367420
+Iteration 47, loss = 1.79026967
+Iteration 48, loss = 1.78711644
+Iteration 49, loss = 1.78395562
+Iteration 50, loss = 1.78378973
+Iteration 51, loss = 1.78275563
+Iteration 52, loss = 1.78028049
+Iteration 53, loss = 1.77829826
+Iteration 54, loss = 1.77784558
+Iteration 55, loss = 1.78056492
+Iteration 56, loss = 1.77589236
+Iteration 57, loss = 1.77449317
+Iteration 58, loss = 1.77672309
+Iteration 59, loss = 1.77460244
+Iteration 60, loss = 1.77785174
+Iteration 61, loss = 1.78648456
+Iteration 62, loss = 1.77966842
+Iteration 63, loss = 1.77423676
+Iteration 64, loss = 1.76985146
+Iteration 65, loss = 1.77046356
+Iteration 66, loss = 1.77464691
+Iteration 67, loss = 1.77031636
+Iteration 68, loss = 1.76473546
+Iteration 69, loss = 1.76317979
+Iteration 70, loss = 1.76224282
+Iteration 71, loss = 1.76295630
+Iteration 72, loss = 1.76101008
+Iteration 73, loss = 1.76134401
+Iteration 74, loss = 1.75960146
+Iteration 75, loss = 1.76112194
+Iteration 76, loss = 1.76194119
+Iteration 77, loss = 1.76206173
+Iteration 78, loss = 1.77344746
+Iteration 79, loss = 1.76435898
+Iteration 80, loss = 1.76427228
+Iteration 81, loss = 1.76452687
+Iteration 82, loss = 1.75990219
+Iteration 83, loss = 1.75900948
+Iteration 84, loss = 1.75797248
+Iteration 85, loss = 1.75663255
+Iteration 86, loss = 1.75717814
+Iteration 87, loss = 1.75709283
+Iteration 88, loss = 1.75580558
+Iteration 89, loss = 1.75636713
+Iteration 90, loss = 1.75586425
+Iteration 91, loss = 1.75427648
+Iteration 92, loss = 1.75389792
+Iteration 93, loss = 1.75479894
+Iteration 94, loss = 1.75451047
+Iteration 95, loss = 1.75482885
+Iteration 96, loss = 1.75474064
+Iteration 97, loss = 1.75480658
+Iteration 98, loss = 1.75467414
+Iteration 99, loss = 1.75294169
+Iteration 100, loss = 1.75428516
+Iteration 101, loss = 1.76197778
+Iteration 102, loss = 1.77436990
+Iteration 103, loss = 1.77829532
+Iteration 104, loss = 1.77808180
+Iteration 105, loss = 1.77017639
+Iteration 106, loss = 1.76445686
+Iteration 107, loss = 1.75671262
+Iteration 108, loss = 1.75473027
+Iteration 109, loss = 1.75424505
+Iteration 110, loss = 1.75344940
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:01:44.516117
+Test MLP in: 0:00:00.300828
+MLP Accuracy: 0.36
+
+################################
+fill accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  0.9948979591836735  |
+| 1  |  0.0  |
+| 2  |  0.3003875968992248  |
+| 3  |  0.007920792079207921  |
+| 4  |  0.059063136456211814  |
+| 5  |  0.006726457399103139  |
+| 6  |  0.7286012526096033  |
+| 7  |  0.009727626459143969  |
+| 8  |  0.8172484599589322  |
+| 9  |  0.7324083250743311  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 975, 0, 0, 0, 0, 0, 2, 0, 1, 2
+1, 1132, 0, 0, 1, 0, 1, 0, 1, 0, 0
+2, 685, 0, 310, 6, 4, 6, 5, 0, 14, 2
+3, 976, 0, 12, 8, 1, 2, 5, 0, 2, 4
+4, 894, 0, 10, 0, 58, 1, 6, 1, 0, 12
+5, 854, 0, 10, 9, 2, 6, 3, 0, 2, 6
+6, 207, 0, 18, 1, 9, 1, 698, 2, 21, 1
+7, 1008, 0, 3, 3, 2, 0, 1, 10, 0, 1
+8, 54, 0, 37, 4, 0, 2, 46, 0, 796, 35
+9, 218, 0, 1, 3, 11, 7, 1, 2, 27, 739
+
+
+################################
+fill done in: 0:01:48.497492
+==== skel-fill ====
+Fitting MLP
+Iteration 1, loss = 3.30370789
+Iteration 2, loss = 3.25276416
+Iteration 3, loss = 3.25202889
+Iteration 4, loss = 3.25233017
+Iteration 5, loss = 3.25152202
+Iteration 6, loss = 3.25163160
+Iteration 7, loss = 3.25164571
+Iteration 8, loss = 3.25085291
+Iteration 9, loss = 3.25158923
+Iteration 10, loss = 3.25095428
+Iteration 11, loss = 3.25130052
+Iteration 12, loss = 3.25073223
+Iteration 13, loss = 3.25084558
+Iteration 14, loss = 3.25096917
+Iteration 15, loss = 3.25087803
+Iteration 16, loss = 3.25093637
+Iteration 17, loss = 3.25084971
+Iteration 18, loss = 3.25085987
+Iteration 19, loss = 3.25084524
+Iteration 20, loss = 3.25079991
+Iteration 21, loss = 3.25087652
+Iteration 22, loss = 3.25071271
+Iteration 23, loss = 3.25108065
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:00:20.212195
+Test MLP in: 0:00:00.299383
+MLP Accuracy: 0.098
+
+################################
+skel-fill accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  1.0  |
+| 1  |  0.0  |
+| 2  |  0.0  |
+| 3  |  0.0  |
+| 4  |  0.0  |
+| 5  |  0.0  |
+| 6  |  0.0  |
+| 7  |  0.0  |
+| 8  |  0.0  |
+| 9  |  0.0  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 980, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1, 1135, 0, 0, 0, 0, 0, 0, 0, 0, 0
+2, 1032, 0, 0, 0, 0, 0, 0, 0, 0, 0
+3, 1010, 0, 0, 0, 0, 0, 0, 0, 0, 0
+4, 982, 0, 0, 0, 0, 0, 0, 0, 0, 0
+5, 892, 0, 0, 0, 0, 0, 0, 0, 0, 0
+6, 958, 0, 0, 0, 0, 0, 0, 0, 0, 0
+7, 1028, 0, 0, 0, 0, 0, 0, 0, 0, 0
+8, 974, 0, 0, 0, 0, 0, 0, 0, 0, 0
+9, 1009, 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+
+################################
+skel-fill done in: 0:00:24.295788
+==== skel ====
+Fitting MLP
+Iteration 1, loss = 0.75621712
+Iteration 2, loss = 0.29101852
+Iteration 3, loss = 0.20075641
+Iteration 4, loss = 0.14672580
+Iteration 5, loss = 0.10888067
+Iteration 6, loss = 0.07792604
+Iteration 7, loss = 0.05939320
+Iteration 8, loss = 0.04148348
+Iteration 9, loss = 0.02933482
+Iteration 10, loss = 0.01916417
+Iteration 11, loss = 0.01065548
+Iteration 12, loss = 0.00728512
+Iteration 13, loss = 0.00585450
+Iteration 14, loss = 0.00413789
+Iteration 15, loss = 0.00342079
+Iteration 16, loss = 0.00307567
+Iteration 17, loss = 0.00249896
+Iteration 18, loss = 0.00219914
+Iteration 19, loss = 0.00189445
+Iteration 20, loss = 0.00176811
+Iteration 21, loss = 0.00161662
+Iteration 22, loss = 0.00158713
+Iteration 23, loss = 0.00149781
+Iteration 24, loss = 0.00143299
+Iteration 25, loss = 0.00124901
+Iteration 26, loss = 0.00113075
+Iteration 27, loss = 0.00108908
+Iteration 28, loss = 0.00106656
+Iteration 29, loss = 0.00101208
+Iteration 30, loss = 0.00097471
+Iteration 31, loss = 0.00095390
+Iteration 32, loss = 0.00092800
+Iteration 33, loss = 0.00091461
+Iteration 34, loss = 0.00089175
+Iteration 35, loss = 0.00087618
+Iteration 36, loss = 0.00085711
+Iteration 37, loss = 0.00084253
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:00:35.554244
+Test MLP in: 0:00:00.300388
+MLP Accuracy: 0.9556
+
+################################
+skel accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  0.9908163265306122  |
+| 1  |  0.9859030837004406  |
+| 2  |  0.9447674418604651  |
+| 3  |  0.9554455445544554  |
+| 4  |  0.955193482688391  |
+| 5  |  0.9461883408071748  |
+| 6  |  0.9572025052192067  |
+| 7  |  0.9523346303501945  |
+| 8  |  0.9404517453798767  |
+| 9  |  0.9236868186323092  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 971, 0, 0, 1, 1, 0, 5, 1, 0, 1
+1, 6, 1119, 4, 1, 0, 1, 1, 2, 1, 0
+2, 33, 4, 975, 0, 1, 0, 2, 12, 5, 0
+3, 17, 1, 8, 965, 0, 9, 0, 7, 3, 0
+4, 18, 3, 2, 0, 938, 0, 5, 0, 2, 14
+5, 23, 0, 0, 16, 0, 844, 2, 0, 3, 4
+6, 21, 3, 3, 0, 4, 5, 917, 0, 4, 1
+7, 16, 3, 17, 2, 0, 0, 0, 979, 1, 10
+8, 21, 1, 3, 5, 5, 5, 7, 4, 916, 7
+9, 33, 4, 1, 5, 14, 9, 0, 7, 4, 932
+
+
+################################
+skel done in: 0:00:39.266963
+==== thresh ====
+Fitting MLP
+Iteration 1, loss = 0.52593420
+Iteration 2, loss = 0.20014238
+Iteration 3, loss = 0.14139333
+Iteration 4, loss = 0.10698385
+Iteration 5, loss = 0.08143854
+Iteration 6, loss = 0.06130085
+Iteration 7, loss = 0.05387163
+Iteration 8, loss = 0.03922319
+Iteration 9, loss = 0.02933632
+Iteration 10, loss = 0.02410042
+Iteration 11, loss = 0.01811637
+Iteration 12, loss = 0.01457251
+Iteration 13, loss = 0.01030080
+Iteration 14, loss = 0.00565815
+Iteration 15, loss = 0.00278588
+Iteration 16, loss = 0.00158468
+Iteration 17, loss = 0.00119894
+Iteration 18, loss = 0.00103754
+Iteration 19, loss = 0.00095015
+Iteration 20, loss = 0.00088692
+Iteration 21, loss = 0.00084358
+Iteration 22, loss = 0.00080510
+Iteration 23, loss = 0.00077397
+Iteration 24, loss = 0.00074610
+Iteration 25, loss = 0.00072325
+Iteration 26, loss = 0.00070493
+Iteration 27, loss = 0.00068718
+Iteration 28, loss = 0.00067162
+Iteration 29, loss = 0.00065794
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:00:27.333505
+Test MLP in: 0:00:00.298092
+MLP Accuracy: 0.9743
+
+################################
+thresh accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  0.9918367346938776  |
+| 1  |  0.9894273127753304  |
+| 2  |  0.9738372093023255  |
+| 3  |  0.9772277227722772  |
+| 4  |  0.9786150712830958  |
+| 5  |  0.9607623318385651  |
+| 6  |  0.9739039665970772  |
+| 7  |  0.9659533073929961  |
+| 8  |  0.9620123203285421  |
+| 9  |  0.9663032705649157  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 972, 0, 0, 0, 0, 0, 5, 1, 1, 1
+1, 6, 1123, 1, 1, 0, 0, 2, 0, 2, 0
+2, 16, 0, 1005, 3, 2, 0, 1, 2, 3, 0
+3, 11, 1, 3, 987, 0, 2, 0, 2, 2, 2
+4, 8, 2, 2, 0, 961, 0, 3, 0, 0, 6
+5, 12, 0, 0, 14, 0, 857, 4, 1, 2, 2
+6, 10, 2, 0, 2, 5, 6, 933, 0, 0, 0
+7, 21, 3, 4, 4, 0, 0, 0, 993, 1, 2
+8, 13, 1, 2, 9, 3, 1, 3, 2, 937, 3
+9, 14, 2, 0, 3, 6, 3, 0, 4, 2, 975
+
+
+################################
+thresh done in: 0:00:31.172841
+==== line ====
+Fitting MLP
+Iteration 1, loss = 2.12285398
+Iteration 2, loss = 1.71168432
+Iteration 3, loss = 1.62527179
+Iteration 4, loss = 1.57411129
+Iteration 5, loss = 1.53278691
+Iteration 6, loss = 1.50100892
+Iteration 7, loss = 1.47385063
+Iteration 8, loss = 1.44648782
+Iteration 9, loss = 1.42410528
+Iteration 10, loss = 1.40668784
+Iteration 11, loss = 1.38518142
+Iteration 12, loss = 1.36595044
+Iteration 13, loss = 1.34952581
+Iteration 14, loss = 1.33047810
+Iteration 15, loss = 1.31818154
+Iteration 16, loss = 1.30262728
+Iteration 17, loss = 1.28654109
+Iteration 18, loss = 1.27401946
+Iteration 19, loss = 1.26454974
+Iteration 20, loss = 1.25450862
+Iteration 21, loss = 1.24108282
+Iteration 22, loss = 1.23491150
+Iteration 23, loss = 1.22442920
+Iteration 24, loss = 1.21611227
+Iteration 25, loss = 1.20815539
+Iteration 26, loss = 1.19992548
+Iteration 27, loss = 1.19002445
+Iteration 28, loss = 1.18439655
+Iteration 29, loss = 1.17850656
+Iteration 30, loss = 1.16823299
+Iteration 31, loss = 1.16417844
+Iteration 32, loss = 1.15965339
+Iteration 33, loss = 1.15318414
+Iteration 34, loss = 1.14641286
+Iteration 35, loss = 1.14556882
+Iteration 36, loss = 1.13850791
+Iteration 37, loss = 1.13494340
+Iteration 38, loss = 1.13294114
+Iteration 39, loss = 1.12566926
+Iteration 40, loss = 1.12206615
+Iteration 41, loss = 1.11760102
+Iteration 42, loss = 1.11356279
+Iteration 43, loss = 1.11080349
+Iteration 44, loss = 1.10586200
+Iteration 45, loss = 1.10243719
+Iteration 46, loss = 1.10125643
+Iteration 47, loss = 1.09837496
+Iteration 48, loss = 1.09460724
+Iteration 49, loss = 1.09119445
+Iteration 50, loss = 1.08861850
+Iteration 51, loss = 1.08729507
+Iteration 52, loss = 1.08893462
+Iteration 53, loss = 1.08127626
+Iteration 54, loss = 1.07951458
+Iteration 55, loss = 1.07721252
+Iteration 56, loss = 1.07359698
+Iteration 57, loss = 1.07052177
+Iteration 58, loss = 1.07153748
+Iteration 59, loss = 1.06862128
+Iteration 60, loss = 1.06325737
+Iteration 61, loss = 1.06278073
+Iteration 62, loss = 1.06131621
+Iteration 63, loss = 1.05836524
+Iteration 64, loss = 1.05824190
+Iteration 65, loss = 1.05576483
+Iteration 66, loss = 1.05623616
+Iteration 67, loss = 1.05197412
+Iteration 68, loss = 1.05459596
+Iteration 69, loss = 1.05160060
+Iteration 70, loss = 1.04998944
+Iteration 71, loss = 1.04860336
+Iteration 72, loss = 1.04688044
+Iteration 73, loss = 1.04326191
+Iteration 74, loss = 1.04440384
+Iteration 75, loss = 1.04120144
+Iteration 76, loss = 1.04061370
+Iteration 77, loss = 1.03903978
+Iteration 78, loss = 1.03988044
+Iteration 79, loss = 1.03958000
+Iteration 80, loss = 1.03832515
+Iteration 81, loss = 1.03446608
+Iteration 82, loss = 1.03505011
+Iteration 83, loss = 1.03323636
+Iteration 84, loss = 1.03350679
+Iteration 85, loss = 1.03578812
+Iteration 86, loss = 1.03019079
+Iteration 87, loss = 1.02705792
+Iteration 88, loss = 1.02887475
+Iteration 89, loss = 1.02584939
+Iteration 90, loss = 1.02729053
+Iteration 91, loss = 1.02807077
+Iteration 92, loss = 1.02254550
+Iteration 93, loss = 1.02214623
+Iteration 94, loss = 1.02125633
+Iteration 95, loss = 1.02090740
+Iteration 96, loss = 1.01893175
+Iteration 97, loss = 1.01984859
+Iteration 98, loss = 1.01864505
+Iteration 99, loss = 1.01594413
+Iteration 100, loss = 1.01636444
+Iteration 101, loss = 1.01625653
+Iteration 102, loss = 1.01535473
+Iteration 103, loss = 1.01684316
+Iteration 104, loss = 1.01445897
+Iteration 105, loss = 1.01249598
+Iteration 106, loss = 1.01561559
+Iteration 107, loss = 1.01312833
+Iteration 108, loss = 1.01236603
+Iteration 109, loss = 1.01191666
+Iteration 110, loss = 1.00901923
+Iteration 111, loss = 1.00980006
+Iteration 112, loss = 1.01004732
+Iteration 113, loss = 1.00871840
+Iteration 114, loss = 1.00602061
+Iteration 115, loss = 1.00717999
+Iteration 116, loss = 1.00651362
+Iteration 117, loss = 1.00692467
+Iteration 118, loss = 1.00922371
+Iteration 119, loss = 1.00864535
+Iteration 120, loss = 1.00522894
+Iteration 121, loss = 1.00415370
+Iteration 122, loss = 1.00619037
+Iteration 123, loss = 1.00517729
+Iteration 124, loss = 1.00468192
+Iteration 125, loss = 1.00552657
+Iteration 126, loss = 1.00358187
+Iteration 127, loss = 1.00044042
+Iteration 128, loss = 1.00039927
+Iteration 129, loss = 0.99842375
+Iteration 130, loss = 0.99807865
+Iteration 131, loss = 1.00020800
+Iteration 132, loss = 0.99998269
+Iteration 133, loss = 0.99910446
+Iteration 134, loss = 0.99715021
+Iteration 135, loss = 0.99756718
+Iteration 136, loss = 0.99790176
+Iteration 137, loss = 0.99669160
+Iteration 138, loss = 0.99637488
+Iteration 139, loss = 0.99597724
+Iteration 140, loss = 0.99494363
+Iteration 141, loss = 0.99704346
+Iteration 142, loss = 0.99592689
+Iteration 143, loss = 0.99291389
+Iteration 144, loss = 0.99334326
+Iteration 145, loss = 0.99290870
+Iteration 146, loss = 0.99489482
+Iteration 147, loss = 0.99436220
+Iteration 148, loss = 0.99369534
+Iteration 149, loss = 0.99271537
+Iteration 150, loss = 0.99266863
+Iteration 151, loss = 0.99170139
+Iteration 152, loss = 0.99053624
+Iteration 153, loss = 0.99030564
+Iteration 154, loss = 0.99024660
+Iteration 155, loss = 0.98971156
+Iteration 156, loss = 0.98879214
+Iteration 157, loss = 0.98929142
+Iteration 158, loss = 0.98835896
+Iteration 159, loss = 0.98829824
+Iteration 160, loss = 0.98770627
+Iteration 161, loss = 0.98924833
+Iteration 162, loss = 0.98925331
+Iteration 163, loss = 0.98760888
+Iteration 164, loss = 0.98650727
+Iteration 165, loss = 0.98829653
+Iteration 166, loss = 0.98640444
+Iteration 167, loss = 0.98719538
+Iteration 168, loss = 0.98617380
+Iteration 169, loss = 0.98585409
+Iteration 170, loss = 0.98628997
+Iteration 171, loss = 0.98417955
+Iteration 172, loss = 0.98513064
+Iteration 173, loss = 0.98554534
+Iteration 174, loss = 0.98380311
+Iteration 175, loss = 0.98396828
+Iteration 176, loss = 0.98467196
+Iteration 177, loss = 0.98529757
+Iteration 178, loss = 0.98424622
+Iteration 179, loss = 0.98216911
+Iteration 180, loss = 0.98344610
+Iteration 181, loss = 0.98202644
+Iteration 182, loss = 0.98197480
+Iteration 183, loss = 0.98204436
+Iteration 184, loss = 0.98176459
+Iteration 185, loss = 0.98395790
+Iteration 186, loss = 0.98205187
+Iteration 187, loss = 0.98218453
+Iteration 188, loss = 0.98069512
+Iteration 189, loss = 0.97912430
+Iteration 190, loss = 0.98131714
+Iteration 191, loss = 0.98016407
+Iteration 192, loss = 0.98035510
+Iteration 193, loss = 0.97865527
+Iteration 194, loss = 0.98061609
+Iteration 195, loss = 0.98180520
+Iteration 196, loss = 0.98184784
+Iteration 197, loss = 0.98048097
+Iteration 198, loss = 0.97834294
+Iteration 199, loss = 0.98004368
+Iteration 200, loss = 0.97995494
+Iteration 201, loss = 0.97818381
+Iteration 202, loss = 0.97685555
+Iteration 203, loss = 0.97879387
+Iteration 204, loss = 0.97826124
+Iteration 205, loss = 0.97905911
+Iteration 206, loss = 0.97706252
+Iteration 207, loss = 0.97842598
+Iteration 208, loss = 0.97738445
+Iteration 209, loss = 0.97619924
+Iteration 210, loss = 0.97571141
+Iteration 211, loss = 0.97599487
+Iteration 212, loss = 0.97579959
+Iteration 213, loss = 0.97673427
+Iteration 214, loss = 0.97551411
+Iteration 215, loss = 0.97721979
+Iteration 216, loss = 0.97459477
+Iteration 217, loss = 0.97629805
+Iteration 218, loss = 0.97554221
+Iteration 219, loss = 0.97698120
+Iteration 220, loss = 0.97575437
+Iteration 221, loss = 0.97539661
+Iteration 222, loss = 0.97393510
+Iteration 223, loss = 0.97435907
+Iteration 224, loss = 0.97483393
+Iteration 225, loss = 0.97406512
+Iteration 226, loss = 0.97384835
+Iteration 227, loss = 0.97413750
+Iteration 228, loss = 0.97249209
+Iteration 229, loss = 0.97176462
+Iteration 230, loss = 0.97304064
+Iteration 231, loss = 0.97182992
+Iteration 232, loss = 0.97283511
+Iteration 233, loss = 0.97415116
+Iteration 234, loss = 0.97300186
+Iteration 235, loss = 0.97241249
+Iteration 236, loss = 0.97409034
+Iteration 237, loss = 0.97327011
+Iteration 238, loss = 0.97122018
+Iteration 239, loss = 0.97008769
+Iteration 240, loss = 0.97225237
+Iteration 241, loss = 0.97153282
+Iteration 242, loss = 0.97059817
+Iteration 243, loss = 0.97084123
+Iteration 244, loss = 0.97131412
+Iteration 245, loss = 0.97120064
+Iteration 246, loss = 0.97112654
+Iteration 247, loss = 0.96896948
+Iteration 248, loss = 0.97114311
+Iteration 249, loss = 0.97097457
+Iteration 250, loss = 0.97181704
+Iteration 251, loss = 0.97088251
+Iteration 252, loss = 0.97038111
+Iteration 253, loss = 0.97066201
+Iteration 254, loss = 0.96944030
+Iteration 255, loss = 0.96875108
+Iteration 256, loss = 0.96931343
+Iteration 257, loss = 0.96754770
+Iteration 258, loss = 0.96834297
+Iteration 259, loss = 0.96790249
+Iteration 260, loss = 0.96834185
+Iteration 261, loss = 0.96689742
+Iteration 262, loss = 0.96796983
+Iteration 263, loss = 0.96690682
+Iteration 264, loss = 0.96680911
+Iteration 265, loss = 0.96842397
+Iteration 266, loss = 0.96666459
+Iteration 267, loss = 0.96880129
+Iteration 268, loss = 0.97008147
+Iteration 269, loss = 0.96698149
+Iteration 270, loss = 0.96879749
+Iteration 271, loss = 0.96693686
+Iteration 272, loss = 0.96661485
+Iteration 273, loss = 0.96757898
+Iteration 274, loss = 0.96730414
+Iteration 275, loss = 0.97001294
+Iteration 276, loss = 0.96599985
+Iteration 277, loss = 0.96805135
+Iteration 278, loss = 0.96743756
+Iteration 279, loss = 0.96609798
+Iteration 280, loss = 0.96539277
+Iteration 281, loss = 0.96621015
+Iteration 282, loss = 0.96558530
+Iteration 283, loss = 0.96662215
+Iteration 284, loss = 0.96516895
+Iteration 285, loss = 0.96716413
+Iteration 286, loss = 0.96521680
+Iteration 287, loss = 0.96586637
+Iteration 288, loss = 0.96419119
+Iteration 289, loss = 0.96523748
+Iteration 290, loss = 0.96552021
+Iteration 291, loss = 0.96582311
+Iteration 292, loss = 0.96411627
+Iteration 293, loss = 0.96401902
+Iteration 294, loss = 0.96389905
+Iteration 295, loss = 0.96398856
+Iteration 296, loss = 0.96396825
+Iteration 297, loss = 0.96582062
+Iteration 298, loss = 0.96481812
+Iteration 299, loss = 0.96399639
+Iteration 300, loss = 0.96339262
+Iteration 301, loss = 0.96293132
+Iteration 302, loss = 0.96333934
+Iteration 303, loss = 0.96476680
+Iteration 304, loss = 0.96360611
+Iteration 305, loss = 0.96370243
+Iteration 306, loss = 0.96335545
+Iteration 307, loss = 0.96370799
+Iteration 308, loss = 0.96429614
+Iteration 309, loss = 0.96326683
+Iteration 310, loss = 0.96343783
+Iteration 311, loss = 0.96410419
+Iteration 312, loss = 0.96290697
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:04:44.060327
+Test MLP in: 0:00:00.299378
+MLP Accuracy: 0.521
+
+################################
+line accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  0.8091836734693878  |
+| 1  |  0.8387665198237886  |
+| 2  |  0.4689922480620155  |
+| 3  |  0.3415841584158416  |
+| 4  |  0.40529531568228105  |
+| 5  |  0.4899103139013453  |
+| 6  |  0.5083507306889353  |
+| 7  |  0.5933852140077821  |
+| 8  |  0.3275154004106776  |
+| 9  |  0.3815659068384539  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 793, 0, 22, 29, 14, 24, 73, 9, 6, 10
+1, 130, 952, 8, 1, 6, 1, 4, 6, 24, 3
+2, 344, 29, 484, 47, 39, 11, 16, 16, 27, 19
+3, 480, 9, 41, 345, 9, 55, 11, 19, 27, 14
+4, 315, 23, 56, 2, 398, 8, 22, 32, 16, 110
+5, 263, 3, 9, 72, 12, 437, 15, 15, 43, 23
+6, 348, 8, 21, 9, 45, 16, 487, 2, 15, 7
+7, 208, 21, 31, 8, 32, 5, 2, 610, 14, 97
+8, 396, 59, 36, 46, 32, 31, 22, 16, 319, 17
+9, 358, 9, 23, 20, 77, 20, 15, 88, 14, 385
+
+
+################################
+line done in: 0:04:48.040278
+==== ellipse ====
+Fitting MLP
+Iteration 1, loss = 2.85214029
+Iteration 2, loss = 2.71807836
+Iteration 3, loss = 2.69111617
+Iteration 4, loss = 2.67369599
+Iteration 5, loss = 2.66034094
+Iteration 6, loss = 2.64699481
+Iteration 7, loss = 2.63965771
+Iteration 8, loss = 2.62840435
+Iteration 9, loss = 2.62143480
+Iteration 10, loss = 2.61568080
+Iteration 11, loss = 2.60974226
+Iteration 12, loss = 2.60274176
+Iteration 13, loss = 2.59768357
+Iteration 14, loss = 2.59055055
+Iteration 15, loss = 2.58746837
+Iteration 16, loss = 2.58432341
+Iteration 17, loss = 2.57971944
+Iteration 18, loss = 2.57740524
+Iteration 19, loss = 2.57449665
+Iteration 20, loss = 2.57126309
+Iteration 21, loss = 2.56840038
+Iteration 22, loss = 2.56748030
+Iteration 23, loss = 2.56383007
+Iteration 24, loss = 2.56202360
+Iteration 25, loss = 2.56065722
+Iteration 26, loss = 2.55762665
+Iteration 27, loss = 2.55577954
+Iteration 28, loss = 2.55393022
+Iteration 29, loss = 2.55375979
+Iteration 30, loss = 2.55259649
+Iteration 31, loss = 2.55058567
+Iteration 32, loss = 2.54880160
+Iteration 33, loss = 2.54816361
+Iteration 34, loss = 2.54661995
+Iteration 35, loss = 2.54526945
+Iteration 36, loss = 2.54522545
+Iteration 37, loss = 2.54372606
+Iteration 38, loss = 2.54302148
+Iteration 39, loss = 2.54231527
+Iteration 40, loss = 2.54061425
+Iteration 41, loss = 2.54052064
+Iteration 42, loss = 2.53871508
+Iteration 43, loss = 2.53847249
+Iteration 44, loss = 2.53804519
+Iteration 45, loss = 2.53683261
+Iteration 46, loss = 2.53688017
+Iteration 47, loss = 2.53568649
+Iteration 48, loss = 2.53482067
+Iteration 49, loss = 2.53545492
+Iteration 50, loss = 2.53408514
+Iteration 51, loss = 2.53383575
+Iteration 52, loss = 2.53266842
+Iteration 53, loss = 2.53225530
+Iteration 54, loss = 2.53119784
+Iteration 55, loss = 2.53110686
+Iteration 56, loss = 2.53113337
+Iteration 57, loss = 2.53016299
+Iteration 58, loss = 2.53071001
+Iteration 59, loss = 2.52935860
+Iteration 60, loss = 2.52808563
+Iteration 61, loss = 2.52780629
+Iteration 62, loss = 2.52847514
+Iteration 63, loss = 2.52813170
+Iteration 64, loss = 2.52732862
+Iteration 65, loss = 2.52661313
+Iteration 66, loss = 2.52633750
+Iteration 67, loss = 2.52634750
+Iteration 68, loss = 2.52574599
+Iteration 69, loss = 2.52484813
+Iteration 70, loss = 2.52492737
+Iteration 71, loss = 2.52492991
+Iteration 72, loss = 2.52389195
+Iteration 73, loss = 2.52434225
+Iteration 74, loss = 2.52369560
+Iteration 75, loss = 2.52389759
+Iteration 76, loss = 2.52348598
+Iteration 77, loss = 2.52260732
+Iteration 78, loss = 2.52267246
+Iteration 79, loss = 2.52235120
+Iteration 80, loss = 2.52172327
+Iteration 81, loss = 2.52189144
+Iteration 82, loss = 2.52160459
+Iteration 83, loss = 2.52096776
+Iteration 84, loss = 2.52147269
+Iteration 85, loss = 2.52084849
+Iteration 86, loss = 2.52024326
+Iteration 87, loss = 2.52056852
+Iteration 88, loss = 2.52011701
+Iteration 89, loss = 2.52043159
+Iteration 90, loss = 2.51952653
+Iteration 91, loss = 2.51935919
+Iteration 92, loss = 2.51900142
+Iteration 93, loss = 2.51936425
+Iteration 94, loss = 2.51876082
+Iteration 95, loss = 2.51934001
+Iteration 96, loss = 2.51810792
+Iteration 97, loss = 2.51768945
+Iteration 98, loss = 2.51829902
+Iteration 99, loss = 2.51789193
+Iteration 100, loss = 2.51834895
+Iteration 101, loss = 2.51714186
+Iteration 102, loss = 2.51754510
+Iteration 103, loss = 2.51714638
+Iteration 104, loss = 2.51709804
+Iteration 105, loss = 2.51746432
+Iteration 106, loss = 2.51721102
+Iteration 107, loss = 2.51647003
+Iteration 108, loss = 2.51726200
+Iteration 109, loss = 2.51650983
+Iteration 110, loss = 2.51573320
+Iteration 111, loss = 2.51611587
+Iteration 112, loss = 2.51560106
+Iteration 113, loss = 2.51574454
+Iteration 114, loss = 2.51571549
+Iteration 115, loss = 2.51505468
+Iteration 116, loss = 2.51537166
+Iteration 117, loss = 2.51503784
+Iteration 118, loss = 2.51583067
+Iteration 119, loss = 2.51497277
+Iteration 120, loss = 2.51527297
+Iteration 121, loss = 2.51476690
+Iteration 122, loss = 2.51506631
+Iteration 123, loss = 2.51483215
+Iteration 124, loss = 2.51453231
+Iteration 125, loss = 2.51430712
+Iteration 126, loss = 2.51439554
+Iteration 127, loss = 2.51462817
+Iteration 128, loss = 2.51416762
+Iteration 129, loss = 2.51378416
+Iteration 130, loss = 2.51362406
+Iteration 131, loss = 2.51396663
+Iteration 132, loss = 2.51383975
+Iteration 133, loss = 2.51409417
+Iteration 134, loss = 2.51321289
+Iteration 135, loss = 2.51407253
+Iteration 136, loss = 2.51284076
+Iteration 137, loss = 2.51311143
+Iteration 138, loss = 2.51288726
+Iteration 139, loss = 2.51288790
+Iteration 140, loss = 2.51290941
+Iteration 141, loss = 2.51320478
+Iteration 142, loss = 2.51301140
+Iteration 143, loss = 2.51275414
+Iteration 144, loss = 2.51275586
+Iteration 145, loss = 2.51150601
+Iteration 146, loss = 2.51262373
+Iteration 147, loss = 2.51254873
+Iteration 148, loss = 2.51245547
+Iteration 149, loss = 2.51226363
+Iteration 150, loss = 2.51205429
+Iteration 151, loss = 2.51210877
+Iteration 152, loss = 2.51153566
+Iteration 153, loss = 2.51194988
+Iteration 154, loss = 2.51156425
+Iteration 155, loss = 2.51198943
+Iteration 156, loss = 2.51164850
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:02:15.585477
+Test MLP in: 0:00:00.295942
+MLP Accuracy: 0.1744
+
+################################
+ellipse accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  0.9030612244897959  |
+| 1  |  0.0  |
+| 2  |  0.10174418604651163  |
+| 3  |  0.18217821782178217  |
+| 4  |  0.002036659877800407  |
+| 5  |  0.13228699551569506  |
+| 6  |  0.2954070981210856  |
+| 7  |  0.0038910505836575876  |
+| 8  |  0.08213552361396304  |
+| 9  |  0.08225966303270565  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 885, 1, 5, 16, 1, 33, 32, 1, 4, 2
+1, 1134, 0, 1, 0, 0, 0, 0, 0, 0, 0
+2, 863, 0, 105, 15, 0, 16, 19, 1, 8, 5
+3, 750, 0, 13, 184, 3, 34, 13, 1, 8, 4
+4, 956, 0, 3, 0, 2, 2, 6, 0, 2, 11
+5, 643, 0, 7, 82, 0, 118, 18, 0, 17, 7
+6, 633, 0, 8, 2, 0, 16, 283, 2, 7, 7
+7, 1013, 0, 1, 5, 2, 0, 0, 4, 0, 3
+8, 807, 1, 5, 27, 2, 21, 20, 0, 80, 11
+9, 894, 0, 4, 4, 4, 9, 4, 3, 4, 83
+
+
+################################
+ellipse done in: 0:02:19.663070
+==== circle ====
+Fitting MLP
+Iteration 1, loss = 2.42288279
+Iteration 2, loss = 2.26865256
+Iteration 3, loss = 2.24420434
+Iteration 4, loss = 2.22844420
+Iteration 5, loss = 2.21877258
+Iteration 6, loss = 2.20709494
+Iteration 7, loss = 2.20024024
+Iteration 8, loss = 2.19006394
+Iteration 9, loss = 2.18407417
+Iteration 10, loss = 2.17808331
+Iteration 11, loss = 2.17178995
+Iteration 12, loss = 2.16666508
+Iteration 13, loss = 2.16173771
+Iteration 14, loss = 2.15555346
+Iteration 15, loss = 2.15127687
+Iteration 16, loss = 2.14688328
+Iteration 17, loss = 2.14300707
+Iteration 18, loss = 2.13850876
+Iteration 19, loss = 2.13450761
+Iteration 20, loss = 2.12996502
+Iteration 21, loss = 2.12732449
+Iteration 22, loss = 2.12471022
+Iteration 23, loss = 2.12151569
+Iteration 24, loss = 2.11848108
+Iteration 25, loss = 2.11490659
+Iteration 26, loss = 2.11455622
+Iteration 27, loss = 2.11071490
+Iteration 28, loss = 2.10725719
+Iteration 29, loss = 2.10676926
+Iteration 30, loss = 2.10298801
+Iteration 31, loss = 2.10113553
+Iteration 32, loss = 2.09910150
+Iteration 33, loss = 2.09666504
+Iteration 34, loss = 2.09434728
+Iteration 35, loss = 2.09339354
+Iteration 36, loss = 2.09267123
+Iteration 37, loss = 2.09126709
+Iteration 38, loss = 2.08922841
+Iteration 39, loss = 2.08764211
+Iteration 40, loss = 2.08709147
+Iteration 41, loss = 2.08516112
+Iteration 42, loss = 2.08380594
+Iteration 43, loss = 2.08296023
+Iteration 44, loss = 2.08186773
+Iteration 45, loss = 2.08026320
+Iteration 46, loss = 2.07960205
+Iteration 47, loss = 2.07859191
+Iteration 48, loss = 2.07850269
+Iteration 49, loss = 2.07614873
+Iteration 50, loss = 2.07639030
+Iteration 51, loss = 2.07466577
+Iteration 52, loss = 2.07473364
+Iteration 53, loss = 2.07331518
+Iteration 54, loss = 2.07192160
+Iteration 55, loss = 2.07234797
+Iteration 56, loss = 2.07062229
+Iteration 57, loss = 2.06991626
+Iteration 58, loss = 2.07094493
+Iteration 59, loss = 2.06887875
+Iteration 60, loss = 2.06703224
+Iteration 61, loss = 2.06946484
+Iteration 62, loss = 2.06698545
+Iteration 63, loss = 2.06611909
+Iteration 64, loss = 2.06538411
+Iteration 65, loss = 2.06615387
+Iteration 66, loss = 2.06581943
+Iteration 67, loss = 2.06455890
+Iteration 68, loss = 2.06369264
+Iteration 69, loss = 2.06280099
+Iteration 70, loss = 2.06317962
+Iteration 71, loss = 2.06108930
+Iteration 72, loss = 2.06244899
+Iteration 73, loss = 2.06130396
+Iteration 74, loss = 2.05996845
+Iteration 75, loss = 2.06004518
+Iteration 76, loss = 2.05926128
+Iteration 77, loss = 2.06074738
+Iteration 78, loss = 2.05891684
+Iteration 79, loss = 2.05808616
+Iteration 80, loss = 2.05818069
+Iteration 81, loss = 2.05872783
+Iteration 82, loss = 2.05663587
+Iteration 83, loss = 2.05815902
+Iteration 84, loss = 2.05678234
+Iteration 85, loss = 2.05640179
+Iteration 86, loss = 2.05619761
+Iteration 87, loss = 2.05608632
+Iteration 88, loss = 2.05590871
+Iteration 89, loss = 2.05445962
+Iteration 90, loss = 2.05483710
+Iteration 91, loss = 2.05441366
+Iteration 92, loss = 2.05440443
+Iteration 93, loss = 2.05375370
+Iteration 94, loss = 2.05431810
+Iteration 95, loss = 2.05317339
+Iteration 96, loss = 2.05358978
+Iteration 97, loss = 2.05381394
+Iteration 98, loss = 2.05194433
+Iteration 99, loss = 2.05269984
+Iteration 100, loss = 2.05168861
+Iteration 101, loss = 2.05248863
+Iteration 102, loss = 2.05083002
+Iteration 103, loss = 2.05203271
+Iteration 104, loss = 2.05083687
+Iteration 105, loss = 2.05059080
+Iteration 106, loss = 2.05151986
+Iteration 107, loss = 2.05028937
+Iteration 108, loss = 2.05092887
+Iteration 109, loss = 2.05014210
+Iteration 110, loss = 2.04907112
+Iteration 111, loss = 2.04920917
+Iteration 112, loss = 2.04920921
+Iteration 113, loss = 2.04974707
+Iteration 114, loss = 2.04867007
+Iteration 115, loss = 2.04764012
+Iteration 116, loss = 2.04757187
+Iteration 117, loss = 2.04790677
+Iteration 118, loss = 2.04850538
+Iteration 119, loss = 2.04726963
+Iteration 120, loss = 2.04831733
+Iteration 121, loss = 2.04786640
+Iteration 122, loss = 2.04641274
+Iteration 123, loss = 2.04741726
+Iteration 124, loss = 2.04661086
+Iteration 125, loss = 2.04669871
+Iteration 126, loss = 2.04655254
+Iteration 127, loss = 2.04637653
+Iteration 128, loss = 2.04578040
+Iteration 129, loss = 2.04544523
+Iteration 130, loss = 2.04572007
+Iteration 131, loss = 2.04564803
+Iteration 132, loss = 2.04606611
+Iteration 133, loss = 2.04525033
+Iteration 134, loss = 2.04448651
+Iteration 135, loss = 2.04458433
+Iteration 136, loss = 2.04468554
+Iteration 137, loss = 2.04450925
+Iteration 138, loss = 2.04440996
+Iteration 139, loss = 2.04397385
+Iteration 140, loss = 2.04439039
+Iteration 141, loss = 2.04456359
+Iteration 142, loss = 2.04300949
+Iteration 143, loss = 2.04337272
+Iteration 144, loss = 2.04429204
+Iteration 145, loss = 2.04302475
+Iteration 146, loss = 2.04313521
+Iteration 147, loss = 2.04212989
+Iteration 148, loss = 2.04250459
+Iteration 149, loss = 2.04315786
+Iteration 150, loss = 2.04247218
+Iteration 151, loss = 2.04201575
+Iteration 152, loss = 2.04174291
+Iteration 153, loss = 2.04212471
+Iteration 154, loss = 2.04112147
+Iteration 155, loss = 2.04243956
+Iteration 156, loss = 2.04206713
+Iteration 157, loss = 2.04098190
+Iteration 158, loss = 2.04115261
+Iteration 159, loss = 2.04161176
+Iteration 160, loss = 2.04244725
+Iteration 161, loss = 2.04079086
+Iteration 162, loss = 2.04117750
+Iteration 163, loss = 2.04107410
+Iteration 164, loss = 2.04068567
+Iteration 165, loss = 2.04108047
+Iteration 166, loss = 2.04052147
+Iteration 167, loss = 2.04056831
+Iteration 168, loss = 2.03996692
+Iteration 169, loss = 2.03984630
+Iteration 170, loss = 2.04066966
+Iteration 171, loss = 2.04014503
+Iteration 172, loss = 2.03976006
+Iteration 173, loss = 2.03932565
+Iteration 174, loss = 2.03930648
+Iteration 175, loss = 2.03923172
+Iteration 176, loss = 2.03972325
+Iteration 177, loss = 2.03949076
+Iteration 178, loss = 2.03891210
+Iteration 179, loss = 2.03872894
+Iteration 180, loss = 2.03951163
+Iteration 181, loss = 2.04034595
+Iteration 182, loss = 2.03855936
+Iteration 183, loss = 2.03892151
+Iteration 184, loss = 2.03760689
+Iteration 185, loss = 2.03900304
+Iteration 186, loss = 2.03850579
+Iteration 187, loss = 2.03732021
+Iteration 188, loss = 2.03758484
+Iteration 189, loss = 2.03728733
+Iteration 190, loss = 2.03781261
+Iteration 191, loss = 2.03806909
+Iteration 192, loss = 2.03784291
+Iteration 193, loss = 2.03767807
+Iteration 194, loss = 2.03779053
+Iteration 195, loss = 2.03756650
+Iteration 196, loss = 2.03769192
+Iteration 197, loss = 2.03694066
+Iteration 198, loss = 2.03727857
+Iteration 199, loss = 2.03732765
+Iteration 200, loss = 2.03712195
+Iteration 201, loss = 2.03714293
+Iteration 202, loss = 2.03645911
+Iteration 203, loss = 2.03581167
+Iteration 204, loss = 2.03732594
+Iteration 205, loss = 2.03734629
+Iteration 206, loss = 2.03699011
+Iteration 207, loss = 2.03718522
+Iteration 208, loss = 2.03652617
+Iteration 209, loss = 2.03571804
+Iteration 210, loss = 2.03617162
+Iteration 211, loss = 2.03614429
+Iteration 212, loss = 2.03655725
+Iteration 213, loss = 2.03620110
+Iteration 214, loss = 2.03605554
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:03:07.929119
+Test MLP in: 0:00:00.296224
+MLP Accuracy: 0.3385
+
+################################
+circle accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  0.8826530612244898  |
+| 1  |  0.9955947136563876  |
+| 2  |  0.28294573643410853  |
+| 3  |  0.2316831683168317  |
+| 4  |  0.07331975560081466  |
+| 5  |  0.061659192825112105  |
+| 6  |  0.3914405010438413  |
+| 7  |  0.08365758754863813  |
+| 8  |  0.2751540041067762  |
+| 9  |  0.007928642220019821  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 865, 5, 16, 11, 3, 20, 33, 4, 23, 0
+1, 2, 1130, 0, 1, 0, 0, 2, 0, 0, 0
+2, 418, 146, 292, 27, 34, 11, 39, 11, 54, 0
+3, 525, 89, 34, 234, 6, 25, 54, 0, 42, 1
+4, 668, 128, 40, 5, 72, 7, 9, 27, 13, 13
+5, 564, 93, 10, 60, 8, 55, 48, 1, 53, 0
+6, 468, 77, 10, 5, 3, 8, 375, 10, 2, 0
+7, 596, 314, 9, 3, 4, 2, 12, 86, 2, 0
+8, 544, 29, 33, 42, 5, 38, 12, 0, 268, 3
+9, 880, 57, 6, 5, 10, 3, 5, 22, 13, 8
+
+
+################################
+circle done in: 0:03:11.632749
+==== ellipse-circle ====
+Fitting MLP
+Iteration 1, loss = 2.38261393
+Iteration 2, loss = 2.19791850
+Iteration 3, loss = 2.15799537
+Iteration 4, loss = 2.13298479
+Iteration 5, loss = 2.11449383
+Iteration 6, loss = 2.09707461
+Iteration 7, loss = 2.08310492
+Iteration 8, loss = 2.06945566
+Iteration 9, loss = 2.06049989
+Iteration 10, loss = 2.04952158
+Iteration 11, loss = 2.04098185
+Iteration 12, loss = 2.03309376
+Iteration 13, loss = 2.02494224
+Iteration 14, loss = 2.01734989
+Iteration 15, loss = 2.01038186
+Iteration 16, loss = 2.00484481
+Iteration 17, loss = 1.99965622
+Iteration 18, loss = 1.99324150
+Iteration 19, loss = 1.98755453
+Iteration 20, loss = 1.98289945
+Iteration 21, loss = 1.97843037
+Iteration 22, loss = 1.97593078
+Iteration 23, loss = 1.97289235
+Iteration 24, loss = 1.96798345
+Iteration 25, loss = 1.96492536
+Iteration 26, loss = 1.96162257
+Iteration 27, loss = 1.95888928
+Iteration 28, loss = 1.95625581
+Iteration 29, loss = 1.95175391
+Iteration 30, loss = 1.94978320
+Iteration 31, loss = 1.94801464
+Iteration 32, loss = 1.94568350
+Iteration 33, loss = 1.94239629
+Iteration 34, loss = 1.94093385
+Iteration 35, loss = 1.93870687
+Iteration 36, loss = 1.93661568
+Iteration 37, loss = 1.93540904
+Iteration 38, loss = 1.93247201
+Iteration 39, loss = 1.93053135
+Iteration 40, loss = 1.92860655
+Iteration 41, loss = 1.92792366
+Iteration 42, loss = 1.92698664
+Iteration 43, loss = 1.92386384
+Iteration 44, loss = 1.92389568
+Iteration 45, loss = 1.92195321
+Iteration 46, loss = 1.92081247
+Iteration 47, loss = 1.92006187
+Iteration 48, loss = 1.91890281
+Iteration 49, loss = 1.91671538
+Iteration 50, loss = 1.91608946
+Iteration 51, loss = 1.91461024
+Iteration 52, loss = 1.91348568
+Iteration 53, loss = 1.91256128
+Iteration 54, loss = 1.91198486
+Iteration 55, loss = 1.91044498
+Iteration 56, loss = 1.91018458
+Iteration 57, loss = 1.90949970
+Iteration 58, loss = 1.90885162
+Iteration 59, loss = 1.90572746
+Iteration 60, loss = 1.90574158
+Iteration 61, loss = 1.90572616
+Iteration 62, loss = 1.90372428
+Iteration 63, loss = 1.90327549
+Iteration 64, loss = 1.90270598
+Iteration 65, loss = 1.90291951
+Iteration 66, loss = 1.90049040
+Iteration 67, loss = 1.90099884
+Iteration 68, loss = 1.90016765
+Iteration 69, loss = 1.89810443
+Iteration 70, loss = 1.89921978
+Iteration 71, loss = 1.89759554
+Iteration 72, loss = 1.89673918
+Iteration 73, loss = 1.89640936
+Iteration 74, loss = 1.89514406
+Iteration 75, loss = 1.89558475
+Iteration 76, loss = 1.89297096
+Iteration 77, loss = 1.89580960
+Iteration 78, loss = 1.89464320
+Iteration 79, loss = 1.89381836
+Iteration 80, loss = 1.89165572
+Iteration 81, loss = 1.89266257
+Iteration 82, loss = 1.89232058
+Iteration 83, loss = 1.89124618
+Iteration 84, loss = 1.89202067
+Iteration 85, loss = 1.89033608
+Iteration 86, loss = 1.88939302
+Iteration 87, loss = 1.88956601
+Iteration 88, loss = 1.89016161
+Iteration 89, loss = 1.88820387
+Iteration 90, loss = 1.88826873
+Iteration 91, loss = 1.88825189
+Iteration 92, loss = 1.88570758
+Iteration 93, loss = 1.88709165
+Iteration 94, loss = 1.88654326
+Iteration 95, loss = 1.88566683
+Iteration 96, loss = 1.88502897
+Iteration 97, loss = 1.88531401
+Iteration 98, loss = 1.88396646
+Iteration 99, loss = 1.88472982
+Iteration 100, loss = 1.88490128
+Iteration 101, loss = 1.88410197
+Iteration 102, loss = 1.88320942
+Iteration 103, loss = 1.88295717
+Iteration 104, loss = 1.88289777
+Iteration 105, loss = 1.88182982
+Iteration 106, loss = 1.88255842
+Iteration 107, loss = 1.88160540
+Iteration 108, loss = 1.88119794
+Iteration 109, loss = 1.88177194
+Iteration 110, loss = 1.88131751
+Iteration 111, loss = 1.88047596
+Iteration 112, loss = 1.88035764
+Iteration 113, loss = 1.87980891
+Iteration 114, loss = 1.88074811
+Iteration 115, loss = 1.87874354
+Iteration 116, loss = 1.87916688
+Iteration 117, loss = 1.87794119
+Iteration 118, loss = 1.87757143
+Iteration 119, loss = 1.87818957
+Iteration 120, loss = 1.87906394
+Iteration 121, loss = 1.87862118
+Iteration 122, loss = 1.87772503
+Iteration 123, loss = 1.87796726
+Iteration 124, loss = 1.87712909
+Iteration 125, loss = 1.87789203
+Iteration 126, loss = 1.87736421
+Iteration 127, loss = 1.87721036
+Iteration 128, loss = 1.87553911
+Iteration 129, loss = 1.87568455
+Iteration 130, loss = 1.87717580
+Iteration 131, loss = 1.87458304
+Iteration 132, loss = 1.87537786
+Iteration 133, loss = 1.87478584
+Iteration 134, loss = 1.87478450
+Iteration 135, loss = 1.87459696
+Iteration 136, loss = 1.87403119
+Iteration 137, loss = 1.87330445
+Iteration 138, loss = 1.87507377
+Iteration 139, loss = 1.87400224
+Iteration 140, loss = 1.87383922
+Iteration 141, loss = 1.87361253
+Iteration 142, loss = 1.87304317
+Iteration 143, loss = 1.87348889
+Iteration 144, loss = 1.87336229
+Iteration 145, loss = 1.87199847
+Iteration 146, loss = 1.87243871
+Iteration 147, loss = 1.87115699
+Iteration 148, loss = 1.87236360
+Iteration 149, loss = 1.87268263
+Iteration 150, loss = 1.87248711
+Iteration 151, loss = 1.87100163
+Iteration 152, loss = 1.87193175
+Iteration 153, loss = 1.87224280
+Iteration 154, loss = 1.87083114
+Iteration 155, loss = 1.87196960
+Iteration 156, loss = 1.87073599
+Iteration 157, loss = 1.86898707
+Iteration 158, loss = 1.87025274
+Iteration 159, loss = 1.86961765
+Iteration 160, loss = 1.87141391
+Iteration 161, loss = 1.86940017
+Iteration 162, loss = 1.86981452
+Iteration 163, loss = 1.86906727
+Iteration 164, loss = 1.86899800
+Iteration 165, loss = 1.86987618
+Iteration 166, loss = 1.86958753
+Iteration 167, loss = 1.86902223
+Iteration 168, loss = 1.86901445
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:02:29.071824
+Test MLP in: 0:00:00.299072
+MLP Accuracy: 0.3874
+
+################################
+ellipse-circle accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  0.9  |
+| 1  |  0.9955947136563876  |
+| 2  |  0.34011627906976744  |
+| 3  |  0.3217821782178218  |
+| 4  |  0.14867617107942974  |
+| 5  |  0.10986547085201794  |
+| 6  |  0.4133611691022965  |
+| 7  |  0.20525291828793774  |
+| 8  |  0.2618069815195072  |
+| 9  |  0.07928642220019821  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 882, 2, 10, 20, 1, 19, 27, 4, 11, 4
+1, 1, 1130, 0, 1, 0, 0, 2, 0, 1, 0
+2, 328, 136, 351, 50, 56, 17, 29, 22, 37, 6
+3, 420, 86, 37, 325, 11, 28, 56, 7, 39, 1
+4, 570, 127, 32, 6, 146, 10, 10, 63, 11, 7
+5, 484, 87, 18, 77, 5, 98, 56, 9, 55, 3
+6, 421, 74, 15, 5, 4, 16, 396, 19, 5, 3
+7, 458, 312, 15, 3, 11, 2, 12, 211, 3, 1
+8, 495, 27, 44, 56, 24, 44, 15, 5, 255, 9
+9, 728, 57, 10, 7, 26, 13, 21, 51, 16, 80
+
+
+################################
+ellipse-circle done in: 0:02:32.885046
+==== chull ====
+Fitting MLP
+Iteration 1, loss = 1.88670091
+Iteration 2, loss = 1.18381138
+Iteration 3, loss = 1.08417138
+Iteration 4, loss = 1.03305827
+Iteration 5, loss = 1.01255116
+Iteration 6, loss = 0.97666340
+Iteration 7, loss = 0.95636484
+Iteration 8, loss = 0.93502916
+Iteration 9, loss = 0.92302060
+Iteration 10, loss = 0.90791279
+Iteration 11, loss = 0.89743165
+Iteration 12, loss = 0.88962968
+Iteration 13, loss = 0.88579154
+Iteration 14, loss = 0.87082227
+Iteration 15, loss = 0.86696981
+Iteration 16, loss = 0.86207556
+Iteration 17, loss = 0.85309779
+Iteration 18, loss = 0.84859987
+Iteration 19, loss = 0.84038266
+Iteration 20, loss = 0.83924885
+Iteration 21, loss = 0.83530230
+Iteration 22, loss = 0.82518613
+Iteration 23, loss = 0.82035774
+Iteration 24, loss = 0.81549667
+Iteration 25, loss = 0.81349408
+Iteration 26, loss = 0.80447658
+Iteration 27, loss = 0.79919978
+Iteration 28, loss = 0.79811243
+Iteration 29, loss = 0.78961206
+Iteration 30, loss = 0.79096422
+Iteration 31, loss = 0.78870597
+Iteration 32, loss = 0.78049023
+Iteration 33, loss = 0.78074817
+Iteration 34, loss = 0.77905498
+Iteration 35, loss = 0.77538376
+Iteration 36, loss = 0.76465518
+Iteration 37, loss = 0.76436039
+Iteration 38, loss = 0.76927441
+Iteration 39, loss = 0.76536027
+Iteration 40, loss = 0.75477709
+Iteration 41, loss = 0.75851938
+Iteration 42, loss = 0.74668593
+Iteration 43, loss = 0.74995712
+Iteration 44, loss = 0.74382277
+Iteration 45, loss = 0.74360622
+Iteration 46, loss = 0.74603101
+Iteration 47, loss = 0.74486570
+Iteration 48, loss = 0.73930890
+Iteration 49, loss = 0.73623642
+Iteration 50, loss = 0.73476182
+Iteration 51, loss = 0.73085315
+Iteration 52, loss = 0.72955445
+Iteration 53, loss = 0.72128986
+Iteration 54, loss = 0.72324800
+Iteration 55, loss = 0.72350062
+Iteration 56, loss = 0.72177641
+Iteration 57, loss = 0.72080746
+Iteration 58, loss = 0.71168801
+Iteration 59, loss = 0.71336340
+Iteration 60, loss = 0.71214518
+Iteration 61, loss = 0.70771517
+Iteration 62, loss = 0.70746008
+Iteration 63, loss = 0.70573009
+Iteration 64, loss = 0.70842055
+Iteration 65, loss = 0.70178091
+Iteration 66, loss = 0.70314835
+Iteration 67, loss = 0.69682359
+Iteration 68, loss = 0.69785980
+Iteration 69, loss = 0.69655966
+Iteration 70, loss = 0.69050940
+Iteration 71, loss = 0.69237911
+Iteration 72, loss = 0.68597444
+Iteration 73, loss = 0.68626903
+Iteration 74, loss = 0.68483289
+Iteration 75, loss = 0.68982210
+Iteration 76, loss = 0.68474357
+Iteration 77, loss = 0.68471128
+Iteration 78, loss = 0.68930276
+Iteration 79, loss = 0.67442060
+Iteration 80, loss = 0.67780129
+Iteration 81, loss = 0.67217341
+Iteration 82, loss = 0.67730258
+Iteration 83, loss = 0.67474818
+Iteration 84, loss = 0.67256403
+Iteration 85, loss = 0.67176739
+Iteration 86, loss = 0.67526677
+Iteration 87, loss = 0.66978070
+Iteration 88, loss = 0.66887882
+Iteration 89, loss = 0.66674398
+Iteration 90, loss = 0.66592994
+Iteration 91, loss = 0.66336908
+Iteration 92, loss = 0.66203792
+Iteration 93, loss = 0.65844063
+Iteration 94, loss = 0.66445713
+Iteration 95, loss = 0.66118828
+Iteration 96, loss = 0.65496124
+Iteration 97, loss = 0.65886183
+Iteration 98, loss = 0.65433885
+Iteration 99, loss = 0.65786757
+Iteration 100, loss = 0.64874555
+Iteration 101, loss = 0.65436292
+Iteration 102, loss = 0.65059394
+Iteration 103, loss = 0.64971374
+Iteration 104, loss = 0.64577110
+Iteration 105, loss = 0.64324434
+Iteration 106, loss = 0.64524048
+Iteration 107, loss = 0.64491902
+Iteration 108, loss = 0.64858259
+Iteration 109, loss = 0.64925951
+Iteration 110, loss = 0.64321016
+Iteration 111, loss = 0.64146847
+Iteration 112, loss = 0.63966479
+Iteration 113, loss = 0.64232361
+Iteration 114, loss = 0.63835363
+Iteration 115, loss = 0.63917888
+Iteration 116, loss = 0.63376589
+Iteration 117, loss = 0.63807619
+Iteration 118, loss = 0.63290527
+Iteration 119, loss = 0.63627763
+Iteration 120, loss = 0.63040936
+Iteration 121, loss = 0.63510040
+Iteration 122, loss = 0.63216002
+Iteration 123, loss = 0.63234977
+Iteration 124, loss = 0.62878844
+Iteration 125, loss = 0.63310899
+Iteration 126, loss = 0.62433895
+Iteration 127, loss = 0.62799522
+Iteration 128, loss = 0.62561849
+Iteration 129, loss = 0.62487734
+Iteration 130, loss = 0.62622760
+Iteration 131, loss = 0.62447473
+Iteration 132, loss = 0.62423757
+Iteration 133, loss = 0.62254669
+Iteration 134, loss = 0.62012989
+Iteration 135, loss = 0.63254349
+Iteration 136, loss = 0.61612324
+Iteration 137, loss = 0.61931449
+Iteration 138, loss = 0.61394124
+Iteration 139, loss = 0.61877129
+Iteration 140, loss = 0.61376582
+Iteration 141, loss = 0.61050536
+Iteration 142, loss = 0.61959027
+Iteration 143, loss = 0.61664009
+Iteration 144, loss = 0.61389588
+Iteration 145, loss = 0.61916148
+Iteration 146, loss = 0.61573956
+Iteration 147, loss = 0.61671370
+Iteration 148, loss = 0.61213947
+Iteration 149, loss = 0.60960145
+Iteration 150, loss = 0.60854421
+Iteration 151, loss = 0.61694054
+Iteration 152, loss = 0.60838234
+Iteration 153, loss = 0.61213143
+Iteration 154, loss = 0.61236688
+Iteration 155, loss = 0.60752448
+Iteration 156, loss = 0.60543212
+Iteration 157, loss = 0.61039835
+Iteration 158, loss = 0.60388067
+Iteration 159, loss = 0.60097322
+Iteration 160, loss = 0.60924898
+Iteration 161, loss = 0.60602879
+Iteration 162, loss = 0.60623152
+Iteration 163, loss = 0.61241598
+Iteration 164, loss = 0.60573077
+Iteration 165, loss = 0.60690174
+Iteration 166, loss = 0.60201069
+Iteration 167, loss = 0.60667992
+Iteration 168, loss = 0.59690270
+Iteration 169, loss = 0.59829421
+Iteration 170, loss = 0.60661364
+Iteration 171, loss = 0.60253571
+Iteration 172, loss = 0.60011584
+Iteration 173, loss = 0.60342649
+Iteration 174, loss = 0.59747492
+Iteration 175, loss = 0.59818282
+Iteration 176, loss = 0.59860643
+Iteration 177, loss = 0.59770067
+Iteration 178, loss = 0.60052191
+Iteration 179, loss = 0.60096479
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:02:35.494589
+Test MLP in: 0:00:00.299158
+MLP Accuracy: 0.7968
+
+################################
+chull accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  0.9295918367346939  |
+| 1  |  0.9550660792951542  |
+| 2  |  0.7955426356589147  |
+| 3  |  0.7485148514851485  |
+| 4  |  0.8676171079429735  |
+| 5  |  0.5818385650224215  |
+| 6  |  0.8862212943632568  |
+| 7  |  0.811284046692607  |
+| 8  |  0.6406570841889117  |
+| 9  |  0.711595639246779  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 911, 0, 15, 10, 4, 1, 22, 1, 14, 2
+1, 23, 1084, 3, 3, 4, 2, 6, 1, 8, 1
+2, 92, 0, 821, 53, 6, 9, 9, 4, 37, 1
+3, 126, 2, 37, 756, 0, 25, 0, 17, 44, 3
+4, 57, 1, 10, 1, 852, 7, 8, 14, 6, 26
+5, 178, 1, 16, 53, 15, 519, 8, 8, 93, 1
+6, 65, 3, 23, 1, 8, 6, 849, 0, 3, 0
+7, 54, 4, 9, 16, 29, 4, 0, 834, 3, 75
+8, 207, 0, 11, 25, 13, 84, 2, 5, 624, 3
+9, 85, 4, 2, 8, 84, 1, 0, 85, 22, 718
+
+
+################################
+chull done in: 0:02:39.473569
+==== corner ====
+Fitting MLP
+Iteration 1, loss = 2.11533946
+Iteration 2, loss = 1.71772834
+Iteration 3, loss = 1.65850983
+Iteration 4, loss = 1.62515787
+Iteration 5, loss = 1.60036052
+Iteration 6, loss = 1.57984160
+Iteration 7, loss = 1.56499421
+Iteration 8, loss = 1.54842960
+Iteration 9, loss = 1.53574737
+Iteration 10, loss = 1.52579845
+Iteration 11, loss = 1.51480787
+Iteration 12, loss = 1.50121149
+Iteration 13, loss = 1.49351402
+Iteration 14, loss = 1.48141032
+Iteration 15, loss = 1.47326599
+Iteration 16, loss = 1.46518766
+Iteration 17, loss = 1.45657566
+Iteration 18, loss = 1.44842787
+Iteration 19, loss = 1.44012791
+Iteration 20, loss = 1.43235917
+Iteration 21, loss = 1.42416900
+Iteration 22, loss = 1.41620401
+Iteration 23, loss = 1.40860953
+Iteration 24, loss = 1.40135536
+Iteration 25, loss = 1.39434799
+Iteration 26, loss = 1.38670120
+Iteration 27, loss = 1.37992783
+Iteration 28, loss = 1.37194638
+Iteration 29, loss = 1.36454894
+Iteration 30, loss = 1.35964679
+Iteration 31, loss = 1.35413078
+Iteration 32, loss = 1.34811667
+Iteration 33, loss = 1.33798707
+Iteration 34, loss = 1.33323893
+Iteration 35, loss = 1.32680987
+Iteration 36, loss = 1.32006982
+Iteration 37, loss = 1.31537508
+Iteration 38, loss = 1.30946116
+Iteration 39, loss = 1.30031248
+Iteration 40, loss = 1.29863902
+Iteration 41, loss = 1.29383958
+Iteration 42, loss = 1.28892393
+Iteration 43, loss = 1.27791165
+Iteration 44, loss = 1.27664109
+Iteration 45, loss = 1.27139188
+Iteration 46, loss = 1.26653885
+Iteration 47, loss = 1.26005626
+Iteration 48, loss = 1.25562559
+Iteration 49, loss = 1.25037624
+Iteration 50, loss = 1.24735706
+Iteration 51, loss = 1.23957053
+Iteration 52, loss = 1.23320746
+Iteration 53, loss = 1.23224947
+Iteration 54, loss = 1.22470296
+Iteration 55, loss = 1.22180362
+Iteration 56, loss = 1.21848143
+Iteration 57, loss = 1.21373547
+Iteration 58, loss = 1.21012022
+Iteration 59, loss = 1.20485131
+Iteration 60, loss = 1.20001390
+Iteration 61, loss = 1.19473842
+Iteration 62, loss = 1.19060570
+Iteration 63, loss = 1.19023491
+Iteration 64, loss = 1.18352856
+Iteration 65, loss = 1.17861477
+Iteration 66, loss = 1.17753115
+Iteration 67, loss = 1.17400637
+Iteration 68, loss = 1.17108654
+Iteration 69, loss = 1.16651442
+Iteration 70, loss = 1.16378177
+Iteration 71, loss = 1.15877689
+Iteration 72, loss = 1.15547292
+Iteration 73, loss = 1.14973996
+Iteration 74, loss = 1.14928554
+Iteration 75, loss = 1.14897145
+Iteration 76, loss = 1.14465174
+Iteration 77, loss = 1.14219071
+Iteration 78, loss = 1.13522851
+Iteration 79, loss = 1.13150928
+Iteration 80, loss = 1.12981582
+Iteration 81, loss = 1.12807566
+Iteration 82, loss = 1.12515208
+Iteration 83, loss = 1.12119183
+Iteration 84, loss = 1.12322937
+Iteration 85, loss = 1.11753098
+Iteration 86, loss = 1.11324412
+Iteration 87, loss = 1.11156127
+Iteration 88, loss = 1.10983424
+Iteration 89, loss = 1.11016360
+Iteration 90, loss = 1.10411930
+Iteration 91, loss = 1.10130590
+Iteration 92, loss = 1.09843676
+Iteration 93, loss = 1.09835282
+Iteration 94, loss = 1.09688054
+Iteration 95, loss = 1.09081962
+Iteration 96, loss = 1.08811383
+Iteration 97, loss = 1.08340738
+Iteration 98, loss = 1.08715584
+Iteration 99, loss = 1.08497398
+Iteration 100, loss = 1.08098768
+Iteration 101, loss = 1.07880113
+Iteration 102, loss = 1.07460838
+Iteration 103, loss = 1.07460909
+Iteration 104, loss = 1.07685130
+Iteration 105, loss = 1.06953030
+Iteration 106, loss = 1.06949495
+Iteration 107, loss = 1.06504260
+Iteration 108, loss = 1.06416206
+Iteration 109, loss = 1.06452064
+Iteration 110, loss = 1.06112954
+Iteration 111, loss = 1.06072748
+Iteration 112, loss = 1.05785260
+Iteration 113, loss = 1.05643016
+Iteration 114, loss = 1.05120895
+Iteration 115, loss = 1.05303430
+Iteration 116, loss = 1.05068320
+Iteration 117, loss = 1.05293666
+Iteration 118, loss = 1.04722895
+Iteration 119, loss = 1.04628798
+Iteration 120, loss = 1.04667954
+Iteration 121, loss = 1.04550308
+Iteration 122, loss = 1.04286545
+Iteration 123, loss = 1.04029885
+Iteration 124, loss = 1.03734946
+Iteration 125, loss = 1.03680740
+Iteration 126, loss = 1.03395339
+Iteration 127, loss = 1.03269892
+Iteration 128, loss = 1.02913919
+Iteration 129, loss = 1.03149786
+Iteration 130, loss = 1.03076927
+Iteration 131, loss = 1.02971047
+Iteration 132, loss = 1.02856582
+Iteration 133, loss = 1.02789617
+Iteration 134, loss = 1.02622176
+Iteration 135, loss = 1.02245935
+Iteration 136, loss = 1.02461384
+Iteration 137, loss = 1.02013123
+Iteration 138, loss = 1.01973838
+Iteration 139, loss = 1.01842068
+Iteration 140, loss = 1.01641419
+Iteration 141, loss = 1.01222467
+Iteration 142, loss = 1.01432889
+Iteration 143, loss = 1.01348634
+Iteration 144, loss = 1.01304007
+Iteration 145, loss = 1.01047231
+Iteration 146, loss = 1.00931322
+Iteration 147, loss = 1.00647401
+Iteration 148, loss = 1.00738964
+Iteration 149, loss = 1.00714185
+Iteration 150, loss = 1.00421261
+Iteration 151, loss = 1.00382612
+Iteration 152, loss = 1.00172998
+Iteration 153, loss = 1.00054547
+Iteration 154, loss = 1.00276977
+Iteration 155, loss = 1.00479861
+Iteration 156, loss = 0.99788480
+Iteration 157, loss = 0.99848724
+Iteration 158, loss = 0.99573878
+Iteration 159, loss = 0.99607965
+Iteration 160, loss = 0.99846188
+Iteration 161, loss = 0.99588875
+Iteration 162, loss = 0.99281315
+Iteration 163, loss = 0.99319808
+Iteration 164, loss = 0.98954241
+Iteration 165, loss = 0.99210454
+Iteration 166, loss = 0.98738447
+Iteration 167, loss = 0.99477063
+Iteration 168, loss = 0.98934317
+Iteration 169, loss = 0.98909867
+Iteration 170, loss = 0.98763037
+Iteration 171, loss = 0.98549412
+Iteration 172, loss = 0.98687120
+Iteration 173, loss = 0.98289563
+Iteration 174, loss = 0.98120959
+Iteration 175, loss = 0.98035393
+Iteration 176, loss = 0.98610751
+Iteration 177, loss = 0.98122847
+Iteration 178, loss = 0.97884517
+Iteration 179, loss = 0.97964323
+Iteration 180, loss = 0.98017151
+Iteration 181, loss = 0.97975744
+Iteration 182, loss = 0.97603425
+Iteration 183, loss = 0.97497507
+Iteration 184, loss = 0.97442023
+Iteration 185, loss = 0.97714185
+Iteration 186, loss = 0.97478920
+Iteration 187, loss = 0.97639011
+Iteration 188, loss = 0.97167450
+Iteration 189, loss = 0.97172937
+Iteration 190, loss = 0.96977888
+Iteration 191, loss = 0.97275479
+Iteration 192, loss = 0.96978389
+Iteration 193, loss = 0.96969510
+Iteration 194, loss = 0.97165236
+Iteration 195, loss = 0.97023527
+Iteration 196, loss = 0.96612309
+Iteration 197, loss = 0.96569287
+Iteration 198, loss = 0.96871177
+Iteration 199, loss = 0.96692026
+Iteration 200, loss = 0.96398343
+Iteration 201, loss = 0.96677669
+Iteration 202, loss = 0.96377154
+Iteration 203, loss = 0.96325653
+Iteration 204, loss = 0.96054378
+Iteration 205, loss = 0.96376487
+Iteration 206, loss = 0.96357291
+Iteration 207, loss = 0.96280886
+Iteration 208, loss = 0.96519104
+Iteration 209, loss = 0.95847276
+Iteration 210, loss = 0.96018422
+Iteration 211, loss = 0.96307656
+Iteration 212, loss = 0.96320653
+Iteration 213, loss = 0.95940594
+Iteration 214, loss = 0.95768456
+Iteration 215, loss = 0.95660829
+Iteration 216, loss = 0.95633081
+Iteration 217, loss = 0.95920265
+Iteration 218, loss = 0.95903178
+Iteration 219, loss = 0.95325649
+Iteration 220, loss = 0.95384639
+Iteration 221, loss = 0.95102842
+Iteration 222, loss = 0.95249167
+Iteration 223, loss = 0.95386461
+Iteration 224, loss = 0.95340950
+Iteration 225, loss = 0.95268089
+Iteration 226, loss = 0.95277605
+Iteration 227, loss = 0.94878068
+Iteration 228, loss = 0.94737778
+Iteration 229, loss = 0.95109547
+Iteration 230, loss = 0.95413288
+Iteration 231, loss = 0.95065211
+Iteration 232, loss = 0.94981367
+Iteration 233, loss = 0.95043227
+Iteration 234, loss = 0.94998289
+Iteration 235, loss = 0.95092663
+Iteration 236, loss = 0.94769520
+Iteration 237, loss = 0.94681035
+Iteration 238, loss = 0.94755008
+Iteration 239, loss = 0.94780928
+Iteration 240, loss = 0.94709572
+Iteration 241, loss = 0.94217470
+Iteration 242, loss = 0.94723118
+Iteration 243, loss = 0.95123604
+Iteration 244, loss = 0.94748059
+Iteration 245, loss = 0.94439596
+Iteration 246, loss = 0.94363968
+Iteration 247, loss = 0.94314242
+Iteration 248, loss = 0.94503101
+Iteration 249, loss = 0.94543450
+Iteration 250, loss = 0.94069575
+Iteration 251, loss = 0.94303412
+Iteration 252, loss = 0.94418604
+Iteration 253, loss = 0.94289129
+Iteration 254, loss = 0.93803643
+Iteration 255, loss = 0.93953123
+Iteration 256, loss = 0.93569345
+Iteration 257, loss = 0.94047534
+Iteration 258, loss = 0.93669214
+Iteration 259, loss = 0.93880745
+Iteration 260, loss = 0.93618210
+Iteration 261, loss = 0.93778555
+Iteration 262, loss = 0.93715824
+Iteration 263, loss = 0.93875159
+Iteration 264, loss = 0.94205249
+Iteration 265, loss = 0.93601136
+Iteration 266, loss = 0.93587548
+Iteration 267, loss = 0.93481712
+Iteration 268, loss = 0.93634749
+Iteration 269, loss = 0.93674171
+Iteration 270, loss = 0.93890726
+Iteration 271, loss = 0.93623998
+Iteration 272, loss = 0.93743391
+Iteration 273, loss = 0.93577458
+Iteration 274, loss = 0.93617759
+Iteration 275, loss = 0.93579500
+Iteration 276, loss = 0.93696461
+Iteration 277, loss = 0.93056359
+Iteration 278, loss = 0.93336271
+Iteration 279, loss = 0.93099734
+Iteration 280, loss = 0.93159630
+Iteration 281, loss = 0.93292680
+Iteration 282, loss = 0.92939170
+Iteration 283, loss = 0.93071788
+Iteration 284, loss = 0.93048814
+Iteration 285, loss = 0.93275552
+Iteration 286, loss = 0.92978549
+Iteration 287, loss = 0.92915987
+Iteration 288, loss = 0.93068594
+Iteration 289, loss = 0.93090034
+Iteration 290, loss = 0.92882254
+Iteration 291, loss = 0.92862479
+Iteration 292, loss = 0.92770031
+Iteration 293, loss = 0.92852150
+Iteration 294, loss = 0.92982039
+Iteration 295, loss = 0.92878256
+Iteration 296, loss = 0.92655238
+Iteration 297, loss = 0.92916333
+Iteration 298, loss = 0.92712306
+Iteration 299, loss = 0.92791431
+Iteration 300, loss = 0.92987918
+Iteration 301, loss = 0.92465370
+Iteration 302, loss = 0.92736393
+Iteration 303, loss = 0.92383993
+Iteration 304, loss = 0.92276761
+Iteration 305, loss = 0.92491308
+Iteration 306, loss = 0.92294755
+Iteration 307, loss = 0.92533798
+Iteration 308, loss = 0.92451479
+Iteration 309, loss = 0.92719461
+Iteration 310, loss = 0.92461959
+Iteration 311, loss = 0.92357586
+Iteration 312, loss = 0.92613066
+Iteration 313, loss = 0.92461883
+Iteration 314, loss = 0.92209804
+Iteration 315, loss = 0.92247063
+Iteration 316, loss = 0.92240846
+Iteration 317, loss = 0.92308056
+Iteration 318, loss = 0.92614349
+Iteration 319, loss = 0.92069403
+Iteration 320, loss = 0.91986136
+Iteration 321, loss = 0.92119954
+Iteration 322, loss = 0.92314888
+Iteration 323, loss = 0.92192601
+Iteration 324, loss = 0.91816437
+Iteration 325, loss = 0.91830872
+Iteration 326, loss = 0.92007907
+Iteration 327, loss = 0.91939662
+Iteration 328, loss = 0.91768158
+Iteration 329, loss = 0.92079020
+Iteration 330, loss = 0.91871442
+Iteration 331, loss = 0.91935860
+Iteration 332, loss = 0.91836826
+Iteration 333, loss = 0.92036489
+Iteration 334, loss = 0.91912859
+Iteration 335, loss = 0.91579645
+Iteration 336, loss = 0.91722620
+Iteration 337, loss = 0.91845153
+Iteration 338, loss = 0.91414498
+Iteration 339, loss = 0.91830495
+Iteration 340, loss = 0.91550900
+Iteration 341, loss = 0.91726762
+Iteration 342, loss = 0.91748249
+Iteration 343, loss = 0.91470760
+Iteration 344, loss = 0.91345308
+Iteration 345, loss = 0.91617413
+Iteration 346, loss = 0.91912664
+Iteration 347, loss = 0.91625167
+Iteration 348, loss = 0.91450962
+Iteration 349, loss = 0.91636290
+Iteration 350, loss = 0.91514805
+Iteration 351, loss = 0.91380220
+Iteration 352, loss = 0.91614660
+Iteration 353, loss = 0.91554975
+Iteration 354, loss = 0.91637031
+Iteration 355, loss = 0.91635536
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Fit MLP in: 0:05:20.553635
+Test MLP in: 0:00:00.300879
+MLP Accuracy: 0.5315
+
+################################
+corner accuracy analysis 
+Class labels, min: 0 max: 9
+
+
+Accuracy per class:
+| class | accuracy |
+| :---: | :---: |
+| 0  |  0.7214285714285714  |
+| 1  |  0.7938325991189428  |
+| 2  |  0.5329457364341085  |
+| 3  |  0.4297029702970297  |
+| 4  |  0.4164969450101833  |
+| 5  |  0.46860986547085204  |
+| 6  |  0.6169102296450939  |
+| 7  |  0.7052529182879378  |
+| 8  |  0.23203285420944558  |
+| 9  |  0.3508424182358771  |
+
+
+confusion matrix:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+0, 707, 54, 46, 48, 5, 45, 18, 11, 42, 4
+1, 162, 901, 13, 9, 10, 11, 5, 1, 21, 2
+2, 205, 12, 550, 61, 61, 34, 42, 18, 20, 29
+3, 257, 52, 69, 434, 33, 45, 11, 33, 50, 26
+4, 268, 10, 75, 45, 409, 21, 41, 13, 29, 71
+5, 239, 9, 43, 51, 39, 418, 35, 12, 35, 11
+6, 205, 12, 39, 6, 30, 26, 591, 10, 24, 15
+7, 155, 11, 40, 29, 15, 6, 7, 725, 16, 24
+8, 365, 61, 33, 61, 54, 58, 35, 33, 226, 48
+9, 378, 6, 22, 24, 79, 21, 15, 77, 33, 354
+
+
+################################
+corner done in: 0:05:24.644826
+Completed training 13 transforms in: 0:33:00.287336
