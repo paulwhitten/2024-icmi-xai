@@ -45,12 +45,12 @@ def analyze_results(batch, labels, predictions):
 This program trains all of the transform models
 """
 
-def train_batch(batch):
+def train_batch(batch, results, id):
     print("====", batch[0], "====")
     batch_start_time = datetime.now()
 
-    N, train_rows, train_columns, train_images, train_labels = load_mnist_float(batch[0][1], batch[0][2])
-    n, test_rows, test_columns, test_images, test_labels = load_mnist_float(batch[0][3], batch[0][4])
+    N, train_rows, train_columns, train_images, train_labels = load_mnist_float(batch[1], batch[2])
+    n, test_rows, test_columns, test_images, test_labels = load_mnist_float(batch[3], batch[4])
 
     # create the svn model
     rbf_svc = svm.SVC(kernel='rbf') # radial basis function
@@ -63,14 +63,14 @@ def train_batch(batch):
     pred = rbf_svc.predict(test_images)
     t_labels = np.argmax(test_labels, axis=-1)
     score = accuracy_score(t_labels, pred)
-    batch[1][batch[2]] = score
-    print(batch[0][0], "SVM Radial Bias Function accuracy:", score)
+    results[id] = score
+    print(batch[0], "SVM Radial Bias Function accuracy:", score)
 
     analyze_results(batch[0], t_labels, pred)
 
     # save https://scikit-learn.org/stable/model_persistence.html
     # https://machinelearningmastery.com/save-load-machine-learning-models-python-scikit-learn/
-    pickle.dump(rbf_svc, open(batch[0][5] + "/" + batch[0][0] + ".model", 'wb'))
+    pickle.dump(rbf_svc, open(batch[5] + "/" + batch[0] + ".model", 'wb'))
     # open by running loaded_model = pickle.load(open(filename, 'rb'))
 
     batch_end_time = datetime.now()
