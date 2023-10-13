@@ -7,6 +7,7 @@ from datetime import datetime
 from multiprocessing import Process
 from sklearn.metrics import accuracy_score
 from load_mnist_data import load_mnist_float, get_num_classes
+from transform_parallel import Transform, TransformNames
 #from joblib import dump, load # more efficient serialization
 
 def analyze_results(batch, labels, predictions):
@@ -48,8 +49,8 @@ def train_batch(batch):
     print("====", batch[0], "====")
     batch_start_time = datetime.now()
 
-    N, train_rows, train_columns, train_images, train_labels = load_mnist_float(batch[1], batch[2])
-    n, test_rows, test_columns, test_images, test_labels = load_mnist_float(batch[3], batch[4])
+    N, train_rows, train_columns, train_images, train_labels = load_mnist_float(batch[0][1], batch[0][2])
+    n, test_rows, test_columns, test_images, test_labels = load_mnist_float(batch[0][3], batch[0][4])
 
     # create the svn model
     rbf_svc = svm.SVC(kernel='rbf') # radial basis function
@@ -61,17 +62,19 @@ def train_batch(batch):
     # check against test labels
     pred = rbf_svc.predict(test_images)
     t_labels = np.argmax(test_labels, axis=-1)
-    print(batch[0], "SVM Radial Bias Function accuracy:", accuracy_score(t_labels, pred))
+    score = accuracy_score(t_labels, pred)
+    batch[1][batch[2]] = score
+    print(batch[0][0], "SVM Radial Bias Function accuracy:", score)
 
     analyze_results(batch[0], t_labels, pred)
 
     # save https://scikit-learn.org/stable/model_persistence.html
     # https://machinelearningmastery.com/save-load-machine-learning-models-python-scikit-learn/
-    pickle.dump(rbf_svc, open(batch[5] + "/" + batch[0] + ".model", 'wb'))
+    pickle.dump(rbf_svc, open(batch[0][5] + "/" + batch[0][0] + ".model", 'wb'))
     # open by running loaded_model = pickle.load(open(filename, 'rb'))
 
     batch_end_time = datetime.now()
-    print(batch[0], "done in:", batch_end_time - batch_start_time)
+    print(batch[0][0], "done in:", batch_end_time - batch_start_time)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='trains transforms for a set')
@@ -84,9 +87,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     batches = [
-        ["raw", f'{args.train_folder}/raw-image', f'{args.train_folder}/raw-labels',
-        f'{args.test_folder}/raw-image', f'{args.test_folder}/raw-labels', args.output_folder],
-
         ["crossing", f'{args.train_folder}/crossing-image', f'{args.train_folder}/crossing-labels',
         f'{args.test_folder}/crossing-image', f'{args.test_folder}/crossing-labels', args.output_folder],
 
@@ -120,19 +120,27 @@ if __name__ == '__main__':
         ["chull", f'{args.train_folder}/chull-image', f'{args.train_folder}/chull-labels',
         f'{args.test_folder}/chull-image', f'{args.test_folder}/chull-labels', args.output_folder],
 
+        ["raw", f'{args.train_folder}/raw-image', f'{args.train_folder}/raw-labels',
+        f'{args.test_folder}/raw-image', f'{args.test_folder}/raw-labels', args.output_folder],
+
         ["corner", f'{args.train_folder}/corner-image', f'{args.train_folder}/corner-labels',
         f'{args.test_folder}/corner-image', f'{args.test_folder}/corner-labels', args.output_folder]
     ]
 
+    accuracies = [0.0] * Transform.SIZE
     start_time = datetime.now()
     processes = []
+    transform_id = 0
     for batch in batches:
-        p = Process(target=train_batch, args=(batch,))
+        p = Process(target=train_batch, args=(batch, accuracies, transform_id,))
         p.start()
         processes.append(p)
+        transform_id += 1
     for p in processes:
         p.join()
     end_time = datetime.now()
+    print("transform names:", TransformNames)
+    print("accuracies:", accuracies)
     print("Completed training", len(batches), "transforms in:", end_time - start_time)
 
     # python train_transforms.py -r ./transforms/mnist -e ./transforms/mnist-test -o models/mnist-svc-rbf

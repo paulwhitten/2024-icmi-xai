@@ -6,6 +6,7 @@ from datetime import datetime
 from sklearn.metrics import accuracy_score
 from sklearn.neural_network import MLPClassifier
 from load_mnist_data import load_mnist_float, get_num_classes
+from transform_parallel import Transform, TransformNames
 #from joblib import dump, load # more efficient serialization
 
 def analyze_results(batch, labels, predictions):
@@ -43,9 +44,11 @@ def analyze_results(batch, labels, predictions):
 This program trains all of the transform models
 """
 
-def train_batch(batch):
+def train_batch(batch, id):
     print("====", batch[0], "====")
     batch_start_time = datetime.now()
+
+    print("type:", type(batch), "length:", len(batch), "element 0:", batch[0])
 
     N, train_rows, train_columns, train_images, train_labels = load_mnist_float(batch[1], batch[2])
     n, test_rows, test_columns, test_images, test_labels = load_mnist_float(batch[3], batch[4])
@@ -70,7 +73,9 @@ def train_batch(batch):
     print("Test MLP in:", end_time - start_time)
     mlp_p = np.argmax(mlp_predict, axis=-1)
     t_labels = np.argmax(test_labels, axis=-1)
-    print("MLP Accuracy:", accuracy_score(t_labels, mlp_p))
+    score = accuracy_score(t_labels, mlp_p)
+    batch[6][id] = score
+    print("MLP Accuracy:", score)
 
     analyze_results(batch[0], t_labels, mlp_p)
 
@@ -92,51 +97,58 @@ if __name__ == '__main__':
                         help='The folder to output')
     args = parser.parse_args()
 
+    accuracies = [0.0] * Transform.SIZE
+
     batches = [
-        ["raw", f'{args.train_folder}/raw-image', f'{args.train_folder}/raw-labels',
-        f'{args.test_folder}/raw-image', f'{args.test_folder}/raw-labels', args.output_folder],
 
         ["crossing", f'{args.train_folder}/crossing-image', f'{args.train_folder}/crossing-labels',
-        f'{args.test_folder}/crossing-image', f'{args.test_folder}/crossing-labels', args.output_folder],
+        f'{args.test_folder}/crossing-image', f'{args.test_folder}/crossing-labels', args.output_folder, accuracies],
 
         ["endpoint", f'{args.train_folder}/endpoint-image', f'{args.train_folder}/endpoint-labels',
-        f'{args.test_folder}/endpoint-image', f'{args.test_folder}/endpoint-labels', args.output_folder],
+        f'{args.test_folder}/endpoint-image', f'{args.test_folder}/endpoint-labels', args.output_folder, accuracies],
 
         ["fill", f'{args.train_folder}/fill-image', f'{args.train_folder}/fill-labels',
-        f'{args.test_folder}/fill-image', f'{args.test_folder}/fill-labels', args.output_folder],
+        f'{args.test_folder}/fill-image', f'{args.test_folder}/fill-labels', args.output_folder, accuracies],
 
         ["skel-fill", f'{args.train_folder}/skel-fill-image', f'{args.train_folder}/skel-fill-labels',
-        f'{args.test_folder}/skel-fill-image', f'{args.test_folder}/skel-fill-labels', args.output_folder],
+        f'{args.test_folder}/skel-fill-image', f'{args.test_folder}/skel-fill-labels', args.output_folder, accuracies],
 
         ["skel", f'{args.train_folder}/skel-image', f'{args.train_folder}/skel-labels',
-        f'{args.test_folder}/skel-image', f'{args.test_folder}/skel-labels', args.output_folder],
+        f'{args.test_folder}/skel-image', f'{args.test_folder}/skel-labels', args.output_folder, accuracies],
 
         ["thresh", f'{args.train_folder}/thresh-image', f'{args.train_folder}/thresh-labels',
-        f'{args.test_folder}/thresh-image', f'{args.test_folder}/thresh-labels', args.output_folder],
+        f'{args.test_folder}/thresh-image', f'{args.test_folder}/thresh-labels', args.output_folder, accuracies],
 
         ["line", f'{args.train_folder}/line-image', f'{args.train_folder}/line-labels',
-        f'{args.test_folder}/line-image', f'{args.test_folder}/line-labels', args.output_folder],
+        f'{args.test_folder}/line-image', f'{args.test_folder}/line-labels', args.output_folder, accuracies],
 
         ["ellipse", f'{args.train_folder}/ellipse-image', f'{args.train_folder}/ellipse-labels',
-        f'{args.test_folder}/ellipse-image', f'{args.test_folder}/ellipse-labels', args.output_folder],
+        f'{args.test_folder}/ellipse-image', f'{args.test_folder}/ellipse-labels', args.output_folder, accuracies],
 
         ["circle", f'{args.train_folder}/circle-image', f'{args.train_folder}/circle-labels',
-        f'{args.test_folder}/circle-image', f'{args.test_folder}/circle-labels', args.output_folder],
+        f'{args.test_folder}/circle-image', f'{args.test_folder}/circle-labels', args.output_folder, accuracies],
 
         ["ellipse-circle", f'{args.train_folder}/ellipse_circle-image', f'{args.train_folder}/ellipse_circle-labels',
-        f'{args.test_folder}/ellipse_circle-image', f'{args.test_folder}/ellipse_circle-labels', args.output_folder],
+        f'{args.test_folder}/ellipse_circle-image', f'{args.test_folder}/ellipse_circle-labels', args.output_folder, accuracies],
 
         ["chull", f'{args.train_folder}/chull-image', f'{args.train_folder}/chull-labels',
-        f'{args.test_folder}/chull-image', f'{args.test_folder}/chull-labels', args.output_folder],
+        f'{args.test_folder}/chull-image', f'{args.test_folder}/chull-labels', args.output_folder, accuracies],
+
+        ["raw", f'{args.train_folder}/raw-image', f'{args.train_folder}/raw-labels',
+        f'{args.test_folder}/raw-image', f'{args.test_folder}/raw-labels', args.output_folder, accuracies],
 
         ["corner", f'{args.train_folder}/corner-image', f'{args.train_folder}/corner-labels',
-        f'{args.test_folder}/corner-image', f'{args.test_folder}/corner-labels', args.output_folder]
+        f'{args.test_folder}/corner-image', f'{args.test_folder}/corner-labels', args.output_folder, accuracies]
     ]
 
     start_time = datetime.now()
+    transform_id = 0
     for batch in batches:
-        train_batch((batch))
+        train_batch(batch, transform_id)
+        transform_id += 1
     end_time = datetime.now()
+    print("transform names:", TransformNames)
+    print("accuracies:", accuracies)
     print("Completed training", len(batches), "transforms in:", end_time - start_time)
 
     # python train_transforms.py -r ./transforms/mnist -e ./transforms/mnist-test -o models/mnist-svc-rbf

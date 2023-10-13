@@ -425,6 +425,21 @@ class Transform(IntEnum):
     CORNER = 12
     SIZE = 13
 
+TransformNames = [
+    "crossing",
+    "endpoint",
+    "fill",
+    "skel-fill",
+    "skel",
+    "thresh",
+    "line",
+    "ellipse",
+    "circle",
+    "ellipse-circle",
+    "chull",
+    "raw",
+    "corner"
+]
 
 def set_image(dest, origin):
     count = 0
