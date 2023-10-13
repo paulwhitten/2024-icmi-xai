@@ -440,7 +440,7 @@ def get_corners(image):
     corner_image = np.zeros((image.shape[0], image.shape[1]), np.uint8)
     for coord in coords:
         set_neighborhood(corner_image, coord[1], coord[0], 1, 255)
-    return image
+    return corner_image
 
 
 def process_image(data):
