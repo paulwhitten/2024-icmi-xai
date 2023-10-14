@@ -93,7 +93,10 @@ if __name__ == '__main__':
         f'{args.test_folder}/ellipse_circle-image', f'{args.test_folder}/ellipse_circle-labels', args.output_folder, args.model_folder],
 
         ["chull", f'{args.train_folder}/chull-image', f'{args.train_folder}/chull-labels',
-        f'{args.test_folder}/chull-image', f'{args.test_folder}/chull-labels', args.output_folder, args.model_folder]
+        f'{args.test_folder}/chull-image', f'{args.test_folder}/chull-labels', args.output_folder, args.model_folder],
+
+        ["corner", f'{args.train_folder}/corner-image', f'{args.train_folder}/corner-labels',
+        f'{args.test_folder}/corner-image', f'{args.test_folder}/corner-labels', args.output_folder, args.model_folder]
     ]
 
     start_time = datetime.now()
