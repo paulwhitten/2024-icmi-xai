@@ -71,7 +71,7 @@ for (let label of kb.labels) {
     };
     for (let t_name of transform_names) {
         //TODO check for other excluded transforms
-        if (t_name != "thresh" && t_name != "raw"  && t_name != "skel-fill") {
+        if (t_name != "thresh" && t_name != "raw"  && t_name != "skel-fill") { //RAW
 
             let trans_prediction = kb.test_preds[t_name][label_index];
 
@@ -94,6 +94,7 @@ for (let label of kb.labels) {
 }
 
 let correct = 0;
+let second_choice = 0;
 let count = 0;
 // determine the results by combining predicitons and weighting
 let results = [];
@@ -104,7 +105,7 @@ for (let p of predictions) {
         index: p.index,
         predictions: [],
         sum_weights: 0,
-        tally: []
+        vote_tally: []
     };
 
     let label_ix = min_label;
@@ -132,21 +133,21 @@ for (let p of predictions) {
             c.attributions.sort((a, b) => {
                 return b.value - a.value;
             })
-            r.tally.push(c);
+            r.vote_tally.push(c);
         }
 
         label_ix++;
     }
 
-    r.tally.sort((a, b) => {
+    r.vote_tally.sort((a, b) => {
         return b.value - a.value;
     });
 
-    for (let t of r.tally) {
+    for (let t of r.vote_tally) {
         r.sum_weights += t.value;
     }
     let action = "selected";
-    for (let t of r.tally) {
+    for (let t of r.vote_tally) {
         t["probability"] = t.value / r.sum_weights;
         let str_prob = t.probability.toPrecision(4).toString();
         let props = "";
@@ -166,8 +167,13 @@ for (let p of predictions) {
     }
 
     // check accuracy of first choice
-    if (r.label == r.tally[0].class) {
+    if (r.label == r.vote_tally[0].class) {
         correct++;
+    } else {
+        // TODO looks for other alternatives
+        if (r.label == r.vote_tally[1]) {
+            second_choice++;
+        }
     }
 
     count++;
@@ -176,6 +182,7 @@ for (let p of predictions) {
 }
 
 console.log("Result:", correct / count);
+console.log("Result 1st and 2nd choice:", (correct + second_choice) / count, second_choice);
 
 fs.writeFileSync(path.join(options.knowledge_base, "results.json"), JSON.stringify(results, null, 4));
 fs.writeFileSync(path.join(options.knowledge_base, "kb.json"), JSON.stringify(kb, null, 4));
