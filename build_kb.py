@@ -101,9 +101,12 @@ if __name__ == '__main__':
 
     start_time = datetime.now()
 
+    processes = []
     for batch in batches:
         p = Process(target=eval_images, args=(batch,))
         p.start()
+        processes.append(p)
+    for p in processes:
         p.join()
 
     end_time = datetime.now()
