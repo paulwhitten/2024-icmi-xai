@@ -71,7 +71,7 @@ for (let label of kb.labels) {
     };
     for (let t_name of transform_names) {
         //TODO check for other excluded transforms
-        if (t_name != "thresh" && t_name != "raw") {
+        if (t_name != "thresh" && t_name != "raw"  && t_name != "skel-fill") {
 
             let trans_prediction = kb.test_preds[t_name][label_index];
 
@@ -177,7 +177,8 @@ for (let p of predictions) {
 
 console.log("Result:", correct / count);
 
-fs.writeFileSync("results.json", JSON.stringify(results, null, 4));
+fs.writeFileSync(path.join(options.knowledge_base, "results.json"), JSON.stringify(results, null, 4));
+fs.writeFileSync(path.join(options.knowledge_base, "kb.json"), JSON.stringify(kb, null, 4));
 
 function get_confusion_matrix(labels, preds) {
     let max = Math.max(...labels);
@@ -266,7 +267,7 @@ function get_confusion_matrix(labels, preds) {
     };
 }
 
-// TODO: do we want the stats weighted?
+// TODO: do we want the stats weighted?  perhaps parameterize this
 function get_contribution(stats) {
     return stats.accuracy * stats.sensitivity * stats.specificity * stats.precision;
 }
