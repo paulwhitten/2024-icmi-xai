@@ -8,7 +8,10 @@ from multiprocessing import Process, Manager
 from sklearn.metrics import accuracy_score
 from load_mnist_data import load_mnist_float, get_num_classes
 from transform_parallel import Transform, TransformNames
-#from joblib import dump, load # more efficient serialization
+# from joblib import dump, load # more efficient serialization
+
+# TODO add the ability to load column major
+# TODO adjust the classes to support non digit data
 
 def analyze_results(batch, labels, predictions):
     print("\n################################")
@@ -86,7 +89,8 @@ if __name__ == '__main__':
                         help='The folder to output')
     args = parser.parse_args()
 
-    accuracies = Manager.dict()
+    manager = Manager()
+    accuracies = manager.dict()
 
     batches = [
         ["crossing", f'{args.train_folder}/crossing-image', f'{args.train_folder}/crossing-labels',
