@@ -13,36 +13,38 @@ def load_mnist_float(image_file, label_file):
     image_labels = open(label_file, "rb").read()
 
     # initial position to read to for header
-    imagePosition = 16
-    labelPosition = 8
+    image_position = 16
+    label_position = 8
 
     # read big endian header
-    (imageMagic, N, rows, columns) = struct.unpack(">iiii", image_data[:imagePosition])
-    (labelMagic, numLabels) = struct.unpack(">ii", image_labels[:labelPosition])
-    if (N != numLabels):
+    (image_magic, N, rows, columns) = struct.unpack(">iiii", image_data[:image_position])
+    (label_magic, num_labels) = struct.unpack(">ii", image_labels[:label_position])
+    if (N != num_labels):
         print("number of labels does not correspond to digits")
 
-    pixelsInImage =  rows * columns
+    pixels_in_image =  rows * columns
 
     digits = []
-    labels = []
-    imageCount = 0
-    while imageCount < N:
+    labels_integer = np.zeros(N).astype('uint8')
+    image_count = 0
+    while image_count < N:
         # read a byte buffer for the label and then the image
-        label = struct.unpack("B", image_labels[labelPosition:labelPosition+1])
-        pixels = struct.unpack("B" * pixelsInImage, image_data[imagePosition: imagePosition + pixelsInImage])
+        label = struct.unpack("B", image_labels[label_position:label_position+1])
+        pixels = struct.unpack("B" * pixels_in_image, image_data[image_position: image_position + pixels_in_image])
         normPixels = []
         # advance the position
-        imagePosition += rows * columns
-        labelPosition += 1
+        image_position += rows * columns
+        label_position += 1
         for pixel in pixels:
             normPixels.append(pixel/255)
         digits.append(normPixels)
-        output = np.zeros(10)
-        output[label[0]] = 1.0
-        labels.append(output)
-        imageCount += 1
-    return (N, rows, columns, digits, labels)
+        labels_integer[image_count] = label[0]
+        image_count += 1
+    labels_one_hot = []
+    largest_label = max(labels_integer)
+    labels_one_hot = np.zeros((N, largest_label + 1)).astype('float32')
+    labels_one_hot[np.arange(N), labels_integer] = 1.0
+    return (N, rows, columns, digits, labels_one_hot)
 
 # loads the mnist image and label file 
 # output is:
@@ -56,29 +58,29 @@ def load_mnist(image_file, label_file):
     image_labels = open(label_file, "rb").read()
 
     # initial position to read to for header
-    imagePosition = 16
-    labelPosition = 8
+    image_position = 16
+    label_position = 8
 
     # read big endian header
-    (imageMagic, N, rows, columns) = struct.unpack(">iiii", image_data[:imagePosition])
-    print('image magic num:', hex(imageMagic), 'N:', N, 'rows:', rows, 'columns:', columns)
-    (labelMagic, numLabels) = struct.unpack(">ii", image_labels[:labelPosition])
-    print('label magic num:', hex(labelMagic), 'numLabels:', numLabels)
-    if (N != numLabels):
+    (image_magic, N, rows, columns) = struct.unpack(">iiii", image_data[:image_position])
+    print('image magic num:', hex(image_magic), 'N:', N, 'rows:', rows, 'columns:', columns)
+    (label_magic, num_labels) = struct.unpack(">ii", image_labels[:label_position])
+    print('label magic num:', hex(label_magic), 'numLabels:', num_labels)
+    if (N != num_labels):
         print("number of labels does not correspond to digits")
 
-    pixelsInImage =  rows * columns
+    pixels_in_image =  rows * columns
 
     digits = []
     labels = []
     imageCount = 0
     while imageCount < N:
         # read a byte buffer for the label and then the image
-        label = struct.unpack("B", image_labels[labelPosition:labelPosition+1])
-        pixels = struct.unpack("B" * pixelsInImage, image_data[imagePosition: imagePosition + pixelsInImage])
+        label = struct.unpack("B", image_labels[label_position:label_position+1])
+        pixels = struct.unpack("B" * pixels_in_image, image_data[image_position: image_position + pixels_in_image])
         # advance the position
-        imagePosition += rows * columns
-        labelPosition += 1
+        image_position += rows * columns
+        label_position += 1
         digits.append(pixels)
         labels.append(label[0])
         imageCount += 1
@@ -91,14 +93,14 @@ def load_mnist(image_file, label_file):
 #   A list of labels read from the file
 def load_mnist_labels(label_file):
     image_labels = open(label_file, "rb").read()
-    labelPosition = 8
-    (labelMagic, numLabels) = struct.unpack(">ii", image_labels[:labelPosition])
-    labelCount = 0
+    label_position = 8
+    (label_magic, num_labels) = struct.unpack(">ii", image_labels[:label_position])
+    label_count = 0
     labels = []
-    while labelCount < numLabels:
-        label = struct.unpack("B", image_labels[labelPosition:labelPosition+1])
-        labelPosition += 1
-        labelCount += 1
+    while label_count < num_labels:
+        label = struct.unpack("B", image_labels[label_position:label_position+1])
+        label_position += 1
+        label_count += 1
         labels.append(label[0])
     return labels
 
@@ -148,39 +150,39 @@ def get_num_classes(train_labels):
 #   the number of columns per digit
 #   an array of normalized pixel data
 #   an array of floating point label data
-# TODO: pass range to normaloze on...
+# TODO: pass range to normalize on...
 def load_mnist_float_tanh(image_file, label_file):
     image_data = open(image_file, "rb").read()
     image_labels = open(label_file, "rb").read()
 
     # initial position to read to for header
-    imagePosition = 16
-    labelPosition = 8
+    image_position = 16
+    label_position = 8
 
     # read big endian header
-    (imageMagic, N, rows, columns) = struct.unpack(">iiii", image_data[:imagePosition])
-    (labelMagic, numLabels) = struct.unpack(">ii", image_labels[:labelPosition])
-    if (N != numLabels):
+    (imageMagic, N, rows, columns) = struct.unpack(">iiii", image_data[:image_position])
+    (labelMagic, num_labels) = struct.unpack(">ii", image_labels[:label_position])
+    if (N != num_labels):
         print("number of labels does not correspond to digits")
 
-    pixelsInImage =  rows * columns
+    pixels_in_image =  rows * columns
 
     digits = []
     labels = []
-    imageCount = 0
-    while imageCount < N:
+    image_count = 0
+    while image_count < N:
         # read a byte buffer for the label and then the image
-        label = struct.unpack("B", image_labels[labelPosition:labelPosition+1])
-        pixels = struct.unpack("B" * pixelsInImage, image_data[imagePosition: imagePosition + pixelsInImage])
+        label = struct.unpack("B", image_labels[label_position:label_position+1])
+        pixels = struct.unpack("B" * pixels_in_image, image_data[image_position: image_position + pixels_in_image])
         normPixels = []
         # advance the position
-        imagePosition += rows * columns
-        labelPosition += 1
+        image_position += rows * columns
+        label_position += 1
         for pixel in pixels:
             normPixels.append(pixel/255 * 2.0 - 1.0)
         digits.append(normPixels)
         output = np.zeros(10)
         output[label[0]] = 1.0
         labels.append(output)
-        imageCount += 1
+        image_count += 1
     return (N, rows, columns, digits, labels)
