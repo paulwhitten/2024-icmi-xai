@@ -77,7 +77,7 @@ def train_batch(batch, results, id):
     # open by running loaded_model = pickle.load(open(filename, 'rb'))
 
     batch_end_time = datetime.now()
-    print(batch[0][0], "done in:", batch_end_time - batch_start_time)
+    print(batch[0], "done in:", batch_end_time - batch_start_time)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='trains transforms for a set')
