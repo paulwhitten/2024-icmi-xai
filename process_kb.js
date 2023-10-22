@@ -98,6 +98,8 @@ let second_choice = 0;
 let count = 0;
 // determine the results by combining predicitons and weighting
 let results = [];
+let final_predictions = [];
+let final_labels = [];
 for (let p of predictions) {
 
     let r = {
@@ -107,6 +109,8 @@ for (let p of predictions) {
         sum_weights: 0,
         vote_tally: []
     };
+
+    final_labels.push(p.label);
 
     let label_ix = min_label;
     while (label_ix <= max_label) {
@@ -175,14 +179,17 @@ for (let p of predictions) {
             second_choice++;
         }
     }
+    final_predictions.push(r.vote_tally[0].class);
 
     count++;
     results.push(r);
 
 }
 
-console.log("Result:", correct / count);
-console.log("Result 1st and 2nd choice:", (correct + second_choice) / count, second_choice);
+console.log("==========================================================")
+console.log("Final result:", correct / count);
+//console.log("Result 1st and 2nd choice:", (correct + second_choice) / count, second_choice);
+get_confusion_matrix(final_labels, final_predictions);
 
 fs.writeFileSync(path.join(options.knowledge_base, "results.json"), JSON.stringify(results, null, 4));
 fs.writeFileSync(path.join(options.knowledge_base, "kb.json"), JSON.stringify(kb, null, 4));
