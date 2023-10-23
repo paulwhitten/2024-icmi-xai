@@ -10,7 +10,7 @@
         dot_flag = false;
 
     var x = "white",
-        y = 4;
+        y = 2;
     
     function init() {
         canvas = document.getElementById('can');
@@ -81,16 +81,70 @@
             //ctx.clearRect(0, 0, w, h);
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            document.getElementById("canvasimg").style.display = "none";
         }
     }
     
-    function save() {
+    function submit() {
         //document.getElementById("canvasimg").style.border = "2px solid";
-        var dataURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        //var dataURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        var b64Img = canvas.toDataURL().split(",")[1];
+        var binaryString = atob(b64Img);
+        var bytes = new Uint8Array(binaryString.length);
+        for (var i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+        }
         //document.getElementById("canvasimg").src = dataURL;
         //document.getElementById("canvasimg").style.display = "inline";
-        console.log("dataURL:", dataURL);
+        //console.log("png bytes:", bytes);
+
+        // https://www.w3schools.com/tags/canvas_getimagedata.asp
+        var imgData = ctx.getImageData(0, 0, 28, 28);
+        //console.log("image data:", imgData);
+
+        //console.log("length", imgData.data.length);
+        let img = [];
+        for (let i = 0; i < imgData.data.length; i += 4) {
+            img.push(imgData.data[i]);
+        }
+        console.log(img);
+
+        // https://stackoverflow.com/questions/36975619/how-to-call-a-rest-web-service-api-from-javascript
+        // https://fastapi.tiangolo.com/
+        /*
+        fetch('http://localhost:3000/images?test=' + JSON.stringify(img)) 
+            .then(response => { 
+                if (response.ok) { 
+                return response.json(); // Parse the response data as JSON 
+                } else { 
+                throw new Error('API request failed'); 
+                } 
+            }) 
+            .then(data => { 
+                // Process the response data here 
+                console.log(data); // Example: Logging the data to the console 
+            }) 
+            .catch(error => { 
+                // Handle any errors here 
+                console.error(error); // Example: Logging the error to the console 
+            });
+        */
+        
+        fetch('http://localhost:8000/submit', {
+            method: 'POST',
+            crossorigin: true,
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({image: img})
+        })
+        .then(data => {
+            console.log(data); // TODO handle response data
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
     }
     
     function findxy(res, e) {
@@ -105,7 +159,7 @@
             if (dot_flag) {
                 ctx.beginPath();
                 ctx.fillStyle = x;
-                ctx.fillRect(currX, currY, 4, 4);
+                ctx.fillRect(currX, currY, 2, 2);
                 ctx.closePath();
                 dot_flag = false;
             }
@@ -125,7 +179,8 @@
     }
     </script>
     <body onload="init()">
-        <canvas id="can" width="56" height="56" style="position:absolute;top:10%;left:10%;"></canvas>
+        <div style="position:absolute;top:5%;left:7%;">Draw A Character</div>
+        <canvas id="can" width="28" height="28" style="position:absolute;top:10%;left:10%;"></canvas>
         <!--
         <div style="position:absolute;top:12%;left:43%;">Choose Color</div>
         <div style="position:absolute;top:15%;left:45%;width:10px;height:10px;background:green;" id="green" onclick="color(this)"></div>
@@ -139,8 +194,8 @@
         <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
         -->
         
-        <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:20%;left:5%;">
-        <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:20%;left:10%;">
+        <input type="button" value="submit" id="btn" size="25" onclick="submit()" style="position:absolute;top:20%;left:7%;">
+        <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:20%;left:17%;">
     </body>
     </html>
 
