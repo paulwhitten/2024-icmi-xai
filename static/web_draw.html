@@ -87,15 +87,12 @@
     function submit() {
         //document.getElementById("canvasimg").style.border = "2px solid";
         //var dataURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-        var b64Img = canvas.toDataURL().split(",")[1];
-        var binaryString = atob(b64Img);
-        var bytes = new Uint8Array(binaryString.length);
-        for (var i = 0; i < binaryString.length; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-        }
-        //document.getElementById("canvasimg").src = dataURL;
-        //document.getElementById("canvasimg").style.display = "inline";
-        //console.log("png bytes:", bytes);
+        // var b64Img = canvas.toDataURL().split(",")[1];
+        // var binaryString = atob(b64Img);
+        // var bytes = new Uint8Array(binaryString.length);
+        // for (var i = 0; i < binaryString.length; i++) {
+        //     bytes[i] = binaryString.charCodeAt(i);
+        // }
 
         // https://www.w3schools.com/tags/canvas_getimagedata.asp
         var imgData = ctx.getImageData(0, 0, 28, 28);
@@ -109,40 +106,22 @@
         console.log(img);
 
         // https://stackoverflow.com/questions/36975619/how-to-call-a-rest-web-service-api-from-javascript
-        // https://fastapi.tiangolo.com/
-        /*
-        fetch('http://localhost:3000/images?test=' + JSON.stringify(img)) 
-            .then(response => { 
-                if (response.ok) { 
-                return response.json(); // Parse the response data as JSON 
-                } else { 
-                throw new Error('API request failed'); 
-                } 
-            }) 
-            .then(data => { 
-                // Process the response data here 
-                console.log(data); // Example: Logging the data to the console 
-            }) 
-            .catch(error => { 
-                // Handle any errors here 
-                console.error(error); // Example: Logging the error to the console 
-            });
-        */
-        
-        fetch('http://localhost:8000/submit', {
+        // https://fastapi.tiangolo.com/ 
+        fetch('http://127.0.0.1:8000/submit', {
             method: 'POST',
-            crossorigin: true,
-            mode: 'no-cors',
+            //crossorigin: true,
+            //mode: 'no-cors',
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json",
+			    "Accept": "application/json"
             },
-            body: JSON.stringify({image: img})
+            body: JSON.stringify(img)
         })
         .then(data => {
-            console.log(data); // TODO handle response data
+            console.log("success:", data); // TODO handle response data
         })
         .catch(error => {
-            console.error(error);
+            console.error("Error:", error);
         });
 
     }
@@ -179,21 +158,8 @@
     }
     </script>
     <body onload="init()">
-        <div style="position:absolute;top:5%;left:7%;">Draw A Character</div>
+        <div style="position:absolute;top:5%;left:7%;">Draw a character</div>
         <canvas id="can" width="28" height="28" style="position:absolute;top:10%;left:10%;"></canvas>
-        <!--
-        <div style="position:absolute;top:12%;left:43%;">Choose Color</div>
-        <div style="position:absolute;top:15%;left:45%;width:10px;height:10px;background:green;" id="green" onclick="color(this)"></div>
-        <div style="position:absolute;top:15%;left:46%;width:10px;height:10px;background:blue;" id="blue" onclick="color(this)"></div>
-        <div style="position:absolute;top:15%;left:47%;width:10px;height:10px;background:red;" id="red" onclick="color(this)"></div>
-        <div style="position:absolute;top:17%;left:45%;width:10px;height:10px;background:yellow;" id="yellow" onclick="color(this)"></div>
-        <div style="position:absolute;top:17%;left:46%;width:10px;height:10px;background:orange;" id="orange" onclick="color(this)"></div>
-        <div style="position:absolute;top:17%;left:47%;width:10px;height:10px;background:black;" id="black" onclick="color(this)"></div>
-        <div style="position:absolute;top:20%;left:43%;">Eraser</div>
-        <div style="position:absolute;top:22%;left:45%;width:15px;height:15px;background:white;border:2px solid;" id="white" onclick="color(this)"></div>
-        <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
-        -->
-        
         <input type="button" value="submit" id="btn" size="25" onclick="submit()" style="position:absolute;top:20%;left:7%;">
         <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:20%;left:17%;">
     </body>
