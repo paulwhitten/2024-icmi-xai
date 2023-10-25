@@ -85,15 +85,6 @@
     }
     
     function submit() {
-        //document.getElementById("canvasimg").style.border = "2px solid";
-        //var dataURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-        // var b64Img = canvas.toDataURL().split(",")[1];
-        // var binaryString = atob(b64Img);
-        // var bytes = new Uint8Array(binaryString.length);
-        // for (var i = 0; i < binaryString.length; i++) {
-        //     bytes[i] = binaryString.charCodeAt(i);
-        // }
-
         // https://www.w3schools.com/tags/canvas_getimagedata.asp
         var imgData = ctx.getImageData(0, 0, 28, 28);
         //console.log("image data:", imgData);

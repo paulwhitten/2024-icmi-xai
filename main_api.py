@@ -2,8 +2,10 @@ from typing import Union
 from fastapi import FastAPI, APIRouter
 from fastapi import Request
 from fastapi.staticfiles import StaticFiles
+from transform_parallel import get_transforms
 #import uvicorn
 import logging
+import json
 
 # setup loggers
 #logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
@@ -41,10 +43,15 @@ async def submit(request: Request):
     elif content_type == 'application/json':
         try:
             logger.debug("submit json processing")
-            json = await request.body()
+            body_data = await request.body()
+            logger.debug(body_data)
+            image_data = json.loads(body_data) # an array representing the image
+            logger.debug(image_data)
+            
             # TODO: process the data
-            logger.debug(json)
-            return json
+            raw, thresh, lee_skel, fill_img, corners, ellipse, circle, ellipse_circle, fill_skel, crossings, endpoints, lines, chull = get_transforms(image_data)
+
+            return body_data
         except JSONDecodeError:
             logger.error("JSON error")
             return 'Invalid JSON data.'

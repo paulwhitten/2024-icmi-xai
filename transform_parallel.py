@@ -457,6 +457,37 @@ def get_corners(image):
         set_neighborhood(corner_image, coord[1], coord[0], 1, 255)
     return corner_image
 
+# gets the transforms from the passed array of image data
+def get_transforms(data):
+    min_thresh = 100
+    pixel_count = len(data)
+    dimension = int(math.sqrt(pixel_count))
+    print("pixels:", pixel_count, "dimension:", dimension)
+    raw = np.zeros([dimension,dimension], np.uint8)
+    thresh = np.zeros([dimension,dimension], np.uint8)
+    img_lee = np.zeros([dimension,dimension], np.uint8)
+    pixel = 0
+    for x in range(dimension):
+        for y in range(dimension):
+            if (data[pixel] > min_thresh):
+                thresh[x, y] = 255
+                img_lee[x,y] = 255
+            raw[x,y] = data[pixel]
+            pixel += 1
+    fill_img = flood_fill_loops(thresh, 100)
+    lee_skel = skeletonize(img_lee, method='lee')
+    corners = get_corners(lee_skel)
+    ellipse = get_ellipse(lee_skel)
+    circle = get_circle(lee_skel)
+    ellipse_circle = get_ellipse_or_circle(lee_skel)
+    fill_skel = flood_fill_loops(lee_skel, 100)
+    crossing_count, crossings, mod_crossings = get_crossings(lee_skel, 100)
+    endpoint_count, endpoints, mod_endpoints = get_endpoints(lee_skel, 100)
+    lines = get_lines(lee_skel)
+    chull = get_convex_hull(thresh)
+    return (raw, thresh, lee_skel, fill_img, corners,
+            ellipse, circle, ellipse_circle, fill_skel,
+            crossings, endpoints, lines, chull)
 
 def process_image(data):
     global num_processed
