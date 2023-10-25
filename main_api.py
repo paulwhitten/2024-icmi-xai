@@ -52,6 +52,7 @@ async def submit(request: Request):
             raw, thresh, skel, fill, corners, ellipse, circle, ellipse_circle, skel_fill, crossings, endpoints, lines, chull = get_transforms(image_data)
             # feed the data into the various models to get voted
             # calculate the results based on kb effectiveness
+            # kb.stats["transform_name"].stats[class].accuracy, sensitivity, specificity, precision
             # assemble a response with explainability
 
             return body_data
