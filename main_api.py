@@ -44,12 +44,15 @@ async def submit(request: Request):
         try:
             logger.debug("submit json processing")
             body_data = await request.body()
-            logger.debug(body_data)
+            #logger.debug(body_data)
             image_data = json.loads(body_data) # an array representing the image
-            logger.debug(image_data)
+            #logger.debug(image_data)
             
             # TODO: process the data
             raw, thresh, lee_skel, fill_img, corners, ellipse, circle, ellipse_circle, fill_skel, crossings, endpoints, lines, chull = get_transforms(image_data)
+            # feed the data into the various models to get voted
+            # calculate the results based on kb effectiveness
+            # assemble a response with explainability
 
             return body_data
         except JSONDecodeError:
