@@ -82,6 +82,9 @@
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
+        for (let i = 0; i < 4; i++) {
+            document.getElementById('label' + i).innerHTML = '';
+        }
     }
     
     function submit() {
@@ -125,8 +128,29 @@
             tally.sort((a, b) => {
                 return b.value - a.value
             });
+            let count = 0
             for (let v of tally) {
                 v.pred = v.value / total;
+                let res = "The digit " + v. class
+                if (count == 0) {
+                    res += " won"
+                } else {
+                    res += " was an alternative"
+                }
+                res += " with prediction " + v.pred.toPrecision(3) + " due to the "
+                let prop_ix = 0;
+                for (let a of v.attributions) {
+                    if (prop_ix != 0) {
+                        res += ", "
+                    }
+                    res += a.name
+                    prop_ix++;
+                }
+                res += " properties."
+                if (count < 4 && v.value > 0.0) {
+                    document.getElementById('label' + count).innerHTML = res;
+                }
+                count++;
             }
             console.log("tally:", tally)
         })
@@ -168,10 +192,20 @@
     }
     </script>
     <body onload="init()">
-        <div style="position:absolute;top:5%;left:7%;">Draw a character</div>
-        <canvas id="can" width="28" height="28" style="position:absolute;top:10%;left:10%;"></canvas>
-        <input type="button" value="submit" id="btn" size="25" onclick="submit()" style="position:absolute;top:20%;left:7%;">
-        <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:20%;left:17%;">
+        <div>Draw a character</div>
+        <br>
+        <div><canvas id="can" width="28" height="28"></canvas></div>
+        <br>
+        <div>
+            <input type="button" value="submit" id="btn" size="25" onclick="submit()">
+            <input type="button" value="clear" id="clr" size="23" onclick="erase()">
+        </div>
+        <br>
+        <br>
+        <div><label id="label0"></label> </div>
+        <div><label id="label1"></label> </div>
+        <div><label id="label2"></label> </div>
+        <div><label id="label3"></label> </div>
     </body>
     </html>
 
