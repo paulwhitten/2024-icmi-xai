@@ -98,7 +98,7 @@
 
         // https://stackoverflow.com/questions/36975619/how-to-call-a-rest-web-service-api-from-javascript
         // https://fastapi.tiangolo.com/ 
-        fetch('http://127.0.0.1:8000/submit', {
+        fetch('/submit', {
             method: 'POST',
             //crossorigin: true,
             //mode: 'no-cors',
@@ -109,7 +109,26 @@
             body: JSON.stringify(img)
         })
         .then(data => {
-            console.log("success:", data); // TODO handle response data
+            return data.json()
+        })
+        .then(d => {
+            console.log("json:", d)
+            console.log(typeof(d))
+            tally = JSON.parse(d)
+            let total = 0.0
+            for (let v of tally) {
+                v.attributions.sort((a, b) => {
+                    return b.effectiveness - a.effectiveness;
+                });
+                total += v.value;
+            }
+            tally.sort((a, b) => {
+                return b.value - a.value
+            });
+            for (let v of tally) {
+                v.pred = v.value / total;
+            }
+            console.log("tally:", tally)
         })
         .catch(error => {
             console.error("Error:", error);

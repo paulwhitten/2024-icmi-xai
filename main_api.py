@@ -3,6 +3,7 @@ from fastapi import FastAPI, APIRouter
 from fastapi import Request
 from fastapi.staticfiles import StaticFiles
 from transform_parallel import get_transforms
+from calculate_sample import CalcObject
 #import uvicorn
 import logging
 import json
@@ -15,6 +16,8 @@ FORMAT = "%(levelname)s:  %(message)s"
 logging.basicConfig(format=FORMAT, level=logging.DEBUG)
 
 logging.debug('This message should appear on the console')
+
+calc = CalcObject("models_svm_mnist", "kb_svm_mnist")
 
 app = FastAPI()
 router = APIRouter()
@@ -49,13 +52,13 @@ async def submit(request: Request):
             #logger.debug(image_data)
             
             # transform
-            raw, thresh, skel, fill, corners, ellipse, circle, ellipse_circle, skel_fill, crossings, endpoints, lines, chull = get_transforms(image_data)
+            raw, thresh, skel, fill, corner, ellipse, circle, ellipse_circle, skel_fill, crossing, endpoint, line, chull = get_transforms(image_data)
+            res = calc.get_result(raw, thresh, skel, fill, corner, ellipse, circle, ellipse_circle, skel_fill, crossing, endpoint, line, chull)
             # feed the data into the various models to get voted
             # calculate the results based on kb effectiveness
-            # kb.stats["transform_name"].stats[class].accuracy, sensitivity, specificity, precision
             # assemble a response with explainability
 
-            return body_data
+            return json.dumps(res)
         except JSONDecodeError:
             logger.error("JSON error")
             return 'Invalid JSON data.'
@@ -72,3 +75,5 @@ async def submit(request: Request):
 
 #if __name__ == '__main__':
 #    uvicorn.run("main_api:app", port=8000)
+
+#uvicorn main_api:app --reload
