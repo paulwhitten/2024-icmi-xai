@@ -76,12 +76,11 @@
     }
     
     function erase() {
-        var m = confirm("Want to clear");
-        if (m) {
-            //ctx.clearRect(0, 0, w, h);
-            ctx.fillStyle = "black";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
+        //var m = confirm("Want to clear");
+        //ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
         for (let i = 0; i < 4; i++) {
             document.getElementById('label' + i).innerHTML = '';
         }
