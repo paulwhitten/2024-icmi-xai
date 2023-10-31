@@ -3,6 +3,9 @@ import pickle
 import argparse
 import numpy as np
 from transform_parallel import TransformNames
+from io import BytesIO
+import imageio
+import base64
 
 #raw, thresh, skel, fill, corners, ellipse, circle, ellipse_circle, skel_fill, crossings, endpoints, lines, chull
 
@@ -66,8 +69,13 @@ class CalcObject:
                 
                 print(n, pred, eff)
 
+                buf = BytesIO()
+                imageio.imwrite(buf, img, format='png')
+                b64_img = base64.b64encode(buf.getbuffer()).decode('utf-8')
+                print("base 64 image:", b64_img)
+
                 vote_tally[pred[0]]["value"] += eff
-                vote_tally[pred[0]]["attributions"].append({"name": n, "effectiveness": eff})
+                vote_tally[pred[0]]["attributions"].append({"name": n, "effectiveness": eff, "image": b64_img}) #img.flatten().tolist()
 
             #self.kb.stats[n].stats[pred[0]].accuracy, self.kb.stats[n].stats[pred[0]].sensitivity,
             #self.kb.stats[n].stats[pred[0]].specificity, self.kb.stats[n].stats[pred[0]].precision

@@ -84,11 +84,27 @@
         for (let i = 0; i < 4; i++) {
             document.getElementById('label' + i).innerHTML = '';
         }
+
+        document.getElementById('skel').src = "";
+        document.getElementById('chull').src = "";
+        document.getElementById('endpoint').src = "";
+        document.getElementById('corner').src = "";
+        document.getElementById('crossing').src = "";
+        document.getElementById('line').src = "";
+        document.getElementById('circle').src = "";
+        document.getElementById('ellipse-circle').src = "";
+        document.getElementById('ellipse').src = "";
+        document.getElementById('fill').src = "";
+        document.getElementById('skel-fill').src = "";
+
+
     }
     
     function submit() {
         // https://www.w3schools.com/tags/canvas_getimagedata.asp
         var imgData = ctx.getImageData(0, 0, 28, 28);
+        //var dataURL = canvas.toDataURL();
+        //console.log('data URL', dataURL);
         //console.log("image data:", imgData);
 
         //console.log("length", imgData.data.length);
@@ -139,6 +155,31 @@
                 res += " with prediction " + v.pred.toPrecision(3) + " due to the "
                 let prop_ix = 0;
                 for (let a of v.attributions) {
+                    if (a.image) {
+                        //document.getElementById(a.name).style.border = "2px solid";
+                        //var dataURL = canvas.toDataURL();
+                        var img = document.getElementById(a.name);
+                        console.log("image:", a.name, img);
+                        img.src = 'data::image/png;base64,' + a.image;
+                        //document.getElementById(a.name).style.display = "inline";
+                        /*
+                        const tmp_canvas = document.createElement('tmp_canvas'); 
+                        const tmp_ctx = canvas.getContext('2d'); 
+                        tmp_canvas.width = 28; 
+                        tmp_canvas.height = 28;
+                        var image_data = tmp_ctx.createImageData(28, 28);
+                        var data = image_data.data;
+                        let count = 0;
+                        for (let i = 0; i < data.length; data += 4) {
+                            data[i] = data[i+1] = data[i+2] = a.image[count];
+                            data[i+3] = 255;
+                            count++;
+                        }
+                        tmp_ctx.putImageData(image_data, 0, 0);
+                        var dataURL = canvas.toDataURL();
+                        img.src = dataURL;
+                        */
+                    }
                     if (prop_ix != 0) {
                         res += ", "
                     }
@@ -191,7 +232,7 @@
     }
     </script>
     <body onload="init()">
-        <div>Draw a character</div>
+        <div>Draw a digit</div>
         <br>
         <div><canvas id="can" width="28" height="28"></canvas></div>
         <br>
@@ -200,7 +241,48 @@
             <input type="button" value="clear" id="clr" size="23" onclick="erase()">
         </div>
         <br>
+        <div>Transforms:</div>
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <img id="skel" width="28" height="28"><figcaption>Skel</figcaption>
+                    </td>
+                    <td>
+                        <img id="chull" width="28" height="28"><figcaption>Chu</figcaption>
+                    </td>
+                    <td>
+                        <img id="endpoint" width="28" height="28"><figcaption>EP</figcaption>
+                    </td>
+                    <td>
+                        <img id="corner" width="28" height="28"><figcaption>Cor</figcaption>
+                    </td>
+                    <td>
+                        <img id="crossing" width="28" height="28"><figcaption>Cro</figcaption>
+                    </td>
+                    <td>
+                        <img id="line" width="28" height="28"><figcaption>Lin</figcaption>
+                    </td>
+                    <td>
+                        <img id="circle" width="28" height="28"><figcaption>Cir</figcaption>
+                    </td>
+                    <td>
+                        <img id="ellipse-circle" width="28" height="28"><figcaption>EC</figcaption>
+                    </td>
+                    <td>
+                        <img id="ellipse" width="28" height="28"><figcaption>El</figcaption>
+                    </td>
+                    <td>
+                        <img id="fill" width="28" height="28"><figcaption>Fill</figcaption>
+                    </td>
+                    <td>
+                        <img id="skel-fill" width="28" height="28"><figcaption>SkFi</figcaption>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <br>
+        <div>Results:</div>
         <div><label id="label0"></label> </div>
         <div><label id="label1"></label> </div>
         <div><label id="label2"></label> </div>
