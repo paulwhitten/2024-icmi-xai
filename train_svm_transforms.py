@@ -1,12 +1,14 @@
 import sys
+import json
 import pickle
 import argparse
 import numpy as np
 from sklearn import svm
 from datetime import datetime
+import matplotlib.pyplot as plt
 from multiprocessing import Process, Manager
-from sklearn.metrics import accuracy_score
-from load_mnist_data import load_mnist_float, get_num_classes
+from sklearn.metrics import roc_auc_score, accuracy_score, RocCurveDisplay
+from load_mnist_data import load_mnist_float, get_num_classes, load_mnist_labels
 from transform_parallel import Transform, TransformNames
 # from joblib import dump, load # more efficient serialization
 
@@ -53,7 +55,12 @@ def train_batch(batch, results, id):
     batch_start_time = datetime.now()
 
     N, train_rows, train_columns, train_images, train_labels = load_mnist_float(batch[1], batch[2])
+    label_array = load_mnist_labels(batch[2])
     n, test_rows, test_columns, test_images, test_labels = load_mnist_float(batch[3], batch[4])
+
+    max_label = max(label_array)
+    min_label = min(label_array)
+    print("max_label:", max_label, "min_label:", min_label)
 
     # create the svm model
     rbf_svc = svm.SVC(kernel='rbf', probability=True) # radial basis function
@@ -68,7 +75,25 @@ def train_batch(batch, results, id):
     score = accuracy_score(t_labels, pred)
     results[batch[0]] = score
     print(batch[0], "SVM Radial Bias Function accuracy:", score)
-
+    y_score = rbf_svc.predict_proba(train_images)
+    aucs = []
+    for label in range(min_label, max_label + 1):
+        auc = roc_auc_score(test_labels[:, label], y_score[:, label], multi_class="ovr")
+        aucs.append(auc)
+        print("label:", label, "AUC:", auc)
+        RocCurveDisplay.from_predictions(
+            test_labels[:, label],
+            y_score[:, label],
+            name=f"{label} vs the rest",
+            color="darkorange"
+        )
+        plt.axis("square")
+        plt.xlabel("False Positive Rate")
+        plt.ylabel("True Positive Rate")
+        plt.title(batch[0] + " One-vs-Rest ROC curve:\n" + str(label) + " vs rest")
+        plt.savefig(batch[5] + "/" + batch[0]+"_auc_" + str(label) + ".png")
+    with open(batch[5] + "/" + batch[0]+ "_auc.json", "w") as outfile:
+        json.dump(aucs, outfile)
     analyze_results(batch[0], t_labels, pred)
 
     # save https://scikit-learn.org/stable/model_persistence.html

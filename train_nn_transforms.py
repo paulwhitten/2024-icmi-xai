@@ -1,11 +1,13 @@
 import sys
+import json
 import pickle
 import argparse
 import numpy as np
 from datetime import datetime
-from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
 from sklearn.neural_network import MLPClassifier
-from load_mnist_data import load_mnist_float, get_num_classes
+from sklearn.metrics import roc_auc_score, accuracy_score, RocCurveDisplay
+from load_mnist_data import load_mnist_float, get_num_classes, load_mnist_labels
 from transform_parallel import Transform, TransformNames
 #from joblib import dump, load # more efficient serialization
 
@@ -51,7 +53,12 @@ def train_batch(batch, id):
     print("type:", type(batch), "length:", len(batch), "element 0:", batch[0])
 
     N, train_rows, train_columns, train_images, train_labels = load_mnist_float(batch[1], batch[2])
+    label_array = load_mnist_labels(batch[2])
     n, test_rows, test_columns, test_images, test_labels = load_mnist_float(batch[3], batch[4])
+
+    max_label = max(label_array)
+    min_label = min(label_array)
+    print("max_label:", max_label, "min_label:", min_label)
 
     # create the mlp model
     hidden_layers = (128, 128)
@@ -76,7 +83,25 @@ def train_batch(batch, id):
     score = accuracy_score(t_labels, mlp_p)
     batch[6][id] = score
     print("MLP Accuracy:", score)
-
+    y_score = mlp.predict_proba(test_images)
+    aucs = []
+    for label in range(min_label, max_label + 1):
+        auc = roc_auc_score(test_labels[:, label], y_score[:, label], multi_class="ovr")
+        aucs.append(auc)
+        print("label:", label, "AUC:", auc)
+        RocCurveDisplay.from_predictions(
+            test_labels[:, label],
+            y_score[:, label],
+            name=f"{label} vs the rest",
+            color="darkorange"
+        )
+        plt.axis("square")
+        plt.xlabel("False Positive Rate")
+        plt.ylabel("True Positive Rate")
+        plt.title(batch[0] + " One-vs-Rest ROC curve:\n" + str(label) + " vs rest")
+        plt.savefig(batch[5] + "/" + batch[0]+"_auc_" + str(label) + ".png")
+    with open(batch[5] + "/" + batch[0]+ "_auc.json", "w") as outfile:
+        json.dump(aucs, outfile)
     analyze_results(batch[0], t_labels, mlp_p)
 
     # save https://scikit-learn.org/stable/model_persistence.html
