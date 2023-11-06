@@ -75,7 +75,7 @@ def train_batch(batch, results, id):
     score = accuracy_score(t_labels, pred)
     results[batch[0]] = score
     print(batch[0], "SVM Radial Bias Function accuracy:", score)
-    y_score = rbf_svc.predict_proba(train_images)
+    y_score = rbf_svc.predict_proba(test_images)
     aucs = []
     for label in range(min_label, max_label + 1):
         auc = roc_auc_score(test_labels[:, label], y_score[:, label], multi_class="ovr")
