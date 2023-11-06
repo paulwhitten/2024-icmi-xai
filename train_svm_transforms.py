@@ -55,8 +55,8 @@ def train_batch(batch, results, id):
     N, train_rows, train_columns, train_images, train_labels = load_mnist_float(batch[1], batch[2])
     n, test_rows, test_columns, test_images, test_labels = load_mnist_float(batch[3], batch[4])
 
-    # create the svn model
-    rbf_svc = svm.SVC(kernel='rbf') # radial basis function
+    # create the svm model
+    rbf_svc = svm.SVC(kernel='rbf', probability=True) # radial basis function
 
     # fit
     tr_labels = np.argmax(train_labels, axis=-1) # 
