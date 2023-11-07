@@ -14,7 +14,7 @@ python train_svm_transforms.py -r ./transforms/mnist/train -e ./transforms/mnist
 
 mkdir -p ./kb/mnist/svm
 
-cp /models/mnist/svm/*.json kb/mnist/svm
+cp ./models/mnist/svm/*.json kb/mnist/svm
 
 python build_kb.py -r ./transforms/mnist/train -e ./transforms/mnist/test -m ./models/mnist/svm -o kb/mnist/svm
 

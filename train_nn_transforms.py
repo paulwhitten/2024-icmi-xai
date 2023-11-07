@@ -100,6 +100,7 @@ def train_batch(batch, id):
         plt.ylabel("True Positive Rate")
         plt.title(batch[0] + " One-vs-Rest ROC curve:\n" + str(label) + " vs rest")
         plt.savefig(batch[5] + "/" + batch[0]+"_auc_" + str(label) + ".png")
+        plt.close()
     with open(batch[5] + "/" + batch[0]+ "_auc.json", "w") as outfile:
         json.dump(aucs, outfile)
     micro = {}

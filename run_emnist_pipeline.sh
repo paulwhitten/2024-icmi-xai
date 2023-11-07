@@ -14,7 +14,7 @@ python train_svm_transforms.py -r ./transforms/emnist/train -e ./transforms/emni
 
 mkdir -p ./kb/emnist/svm
 
-cp /models/emnist/svm/*.json kb/emnist/svm
+cp ./models/emnist/svm/*.json kb/emnist/svm
 
 python build_kb.py -r ./transforms/emnist/train -e ./transforms/emnist/test -m ./models/emnist/svm -o kb/emnist/svm
 
