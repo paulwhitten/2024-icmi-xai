@@ -37,6 +37,7 @@ let kb = {
 for (let t_name of transform_names) {
     console.log(`=======${t_name}=======`);
     kb.transform_names.push(t_name);
+    let auc = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}_auc.json`)));
     let train_preds = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.train.json`)));
     let train_labels = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.train-labels.json`)));
     let test_preds = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.test.json`)));
@@ -56,11 +57,12 @@ for (let t_name of transform_names) {
         }
     }
 
-    kb.stats[t_name] = get_confusion_matrix(train_labels, train_preds);
+    kb.stats[t_name] = get_confusion_matrix(train_labels, train_preds, auc);
+    //kb.stats[t_name]["auc"] = auc;
     kb.test_preds[t_name] = test_preds;
 }
 
-// build up the predicitons and statistical metrics
+// build up the predictions and statistical metrics
 let predictions = [];
 let label_index = 0;
 for (let label of kb.labels) {
@@ -96,7 +98,7 @@ for (let label of kb.labels) {
 let correct = 0;
 let second_choice = 0;
 let count = 0;
-// determine the results by combining predicitons and weighting
+// determine the results by combining predictions and weighting
 let results = [];
 let final_predictions = [];
 let final_labels = [];
@@ -194,7 +196,7 @@ get_confusion_matrix(final_labels, final_predictions);
 fs.writeFileSync(path.join(options.knowledge_base, "results.json"), JSON.stringify(results, null, 4));
 fs.writeFileSync(path.join(options.knowledge_base, "kb.json"), JSON.stringify(kb, null, 4));
 
-function get_confusion_matrix(labels, preds) {
+function get_confusion_matrix(labels, preds, auc) {
     let max = Math.max(...labels);
     let min = Math.min(...labels);
     if (max_label < max) {
@@ -227,10 +229,7 @@ function get_confusion_matrix(labels, preds) {
     console.log("confusion matrix");
     console.table(cm);
 
-    let s = new Array(row_len).fill().map(u => ({actual: 0, sum: 0, tp: 0, tn: 0, fp: 0, fn: 0, accuracy: 0, sensitivity: 0, specificity: 0, precision: 0}));
-
-    // todo: condider
-    //   Precision = tp / (tp + fp)
+    let s = new Array(row_len).fill().map(u => ({actual: 0, sum: 0, tp: 0, tn: 0, fp: 0, fn: 0, accuracy: 0, sensitivity: 0, specificity: 0, precision: 0, t_product: 0, auc: 0}));
 
     for (let j = 0; j < row_len; j++) {
         for (let i = 0; i < row_len; i++) {
@@ -261,6 +260,7 @@ function get_confusion_matrix(labels, preds) {
         label_count++;
     }
 
+    let count = 0;
     for (let t of s) {
         // number of correct predictions
         t.accuracy = (t.tp + t.tn) / t.sum;
@@ -270,10 +270,30 @@ function get_confusion_matrix(labels, preds) {
         t.specificity = t.tn / (t.tn + t.fp);
         // out of all positive predictions, ratio that were correct
         t.precision = t.tp / (t.tp + t.fp);
+        // product
+        t.t_product = get_contribution(t);
+        if (auc) {
+            t.auc = auc[count]
+        }
+        count++;
     }
 
+    // format the floating point values
+    const PREC = 4
+    let fmt_s = [];
+    for (let t of s) {
+        new_t = {}
+        for(let n in t) {
+            if (t[n] % 1 != 0) {
+                new_t[n] = t[n].toPrecision(PREC);
+            } else {
+                new_t[n] = t[n]
+            }
+        }
+        fmt_s.push(new_t);
+    }
     console.log("stats");
-    console.table(s);
+    console.table(fmt_s);
 
     return {
         stats: s,

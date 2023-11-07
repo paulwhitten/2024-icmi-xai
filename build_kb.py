@@ -31,6 +31,11 @@ def eval_images(batch):
     train_predictions = model.predict(train_images)
     test_predictions = model.predict(test_images)
 
+    # convert the one-hot to numeric label encoding
+    if len(train_predictions.shape) > 1 and train_predictions.shape[1] > 1:
+        train_predictions = np.argmax(train_predictions, axis=-1)
+    if len(test_predictions.shape) > 1 and test_predictions.shape[1] > 1:
+        test_predictions = np.argmax(test_predictions, axis=-1)
     print("train predictions shape:", train_predictions.shape)
     print("test predictions shape:", test_predictions.shape)
 
@@ -103,11 +108,7 @@ if __name__ == '__main__':
 
     processes = []
     for batch in batches:
-        p = Process(target=eval_images, args=(batch,))
-        p.start()
-        processes.append(p)
-    for p in processes:
-        p.join()
+        eval_images(batch)
 
     end_time = datetime.now()
     print("Program done in:", end_time - start_time)
