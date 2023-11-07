@@ -5,6 +5,8 @@ from sklearn.metrics import RocCurveDisplay
 import json
 import pickle
 
+#https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html
+
 t = open("./kb_svm_mnist/corner.train-labels.json")
 train_labels = json.load(t)
 p = open("./kb_svm_mnist/corner.test.json")

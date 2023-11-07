@@ -77,6 +77,7 @@ def train_batch(batch, results, id):
     print(batch[0], "SVM Radial Bias Function accuracy:", score)
     y_score = rbf_svc.predict_proba(test_images)
     aucs = []
+    # https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html
     for label in range(min_label, max_label + 1):
         auc = roc_auc_score(test_labels[:, label], y_score[:, label], multi_class="ovr")
         aucs.append(auc)
@@ -94,6 +95,10 @@ def train_batch(batch, results, id):
         plt.savefig(batch[5] + "/" + batch[0]+"_auc_" + str(label) + ".png")
     with open(batch[5] + "/" + batch[0]+ "_auc.json", "w") as outfile:
         json.dump(aucs, outfile)
+    micro = {}
+    micro["micro_averaged_auc"] = roc_auc_score(test_labels, y_score, multi_class="ovr", average="micro")
+    with open(batch[5] + "/" + batch[0]+ "_auc_avg.json", "w") as outfile:
+        json.dump(micro, outfile)
     analyze_results(batch[0], t_labels, pred)
 
     # save https://scikit-learn.org/stable/model_persistence.html

@@ -102,6 +102,10 @@ def train_batch(batch, id):
         plt.savefig(batch[5] + "/" + batch[0]+"_auc_" + str(label) + ".png")
     with open(batch[5] + "/" + batch[0]+ "_auc.json", "w") as outfile:
         json.dump(aucs, outfile)
+    micro = {}
+    micro["micro_averaged_auc"] = roc_auc_score(test_labels, y_score, multi_class="ovr", average="micro")
+    with open(batch[5] + "/" + batch[0]+ "_auc_avg.json", "w") as outfile:
+        json.dump(micro, outfile)
     analyze_results(batch[0], t_labels, mlp_p)
 
     # save https://scikit-learn.org/stable/model_persistence.html
