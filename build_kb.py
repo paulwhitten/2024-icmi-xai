@@ -3,6 +3,7 @@ import argparse
 from multiprocessing import Process
 from datetime import datetime
 import numpy as np
+#from sklearn.metrics import confusion_matrix
 from load_mnist_data import load_mnist_float, load_mnist_labels
 import json
 
@@ -38,6 +39,9 @@ def eval_images(batch):
         test_predictions = np.argmax(test_predictions, axis=-1)
     print("train predictions shape:", train_predictions.shape)
     print("test predictions shape:", test_predictions.shape)
+
+    # train_matrix = confusion_matrix(train_label_list, train_predictions)
+    # test_matrix = confusion_matrix(test_label_list, test_predictions)
 
     with open(batch[5] + "/" + batch[0] + ".train.json", 'w') as outfile:
         json.dump(train_predictions.tolist(), outfile)

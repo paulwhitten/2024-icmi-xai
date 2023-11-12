@@ -269,7 +269,9 @@ function get_confusion_matrix(labels, preds, auc) {
         // probability of properly detecting not this class
         t.specificity = t.tn / (t.tn + t.fp);
         // out of all positive predictions, ratio that were correct
-        t.precision = t.tp / (t.tp + t.fp);
+        if (t.tp > 0 || t.fp > 0) {
+            t.precision = t.tp / (t.tp + t.fp);
+        }
         // product
         t.t_product = get_contribution(t);
         if (auc) {
