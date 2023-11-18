@@ -10,6 +10,8 @@ program.parse();
 const options = program.opts();
 
 console.log("Running with options:", options);
+// output the contribbution metrics
+get_contribution();
 
 const transform_names = [
         'crossing', 'endpoint', 'fill', 'skel-fill', 'skel', 'thresh',
@@ -30,7 +32,9 @@ let kb = {
     labels: undefined,
     // hashmap storage for test predictions per transform
     //   each element is an array of predictions
-    test_preds: {}
+    test_preds: {},
+    // contents of the stats json file
+    metrics: {}
 }
 
 
@@ -42,6 +46,7 @@ for (let t_name of transform_names) {
     let train_labels = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.train-labels.json`)));
     let test_preds = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.test.json`)));
     let test_labels = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.test-labels.json`)));
+    let trans_stats = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}-stat.json`)))
 
     if (!kb.lables) {
         console.log("setting test labels");
@@ -60,6 +65,7 @@ for (let t_name of transform_names) {
     kb.stats[t_name] = get_confusion_matrix(train_labels, train_preds, auc);
     //kb.stats[t_name]["auc"] = auc;
     kb.test_preds[t_name] = test_preds;
+    kb.metrics[t_name] = trans_stats;
 }
 
 // build up the predictions and statistical metrics
@@ -73,7 +79,8 @@ for (let label of kb.labels) {
     };
     for (let t_name of transform_names) {
         //TODO check for other excluded transforms
-        if (t_name != "thresh" && t_name != "raw"  && t_name != "skel-fill") { //RAW
+        //TODO parametrize this?
+        if (t_name != "thresh" && t_name != "skel-fill") { //RAW   && t_name != "raw" 
 
             let trans_prediction = kb.test_preds[t_name][label_index];
 
@@ -81,7 +88,9 @@ for (let label of kb.labels) {
                 trans_name: t_name,
                 class: trans_prediction,
                 stats: kb.stats[t_name]['stats'][trans_prediction],
-                contribution: get_contribution(kb.stats[t_name]['stats'][trans_prediction])
+                contribution: get_contribution(kb.stats[t_name]['stats'][trans_prediction], kb.metrics[t_name]['classes'][trans_prediction]),
+                explainability: kb.metrics[t_name]['explainability']
+                // kb.metrics[t_name]['classes'][trans_prediction]
             });
 
             // vote from the transform
@@ -104,12 +113,13 @@ let final_predictions = [];
 let final_labels = [];
 for (let p of predictions) {
 
+    // r represents each test element we are gathering "a vote tally" for
     let r = {
         label: p.label,
         index: p.index,
         predictions: [],
         sum_weights: 0,
-        vote_tally: []
+        vote_tally: [],
     };
 
     final_labels.push(p.label);
@@ -121,7 +131,8 @@ for (let p of predictions) {
         let c = {
             class: label_ix,
             value: 0.0,
-            attributions: []
+            attributions: [],
+            exp_sum: 0
         }
 
         if (p && p.votes && p.votes.length > 0) {
@@ -129,6 +140,7 @@ for (let p of predictions) {
                 if (v.class == label_ix) {
                     c.value += v.contribution;
                     c.attributions.push({name: v.trans_name, value: v.contribution});
+                    c.exp_sum += v.contribution * v.explainability;
                 }
             };
         } else {
@@ -155,6 +167,7 @@ for (let p of predictions) {
     let action = "selected";
     for (let t of r.vote_tally) {
         t["probability"] = t.value / r.sum_weights;
+        t["exp"] = t.exp_sum / t.value;
         let str_prob = t.probability.toPrecision(4).toString();
         let props = "";
         let i = 0;
@@ -273,7 +286,7 @@ function get_confusion_matrix(labels, preds, auc) {
             t.precision = t.tp / (t.tp + t.fp);
         }
         // product
-        t.t_product = get_contribution(t);
+        t.t_product = get_product(t);
         if (auc) {
             t.auc = auc[count]
         }
@@ -303,7 +316,22 @@ function get_confusion_matrix(labels, preds, auc) {
     };
 }
 
-// TODO: do we want the stats weighted?  perhaps parameterize this
-function get_contribution(stats) {
+function get_product(stats) {
     return stats.accuracy * stats.sensitivity * stats.specificity * stats.precision;
+}
+
+// TODO: do we want the stats weighted?  perhaps parameterize this
+function get_contribution(stats, metrics) {
+
+    if (stats === undefined) {
+        // TODO change to describe the stat metric used
+        console.log("----------Contribution is the original recall----------");
+        return;
+    }
+
+    //return get_product(stats); // product
+    //return metrics['train_auc'];
+    //return metrics['train_f_score'];
+    //return  metrics['train_recall'] * metrics['train_balanced_acc'] * metrics['train_specificity'] * metrics['train_precision']; // balanced acc product
+    return metrics['train_recall']
 }
