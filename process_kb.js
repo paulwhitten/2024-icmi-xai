@@ -325,13 +325,16 @@ function get_contribution(stats, metrics) {
 
     if (stats === undefined) {
         // TODO change to describe the stat metric used
-        console.log("----------Contribution is the original recall----------");
+        console.log("----------Contribution is the balanced acc product ----------");
         return;
     }
 
     //return get_product(stats); // product
+    return metrics['train_acc'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision']; // metrics alternative product
+    //return metrics['train_balanced_acc']
     //return metrics['train_auc'];
     //return metrics['train_f_score'];
     //return  metrics['train_recall'] * metrics['train_balanced_acc'] * metrics['train_specificity'] * metrics['train_precision']; // balanced acc product
-    return metrics['train_recall']
+    //return metrics['train_recall']; // original
+    //return metrics['train_f_score'] * metrics['train_acc'] * metrics['train_specificity']; // f score product - f - score = harmonic mean of precision and recall
 }
