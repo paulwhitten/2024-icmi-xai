@@ -139,7 +139,7 @@ for (let p of predictions) {
             for (let v of p.votes) {
                 if (v.class == label_ix) {
                     c.value += v.contribution;
-                    c.attributions.push({name: v.trans_name, value: v.contribution});
+                    c.attributions.push({name: v.trans_name, value: v.contribution, exp: v.explainability});
                     c.exp_sum += v.contribution * v.explainability;
                 }
             };
@@ -325,12 +325,12 @@ function get_contribution(stats, metrics) {
 
     if (stats === undefined) {
         // TODO change to describe the stat metric used
-        console.log("----------Contribution is the balanced acc product ----------");
+        console.log("----------Contribution is the f - score product ----------");
         return;
     }
 
-    //return get_product(stats); // product
-    return metrics['train_acc'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision']; // metrics alternative product
+    return get_product(stats); // product
+    //return metrics['train_acc'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision']; // metrics alternative product
     //return metrics['train_balanced_acc']
     //return metrics['train_auc'];
     //return metrics['train_f_score'];
