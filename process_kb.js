@@ -10,7 +10,7 @@ program.parse();
 const options = program.opts();
 
 console.log("Running with options:", options);
-// output the contribbution metrics
+// output the contribution metrics
 get_contribution();
 
 const transform_names = [
@@ -325,11 +325,13 @@ function get_contribution(stats, metrics) {
 
     if (stats === undefined) {
         // TODO change to describe the stat metric used
-        console.log("----------Contribution is the f - score product ----------");
+        console.log("----------Contribution is the spec * recall * prec ----------");
         return;
     }
 
-    return get_product(stats); // product
+    //return get_product(stats); // product
+    //return metrics['train_specificity'] * metrics['train_recall']
+    return metrics['train_specificity'] * metrics['train_recall'] * metrics['train_precision']
     //return metrics['train_acc'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision']; // metrics alternative product
     //return metrics['train_balanced_acc']
     //return metrics['train_auc'];
