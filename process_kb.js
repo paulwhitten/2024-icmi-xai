@@ -80,7 +80,7 @@ for (let label of kb.labels) {
     for (let t_name of transform_names) {
         //TODO check for other excluded transforms
         //TODO parametrize this?
-        if (t_name != "thresh" && t_name != "skel-fill") { //RAW   && t_name != "raw" 
+        if (t_name != "thresh" && t_name != "raw" && t_name != "skel-fill") { //RAW   && t_name != "raw" 
 
             let trans_prediction = kb.test_preds[t_name][label_index];
 
@@ -165,10 +165,12 @@ for (let p of predictions) {
         r.sum_weights += t.value;
     }
     let action = "selected";
+    // TODO: should probability (str_prob and t.probability) variables be changed to confidence?
     for (let t of r.vote_tally) {
         t["probability"] = t.value / r.sum_weights;
         t["exp"] = t.exp_sum / t.value;
         let str_prob = t.probability.toPrecision(4).toString();
+        let str_exp = t.exp.toPrecision(4).toString();
         let props = "";
         let i = 0;
         for (let a of t.attributions) {
@@ -181,7 +183,7 @@ for (let p of predictions) {
             props += a.name;
             i++
         }
-        r.predictions.push(`The digit ${t.class} was ${action} with probability ${str_prob} due to the ${props} properties`);
+        r.predictions.push(`The digit ${t.class} was ${action} with confidence ${str_prob} and explainability ${str_exp} due to the ${props} properties`);
         action = "an alternative";
     }
 
@@ -242,7 +244,7 @@ function get_confusion_matrix(labels, preds, auc) {
     console.log("confusion matrix");
     console.table(cm);
 
-    let s = new Array(row_len).fill().map(u => ({actual: 0, sum: 0, tp: 0, tn: 0, fp: 0, fn: 0, accuracy: 0, sensitivity: 0, specificity: 0, precision: 0, t_product: 0, auc: 0}));
+    let s = new Array(row_len).fill().map(u => ({actual: 0, sum: 0, tp: 0, tn: 0, btn: 0, fp: 0, fn: 0, accuracy: 0, cba: 0, sensitivity: 0, specificity: 0, precision: 0, t_product: 0, auc: 0}));
 
     for (let j = 0; j < row_len; j++) {
         for (let i = 0; i < row_len; i++) {
@@ -275,8 +277,12 @@ function get_confusion_matrix(labels, preds, auc) {
 
     let count = 0;
     for (let t of s) {
+        // balanced true negative? TODO revisit name
+        t.btn = t.tn / (max_label - min_label);
         // number of correct predictions
         t.accuracy = (t.tp + t.tn) / t.sum;
+        // CBA class balanced accuracy TODO revisit name TODO problem for unbalanced using avg?
+        t.cba = (t.tp + t.btn) / (t.actual + (t.sum / (max_label - min_label + 1)))
         // probability detecting the class given the class
         t.sensitivity = t.tp / t.actual; // same as recall
         // probability of properly detecting not this class
@@ -325,13 +331,13 @@ function get_contribution(stats, metrics) {
 
     if (stats === undefined) {
         // TODO change to describe the stat metric used
-        console.log("----------Contribution is the spec * recall * prec ----------");
+        console.log("----------Contribution is the CBA product ----------");
         return;
     }
 
     //return get_product(stats); // product
     //return metrics['train_specificity'] * metrics['train_recall']
-    return metrics['train_specificity'] * metrics['train_recall'] * metrics['train_precision']
+    //return metrics['train_specificity'] * metrics['train_recall'] * metrics['train_precision']
     //return metrics['train_acc'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision']; // metrics alternative product
     //return metrics['train_balanced_acc']
     //return metrics['train_auc'];
@@ -339,4 +345,5 @@ function get_contribution(stats, metrics) {
     //return  metrics['train_recall'] * metrics['train_balanced_acc'] * metrics['train_specificity'] * metrics['train_precision']; // balanced acc product
     //return metrics['train_recall']; // original
     //return metrics['train_f_score'] * metrics['train_acc'] * metrics['train_specificity']; // f score product - f - score = harmonic mean of precision and recall
+    return stats['cba'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision']
 }
