@@ -80,7 +80,7 @@ for (let label of kb.labels) {
     for (let t_name of transform_names) {
         //TODO check for other excluded transforms
         //TODO parametrize this?
-        if (t_name != "thresh" && t_name != "raw" && t_name != "skel-fill") { //RAW   && t_name != "raw" 
+        if (t_name != "thresh"&& t_name != "skel-fill") { //RAW   t_name != "thresh" && t_name != "raw" && t_name != "skel-fill"
 
             let trans_prediction = kb.test_preds[t_name][label_index];
 
@@ -244,7 +244,7 @@ function get_confusion_matrix(labels, preds, auc) {
     console.log("confusion matrix");
     console.table(cm);
 
-    let s = new Array(row_len).fill().map(u => ({actual: 0, sum: 0, tp: 0, tn: 0, btn: 0, fp: 0, fn: 0, accuracy: 0, cba: 0, sensitivity: 0, specificity: 0, precision: 0, t_product: 0, auc: 0}));
+    let s = new Array(row_len).fill().map(u => ({actual: 0, sum: 0, tp: 0, tn: 0, btn: 0, fp: 0, fn: 0, accuracy: 0, cba: 0, sensitivity: 0, specificity: 0, precision: 0, t_product: 0, auc: 0, mcc: 0}));
 
     for (let j = 0; j < row_len; j++) {
         for (let i = 0; i < row_len; i++) {
@@ -296,6 +296,7 @@ function get_confusion_matrix(labels, preds, auc) {
         if (auc) {
             t.auc = auc[count]
         }
+        t.mcc = (t.tp * t.tn - t.fp * t.fn) / Math.sqrt((t.tp + t.fp)*(t.tp+t.fn)*(t.tn+t.fp)*(t.tn+t.fn));
         count++;
     }
 
@@ -331,7 +332,7 @@ function get_contribution(stats, metrics) {
 
     if (stats === undefined) {
         // TODO change to describe the stat metric used
-        console.log("----------Contribution is the CBA product ----------");
+        console.log("----------Contribution is the MCC ----------");
         return;
     }
 
@@ -345,5 +346,6 @@ function get_contribution(stats, metrics) {
     //return  metrics['train_recall'] * metrics['train_balanced_acc'] * metrics['train_specificity'] * metrics['train_precision']; // balanced acc product
     //return metrics['train_recall']; // original
     //return metrics['train_f_score'] * metrics['train_acc'] * metrics['train_specificity']; // f score product - f - score = harmonic mean of precision and recall
-    return stats['cba'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision']
+    //return stats['cba'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision']
+    return stats.mcc;
 }
