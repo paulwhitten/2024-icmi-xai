@@ -27,14 +27,16 @@ let kb = {
     // hashmap storage for per transform statistics
     //   each element is an array of stats for a class
     stats: {},
+    // contents of the stats json file
+    metrics: {},
     // test label array for confirming all match
     //  each element is a label
     labels: undefined,
     // hashmap storage for test predictions per transform
     //   each element is an array of predictions
     test_preds: {},
-    // contents of the stats json file
-    metrics: {}
+    // Storage for the test probability
+    test_prob: {}
 }
 
 
@@ -47,8 +49,9 @@ for (let t_name of transform_names) {
     let test_preds = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.test.json`)));
     let test_labels = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.test-labels.json`)));
     let trans_stats = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}-stat.json`)))
+    let test_proba = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.test-proba.json`)));
 
-    if (!kb.lables) {
+    if (!kb.labels) {
         console.log("setting test labels");
         kb.labels = test_labels;
     } else {
@@ -66,6 +69,7 @@ for (let t_name of transform_names) {
     //kb.stats[t_name]["auc"] = auc;
     kb.test_preds[t_name] = test_preds;
     kb.metrics[t_name] = trans_stats;
+    kb.test_prob[t_name] = test_proba;
 }
 
 // build up the predictions and statistical metrics
@@ -89,7 +93,8 @@ for (let label of kb.labels) {
                 class: trans_prediction,
                 stats: kb.stats[t_name]['stats'][trans_prediction],
                 contribution: get_contribution(kb.stats[t_name]['stats'][trans_prediction], kb.metrics[t_name]['classes'][trans_prediction]),
-                explainability: kb.metrics[t_name]['explainability']
+                explainability: kb.metrics[t_name]['explainability'],
+                ie_prob: kb.test_prob[t_name][label_index][trans_prediction] // output of the inference engine
                 // kb.metrics[t_name]['classes'][trans_prediction]
             });
 
@@ -138,8 +143,9 @@ for (let p of predictions) {
         if (p && p.votes && p.votes.length > 0) {
             for (let v of p.votes) {
                 if (v.class == label_ix) {
-                    c.value += v.contribution;
-                    c.attributions.push({name: v.trans_name, value: v.contribution, exp: v.explainability});
+                    c.value += v.contribution * v.ie_prob;
+                    // contribution as the inference engine output and contribution
+                    c.attributions.push({name: v.trans_name, value: v.contribution * v.ie_prob, exp: v.explainability});
                     c.exp_sum += v.contribution * v.explainability;
                 }
             };

@@ -56,7 +56,7 @@ def eval_images(batch):
     print(batch[0], "done in:", batch_end_time - batch_start_time)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='trains transforms for a set')
+    parser = argparse.ArgumentParser(description='builds a knowledgebase')
     parser.add_argument('-r', '--train_folder', 
                         help='The training input folder')
     parser.add_argument('-e', '--test_folder', 
