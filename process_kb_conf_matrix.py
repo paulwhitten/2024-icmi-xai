@@ -3,7 +3,7 @@ import argparse
 from multiprocessing import Process
 from datetime import datetime
 import numpy as np
-from sklearn.metrics import confusion_matrix, multilabel_confusion_matrix, precision_recall_fscore_support
+from sklearn.metrics import confusion_matrix, multilabel_confusion_matrix, precision_recall_fscore_support, accuracy_score, matthews_corrcoef, f1_score
 from load_mnist_data import load_mnist_float, load_mnist_labels
 import json
 
@@ -86,6 +86,10 @@ def eval_transforms(batch, kb_folder):
 
     prfs_train = precision_recall_fscore_support(train_labels, train_pred)
     prfs_test = precision_recall_fscore_support(test_labels, test_pred)
+
+    trans_stat["acc"] = accuracy_score(test_labels, test_pred)
+    trans_stat["f1"] = f1_score(test_labels, test_pred, average='macro')
+    trans_stat["mcc"] = matthews_corrcoef(test_labels, test_pred)
 
     for i, l in enumerate(labels):
         train_tn, train_fp, train_fn, train_tp = ml_cm_train[i].ravel()
