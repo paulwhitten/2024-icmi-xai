@@ -152,7 +152,7 @@
                 } else {
                     res += " was an alternative"
                 }
-                res += " with prediction " + v.pred.toPrecision(3) + " due to the "
+                res += " with confidence " + v.pred.toPrecision(3) + " due to the "
                 let prop_ix = 0;
                 for (let a of v.attributions) {
                     if (a.image) {

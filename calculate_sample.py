@@ -7,6 +7,9 @@ from io import BytesIO
 import imageio
 import base64
 
+# TODO remove skel-fill
+# TODO add ability for mixed explainability 
+
 #raw, thresh, skel, fill, corners, ellipse, circle, ellipse_circle, skel_fill, crossings, endpoints, lines, chull
 
 class CalcObject:
