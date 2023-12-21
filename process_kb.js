@@ -28,7 +28,7 @@ const transform_names = [
  */
 function process_transform(t_name, unexplainable) {
     if (t_name == "thresh" || t_name == "skel-fill" || (!unexplainable && t_name == "raw")) {
-        // exclude threshold, skeleton-fill, and the raw if we are not doing a mixed_explainabilit
+        // exclude threshold, skeleton-fill, and the raw if we are not doing a mixed_explainability
         return false
     }
     return true;
