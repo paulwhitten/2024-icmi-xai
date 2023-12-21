@@ -12,6 +12,9 @@ This program reprocesses all of the transform data to build a knowledgebase. In
 doing so, we read all transforms and load models, outputting all predictions for
 the transforms based on training and then test images. Data is output in json
 format to files for each of the datasets along with json containing the labels.
+This version of building the knowledgebase differs as it uses probability
+predictions rather than strictly the classification decisions and has shown to
+be more accurate.
 """
 
 def eval_images(batch):

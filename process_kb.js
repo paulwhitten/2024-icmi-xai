@@ -1,11 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const { program } = require('commander');
+const { ConfusionMatrix } = require('ml-confusion-matrix');
 
 program
   .requiredOption('-k, --knowledgebase <path>', 'Must indicate the path to the kb')
   .requiredOption('-e, --effectiveness_metric <metric_name>', 'Must name a metric to use for effectiveness')
-  .option('-m, --mixed_explainability', 'Use an unexplainable component to increase performance');
+  .option('-u, --unexplainable', 'Use an unexplainable component to increase performance');
 
 program.parse();
 
@@ -23,14 +24,29 @@ const transform_names = [
 /**
  * Tells if the transform should be processed
  * @param {*} t_name - the transform name
- * @param {*} mixed_explainability - 
+ * @param {*} unexplainable - 
  */
-function process_transform(t_name, mixed_explainability) {
-    if (t_name == "thresh" || t_name == "skel-fill" || (!mixed_explainability && t_name == "raw")) {
+function process_transform(t_name, unexplainable) {
+    if (t_name == "thresh" || t_name == "skel-fill" || (!unexplainable && t_name == "raw")) {
         // exclude threshold, skeleton-fill, and the raw if we are not doing a mixed_explainabilit
         return false
     }
     return true;
+}
+
+/**
+ * Gets the geometric mean of recall
+ * @param {*} tp 
+ * @param {*} tn 
+ * @param {*} fp 
+ * @param {*} fn 
+ * @returns 
+ */
+function get_g_mean(tp, tn, fp, fn) {
+    if (tp + fn > 0 && tn + fp > 0) {
+        return Math.sqrt((tp/(tp+fn))/(tn/(tn+fp)));
+    }
+    return 0.0;
 }
 
 let max_label = 0
@@ -92,7 +108,7 @@ for (let label of kb.labels) {
         votes: []
     };
     for (let t_name of transform_names) {
-        if ( process_transform(t_name, options.mixed_explainability)) {
+        if ( process_transform(t_name, options.unexplainable)) {
 
             let trans_prediction = kb.test_preds[t_name][label_index];
 
@@ -111,6 +127,9 @@ for (let label of kb.labels) {
             // stats for transform and class digit zero
             //console.log("zero:", kb.stats[t_name]['stats'][0]);
         }
+        /*else {
+            console.log('Excluding the transform', t_name, "from results.")
+        }*/
     }
     predictions.push(poll);
     label_index++;
@@ -200,7 +219,7 @@ for (let p of predictions) {
     }
 
     // check accuracy of first choice
-    if (r.label == r.vote_tally[0].class) {
+    if (r.vote_tally[0] && r.label == r.vote_tally[0].class) {
         correct++;
     } else {
         // TODO looks for other alternatives
@@ -208,7 +227,13 @@ for (let p of predictions) {
             second_choice++;
         }
     }
-    final_predictions.push(r.vote_tally[0].class);
+
+    if (r.vote_tally[0]) { 
+        final_predictions.push(r.vote_tally[0].class);
+    } else {
+        console.log('No first choice so picking 0.')
+        final_predictions.push(0);
+    }
 
     count++;
     results.push(r);
@@ -219,6 +244,13 @@ console.log("==========================================================")
 console.log("Final result:", correct / count);
 //console.log("Result 1st and 2nd choice:", (correct + second_choice) / count, second_choice);
 get_confusion_matrix(final_labels, final_predictions);
+
+// just triple checking the logic with another implementation
+const final_cm = ConfusionMatrix.fromLabels(final_labels, final_predictions);
+console.log("accuracy:", final_cm.getAccuracy(0));
+for (let i = min_label; i < max_label + 1; i++) {
+    console.log("class:", i, "precision:", final_cm.getPositivePredictiveValue(i), "specificity:", final_cm.getTrueNegativeRate(i), "recall:", final_cm.getTruePositiveRate(i), "f1 score:", final_cm.getF1Score(1), "mcc:", final_cm.getMatthewsCorrelationCoefficient(0));
+}
 
 fs.writeFileSync(path.join(options.knowledgebase, "results.json"), JSON.stringify(results, null, 4));
 fs.writeFileSync(path.join(options.knowledgebase, "kb.json"), JSON.stringify(kb, null, 4));
@@ -253,10 +285,10 @@ function get_confusion_matrix(labels, preds, auc) {
         label_count++;
     }
 
-    console.log("confusion matrix");
+    console.log("confusion matrix - row = actual, column = predicted");
     console.table(cm);
 
-    let s = new Array(row_len).fill().map(u => ({actual: 0, sum: 0, tp: 0, tn: 0, btn: 0, fp: 0, fn: 0, accuracy: 0, cba: 0, sensitivity: 0, specificity: 0, precision: 0, t_product: 0, auc: 0, mcc: 0}));
+    let s = new Array(row_len).fill().map(u => ({actual: 0, sum: 0, tp: 0, tn: 0, btn: 0, fp: 0, fn: 0, accuracy: 0, cba: 0, sensitivity: 0, specificity: 0, precision: 0, t_product: 0, auc: 0, mcc: 0, g_mean: 0}));
 
     for (let j = 0; j < row_len; j++) {
         for (let i = 0; i < row_len; i++) {
@@ -309,6 +341,7 @@ function get_confusion_matrix(labels, preds, auc) {
             t.auc = auc[count]
         }
         t.mcc = (t.tp * t.tn - t.fp * t.fn) / Math.sqrt((t.tp + t.fp)*(t.tp+t.fn)*(t.tn+t.fp)*(t.tn+t.fn));
+        t.g_mean = get_g_mean(t.tp, t.tn, t.fp, t.fn);
         count++;
     }
 
@@ -339,44 +372,51 @@ function get_product(stats) {
     return stats.accuracy * stats.sensitivity * stats.specificity * stats.precision;
 }
 
-// TODO: do we want the stats weighted?  perhaps parameterize this
 function get_contribution(stats, metrics, metric_name) {
 
     if (stats === undefined) {
         // TODO change to describe the stat metric used
-        console.log("----------Contribution is " + metric_name + " ----------");
+        console.log("----------Effectiveness contribution is " + metric_name + " ----------");
         return;
     }
 
     if (metric_name === 'product') {
         return get_product(stats); // product
         //return metrics['train_acc'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision']; // metrics alternative product
-    } else if (metric_name === 's_dot_r' ) { // specificity * recall
+    } else if (metric_name === 's_dot_r') { // specificity * recall
         return metrics['train_specificity'] * metrics['train_recall'];
-    } else if (metric_name === 's_dot_r_dot_p' ) { // specificity * recall * precision
+    } else if (metric_name === 'p_dot_r_dot_s') { // specificity * recall * precision
         return metrics['train_specificity'] * metrics['train_recall'] * metrics['train_precision'];
-    } else if (metric_name === 'balanced_acc' ) {
+    } else if (metric_name === 'balanced_acc') {
         return metrics['train_balanced_acc'];
-    } else if (metric_name === 'auc' ) {
+    } else if (metric_name === 'auc') {
         return metrics['train_auc'];
-    } else if (metric_name === 'f_score' ) {
+    } else if (metric_name === 'f_score') {
         return metrics['train_f_score'];
-    }else if (metric_name === 'balanced_acc_product' ) { 
+    }else if (metric_name === 'balanced_acc_product') { 
         return  metrics['train_recall'] * metrics['train_balanced_acc'] * metrics['train_specificity'] * metrics['train_precision']; // balanced acc product
-    }else if (metric_name === 'f_score_product' ) {
+    }else if (metric_name === 'f_score_product') {
         return metrics['train_f_score'] * metrics['train_acc'] * metrics['train_specificity']; // f score product - f - score = harmonic mean of precision and recall
-    } else if (metric_name === 'cba_product' ) {
+    } else if (metric_name === 'cba_product') {
         return stats['cba'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision'];
-    } else if (metric_name === 'mcc' ) {
+    } else if (metric_name === 'mcc') {
         return stats.mcc;
-    }  else if (metric_name === 'r' ) {
+    }  else if (metric_name === 'r') {
         return metrics['train_recall']; // original
-    } else if (metric_name === 's' ) {
+    } else if (metric_name === 's') {
         return metrics['train_specificity'];
-    }  else if (metric_name === 'acc' ) {
+    }  else if (metric_name === 'acc') {
         return metrics['train_acc'];
-    }  else if (metric_name === 'p' ) {
+    }  else if (metric_name === 'p') {
         return metrics['train_precision'];
+    } else if (metric_name === 'g_mean') {
+        return stats['g_mean']
+    } else if (metric_name == 'cohen_kappa') {
+        return metrics['cohen_kappa']
+    } else if (metric_name == 'p_dot_r') {
+        return metrics['train_recall'] * metrics['train_precision'];
+    } else if (metric_name == 'p_dot_s') {
+        return metrics['train_specificity'] * metrics['train_precision'];
     } else {
         console.log("Invalid metric name,", metric_name);
         process.exit(1);

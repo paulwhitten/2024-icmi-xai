@@ -3,7 +3,7 @@ import argparse
 from multiprocessing import Process
 from datetime import datetime
 import numpy as np
-from sklearn.metrics import confusion_matrix, multilabel_confusion_matrix, precision_recall_fscore_support, accuracy_score, matthews_corrcoef, f1_score
+from sklearn.metrics import confusion_matrix, multilabel_confusion_matrix, precision_recall_fscore_support, accuracy_score, matthews_corrcoef, f1_score, cohen_kappa_score
 from load_mnist_data import load_mnist_float, load_mnist_labels
 import json
 
@@ -38,6 +38,21 @@ def calc_specificity(tn, fp):
     if tn + fp > 0:
         result = tn / (tn + fp)
     return result
+
+# get one versus others labels
+def get_ovo_labels(tl, tp, one):
+    otl = []
+    otp = []
+    for i, l in enumerate(tl):
+        if l == one:
+            otl.append(1)
+        else:
+            otl.append(0)
+        if tp[i] == one:
+            otp.append(1)
+        else:
+            otp.append(0)
+    return otl, otp
 
 def eval_transforms(batch, kb_folder):
     print("====", batch, "====")
@@ -90,10 +105,14 @@ def eval_transforms(batch, kb_folder):
     trans_stat["acc"] = accuracy_score(test_labels, test_pred)
     trans_stat["f1"] = f1_score(test_labels, test_pred, average='macro')
     trans_stat["mcc"] = matthews_corrcoef(test_labels, test_pred)
+    if trans_stat["mcc"] < 0.0:
+        print("mcc was less than zero", trans_stat["mcc"]) 
+    trans_stat["cohen_kappa"] = cohen_kappa_score(test_labels, test_pred)
 
     for i, l in enumerate(labels):
         train_tn, train_fp, train_fn, train_tp = ml_cm_train[i].ravel()
         test_tn, test_fp, test_fn, test_tp = ml_cm_test[i].ravel()
+        ov_train_labels, ov_train_preds = get_ovo_labels(train_labels, train_pred, l)
         label_stat = {
             "class_label": l,
             "train_tn": train_tn, "train_fp": train_fp, "train_fn": train_fn, "train_tp": train_tp,
@@ -107,7 +126,9 @@ def eval_transforms(batch, kb_folder):
             "train_specificity": calc_specificity(train_tn, train_fp),
             "test_specificity": calc_specificity(test_tn, test_fp),
             "train_precision": prfs_train[0][i], "train_recall": prfs_train[1][i], "train_f_score": prfs_train[2][i], "train_support": prfs_train[3][i],
-            "train_auc": aucs[i]
+            "train_auc": aucs[i],
+            "mcc": matthews_corrcoef(ov_train_labels, ov_train_preds),
+            "cohen_kappa": cohen_kappa_score(ov_train_labels, ov_train_preds)
         }
         label_stat["product"] = label_stat["train_sensitivity"] * label_stat["train_specificity"] * label_stat["train_precision"] * label_stat["train_acc"]
         trans_stat["classes"].append(label_stat)
@@ -120,7 +141,7 @@ def eval_transforms(batch, kb_folder):
     print("Multi-label cm training")
     for i, s in enumerate(ml_cm_train):
         tn, fp, fn, tp = s.ravel()
-        print("type:", type(tn))
+        #print("type:", type(tn))
         print("label:", min_label + i, "tp:", tp, "tn:", tn, "fp:", fp, "fn:", fn)
     
     print("PRFS train - precision, recall, f, support")

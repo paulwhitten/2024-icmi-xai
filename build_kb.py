@@ -9,9 +9,10 @@ import json
 
 """
 This program reprocesses all of the transform data to build a knowledgebase. In
-doing so, we read all transforms and load models, outputting all predictions for
-the transforms based on training and then test images. Data is output in json
-format to files for each of the datasets along with json containing the labels.
+doing so, we read all transforms and load models, outputting all classification
+predictions for the transforms based on training and then test images. Data is
+output in json format to files for each of the datasets along with json
+containing the labels.
 """
 
 def eval_images(batch):

@@ -3,7 +3,9 @@ const path = require('path');
 const { program } = require('commander');
 
 program
-  .option('-k, --knowledge_base <path>');
+  .requiredOption('-k, --knowledgebase <path>', 'Must indicate the path to the kb')
+  .requiredOption('-e, --effectiveness_metric <metric_name>', 'Must name a metric to use for effectiveness')
+  .option('-u, --unexplainable', 'Use an unexplainable component to increase performance');
 
 program.parse();
 
@@ -11,12 +13,25 @@ const options = program.opts();
 
 console.log("Running with options:", options);
 // output the contribution metrics
-get_contribution();
+get_contribution(undefined, undefined, options.effectiveness_metric);
 
 const transform_names = [
         'crossing', 'endpoint', 'fill', 'skel-fill', 'skel', 'thresh',
         'line', 'ellipse', 'circle', 'ellipse-circle', 'chull', 'raw', 'corner'
 ];
+
+/**
+ * Tells if the transform should be processed
+ * @param {*} t_name - the transform name
+ * @param {*} unexplainable - 
+ */
+function process_transform(t_name, unexplainable) {
+    if (t_name == "thresh" || t_name == "skel-fill" || (!unexplainable && t_name == "raw")) {
+        // exclude threshold, skeleton-fill, and the raw if we are not doing a mixed_explainability
+        return false
+    }
+    return true;
+}
 
 let max_label = 0
 let min_label = 0xffffffff
@@ -43,13 +58,13 @@ let kb = {
 for (let t_name of transform_names) {
     console.log(`=======${t_name}=======`);
     kb.transform_names.push(t_name);
-    let auc = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}_auc.json`)));
-    let train_preds = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.train.json`)));
-    let train_labels = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.train-labels.json`)));
-    let test_preds = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.test.json`)));
-    let test_labels = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.test-labels.json`)));
-    let trans_stats = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}-stat.json`)))
-    let test_proba = JSON.parse(fs.readFileSync(path.join(options.knowledge_base, `${t_name}.test-proba.json`)));
+    let auc = JSON.parse(fs.readFileSync(path.join(options.knowledgebase, `${t_name}_auc.json`)));
+    let train_preds = JSON.parse(fs.readFileSync(path.join(options.knowledgebase, `${t_name}.train.json`)));
+    let train_labels = JSON.parse(fs.readFileSync(path.join(options.knowledgebase, `${t_name}.train-labels.json`)));
+    let test_preds = JSON.parse(fs.readFileSync(path.join(options.knowledgebase, `${t_name}.test.json`)));
+    let test_labels = JSON.parse(fs.readFileSync(path.join(options.knowledgebase, `${t_name}.test-labels.json`)));
+    let trans_stats = JSON.parse(fs.readFileSync(path.join(options.knowledgebase, `${t_name}-stat.json`)))
+    let test_proba = JSON.parse(fs.readFileSync(path.join(options.knowledgebase, `${t_name}.test-proba.json`)));
 
     if (!kb.labels) {
         console.log("setting test labels");
@@ -82,9 +97,7 @@ for (let label of kb.labels) {
         votes: []
     };
     for (let t_name of transform_names) {
-        //TODO check for other excluded transforms
-        //TODO parametrize this?
-        if (t_name != "thresh"&& t_name != "skel-fill") { //RAW   t_name != "thresh" && t_name != "raw" && t_name != "skel-fill"
+        if ( process_transform(t_name, options.unexplainable)) {
 
             let trans_prediction = kb.test_preds[t_name][label_index];
 
@@ -92,7 +105,7 @@ for (let label of kb.labels) {
                 trans_name: t_name,
                 class: trans_prediction,
                 stats: kb.stats[t_name]['stats'][trans_prediction],
-                contribution: get_contribution(kb.stats[t_name]['stats'][trans_prediction], kb.metrics[t_name]['classes'][trans_prediction]),
+                contribution: get_contribution(kb.stats[t_name]['stats'][trans_prediction], kb.metrics[t_name]['classes'][trans_prediction], options.effectiveness_metric),
                 explainability: kb.metrics[t_name]['explainability'],
                 ie_prob: kb.test_prob[t_name][label_index][trans_prediction] // output of the inference engine
                 // kb.metrics[t_name]['classes'][trans_prediction]
@@ -214,8 +227,8 @@ console.log("Final result:", correct / count);
 //console.log("Result 1st and 2nd choice:", (correct + second_choice) / count, second_choice);
 get_confusion_matrix(final_labels, final_predictions);
 
-fs.writeFileSync(path.join(options.knowledge_base, "results.json"), JSON.stringify(results, null, 4));
-fs.writeFileSync(path.join(options.knowledge_base, "kb.json"), JSON.stringify(kb, null, 4));
+fs.writeFileSync(path.join(options.knowledgebase, "results.json"), JSON.stringify(results, null, 4));
+fs.writeFileSync(path.join(options.knowledgebase, "kb.json"), JSON.stringify(kb, null, 4));
 
 function get_confusion_matrix(labels, preds, auc) {
     let max = Math.max(...labels);
@@ -333,25 +346,53 @@ function get_product(stats) {
     return stats.accuracy * stats.sensitivity * stats.specificity * stats.precision;
 }
 
-// TODO: do we want the stats weighted?  perhaps parameterize this
-function get_contribution(stats, metrics) {
+function get_contribution(stats, metrics, metric_name) {
 
     if (stats === undefined) {
         // TODO change to describe the stat metric used
-        console.log("----------Contribution is the MCC ----------");
+        console.log("----------Effectiveness contribution is " + metric_name + " ----------");
         return;
     }
 
-    return get_product(stats); // product
-    //return metrics['train_specificity'] * metrics['train_recall']
-    //return metrics['train_specificity'] * metrics['train_recall'] * metrics['train_precision']
-    //return metrics['train_acc'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision']; // metrics alternative product
-    //return metrics['train_balanced_acc']
-    //return metrics['train_auc'];
-    //return metrics['train_f_score'];
-    //return  metrics['train_recall'] * metrics['train_balanced_acc'] * metrics['train_specificity'] * metrics['train_precision']; // balanced acc product
-    //return metrics['train_recall']; // original
-    //return metrics['train_f_score'] * metrics['train_acc'] * metrics['train_specificity']; // f score product - f - score = harmonic mean of precision and recall
-    //return stats['cba'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision']
-    //return stats.mcc;
+    if (metric_name === 'product') {
+        return get_product(stats); // product
+        //return metrics['train_acc'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision']; // metrics alternative product
+    } else if (metric_name === 's_dot_r') { // specificity * recall
+        return metrics['train_specificity'] * metrics['train_recall'];
+    } else if (metric_name === 'p_dot_r_dot_s') { // specificity * recall * precision
+        return metrics['train_specificity'] * metrics['train_recall'] * metrics['train_precision'];
+    } else if (metric_name === 'balanced_acc') {
+        return metrics['train_balanced_acc'];
+    } else if (metric_name === 'auc') {
+        return metrics['train_auc'];
+    } else if (metric_name === 'f_score') {
+        return metrics['train_f_score'];
+    }else if (metric_name === 'balanced_acc_product') { 
+        return  metrics['train_recall'] * metrics['train_balanced_acc'] * metrics['train_specificity'] * metrics['train_precision']; // balanced acc product
+    }else if (metric_name === 'f_score_product') {
+        return metrics['train_f_score'] * metrics['train_acc'] * metrics['train_specificity']; // f score product - f - score = harmonic mean of precision and recall
+    } else if (metric_name === 'cba_product') {
+        return stats['cba'] * metrics['train_recall'] * metrics['train_specificity'] * metrics['train_precision'];
+    } else if (metric_name === 'mcc') {
+        return stats.mcc;
+    }  else if (metric_name === 'r') {
+        return metrics['train_recall']; // original
+    } else if (metric_name === 's') {
+        return metrics['train_specificity'];
+    }  else if (metric_name === 'acc') {
+        return metrics['train_acc'];
+    }  else if (metric_name === 'p') {
+        return metrics['train_precision'];
+    } else if (metric_name === 'g_mean') {
+        return stats['g_mean']
+    } else if (metric_name == 'cohen_kappa') {
+        return metrics['cohen_kappa']
+    } else if (metric_name == 'p_dot_r') {
+        return metrics['train_recall'] * metrics['train_precision'];
+    } else if (metric_name == 'p_dot_s') {
+        return metrics['train_specificity'] * metrics['train_precision'];
+    } else {
+        console.log("Invalid metric name,", metric_name);
+        process.exit(1);
+    } 
 }

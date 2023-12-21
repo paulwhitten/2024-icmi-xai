@@ -21,6 +21,7 @@
   "homepage": "https://gitlab.com/paulwhitten/2023-svm-xai#readme",
   "dependencies": {
     "commander": "^11.1.0",
+    "ml-confusion-matrix": "^2.0.0",
     "simple-statistics": "^7.8.3"
   }
 }
