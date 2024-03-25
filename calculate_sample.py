@@ -29,7 +29,7 @@ class CalcObject:
 
         vote_tally = []
         for i in range(self.max_label + 1):
-            vote_tally.append({"class": i, "value": 0.0, "attributions": []})
+            vote_tally.append({"class": i, "value": 0.0, "explainability": 0.0, "attributions": []})
 
         for n in TransformNames:
             match n:
@@ -62,7 +62,7 @@ class CalcObject:
                 case _:
                     print("No match for:", n)
 
-            if n != "raw" and n != "thresh":
+            if n != "skel-fill" and n != "thresh": # raw
                 # convert img to normalized
                 i = np.array(img).flatten().astype('float32')/255
 
@@ -78,6 +78,8 @@ class CalcObject:
                 print("base 64 image:", b64_img)
 
                 vote_tally[pred[0]]["value"] += eff
+                if n != "raw":
+                    vote_tally[pred[0]]["explainability"] += eff
                 vote_tally[pred[0]]["attributions"].append({"name": n, "effectiveness": eff, "image": b64_img}) #img.flatten().tolist()
 
             #self.kb.stats[n].stats[pred[0]].accuracy, self.kb.stats[n].stats[pred[0]].sensitivity,

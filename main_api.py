@@ -22,8 +22,10 @@ calc = CalcObject("models_svm_mnist", "kb_svm_mnist")
 app = FastAPI()
 router = APIRouter()
 
+# static serving of files such as web page
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+# hello world example for routing root api path
 @router.get("/")
 def router_root():
     logger.debug("router root")
@@ -36,6 +38,7 @@ def read_root():
     logger.debug("Root log")
     return {"Hello": "World"}
 
+# submit post for the rendered image
 @app.post("/submit")
 async def submit(request: Request):
     logger.debug("Submit log")

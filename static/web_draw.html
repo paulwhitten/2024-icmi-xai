@@ -95,12 +95,19 @@
         document.getElementById('ellipse-circle').src = "";
         document.getElementById('ellipse').src = "";
         document.getElementById('fill').src = "";
-        document.getElementById('skel-fill').src = "";
+        document.getElementById('raw').src = "";
 
 
     }
     
     function submit() {
+
+        let transNameToProp = {
+            skel: "stroke",
+            chull: "convex hull",
+            fill: "enclosed region"
+        };
+
         // https://www.w3schools.com/tags/canvas_getimagedata.asp
         var imgData = ctx.getImageData(0, 0, 28, 28);
         //var dataURL = canvas.toDataURL();
@@ -133,13 +140,17 @@
             console.log("json:", d)
             console.log(typeof(d))
             tally = JSON.parse(d)
+            // get the total weight
             let total = 0.0
             for (let v of tally) {
+                // sort attributions based on effectiveness
                 v.attributions.sort((a, b) => {
                     return b.effectiveness - a.effectiveness;
                 });
                 total += v.value;
+                v["exp"] = v.explainability / v.value;
             }
+            // sort the votes
             tally.sort((a, b) => {
                 return b.value - a.value
             });
@@ -152,7 +163,7 @@
                 } else {
                     res += " was an alternative"
                 }
-                res += " with confidence " + v.pred.toPrecision(3) + " due to the "
+                res += " with confidence " + v.pred.toPrecision(3) + " and explainability " + v.exp.toPrecision(3) + " due to the "
                 let prop_ix = 0;
                 for (let a of v.attributions) {
                     if (a.image) {
@@ -183,10 +194,15 @@
                     if (prop_ix != 0) {
                         res += ", "
                     }
-                    res += a.name
+                    res += transNameToProp[a.name] || a.name
                     prop_ix++;
                 }
-                res += " properties."
+                res += " propert"
+                if (prop_ix > 1) {
+                    res += "ies"
+                } else {
+                    res += "y"
+                }
                 if (count < 4 && v.value > 0.0) {
                     document.getElementById('label' + count).innerHTML = res;
                 }
@@ -276,7 +292,7 @@
                         <img id="fill" width="28" height="28"><figcaption>Fill</figcaption>
                     </td>
                     <td>
-                        <img id="skel-fill" width="28" height="28"><figcaption>SkFi</figcaption>
+                        <img id="raw" width="28" height="28"><figcaption>Raw</figcaption>
                     </td>
                 </tr>
             </table>
@@ -287,6 +303,12 @@
         <div><label id="label1"></label> </div>
         <div><label id="label2"></label> </div>
         <div><label id="label3"></label> </div>
+
+        <div  style="position: absolute; bottom: 0;">
+            <p>
+                Copyright &copy; 2024
+            </p>
+        </div>
     </body>
     </html>
 
