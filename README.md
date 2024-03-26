@@ -8,7 +8,7 @@ TODO: refine the documentation of the process
 
 1. Create a folder for transformed data
 1. Transform data using the program `transform_parallel.py` into the folder for transforms
-1. Create a golder to store the ML models
+1. Create a folder to store the ML models
 1. Train models using the program `train_svm_transforms.py` (support vector machines) or `train_nn_transforms.py` (multi-layer perceptrons) storing in the appropriate folder
 1. Creating a kb folder.
 1. Build the knowledgebase (kb) by running the program `build_kb.py` with output of the klb folder
