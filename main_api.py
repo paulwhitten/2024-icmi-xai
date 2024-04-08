@@ -11,6 +11,7 @@ import numpy as np
 import logging
 import json
 
+# find the center of mass
 def center_of_mass(data):
     image = get_image_from_list(data)
     threshold_value = filters.threshold_otsu(image)
@@ -21,6 +22,7 @@ def center_of_mass(data):
     print("COM:", center_of_mass)
     return center_of_mass
 
+# translate the image according to the passed x and y
 def translate_img(img, x_trans, y_trans):
     im_sh = img.shape
     raw = np.zeros((im_sh[0], im_sh[1]), np.uint8)
@@ -80,6 +82,7 @@ async def submit(request: Request):
             image_data = json.loads(body_data) # an array representing the image
             #logger.debug(image_data)
 
+            # center the image
             com = center_of_mass(image_data)
             img = get_image_from_list(image_data)
             centered = translate_img(img, int(13.0-com[0]), int(13.0-com[1]))
@@ -87,10 +90,11 @@ async def submit(request: Request):
             
             # transform
             raw, thresh, skel, fill, corner, ellipse, circle, ellipse_circle, skel_fill, crossing, endpoint, line, chull = get_transforms(centered_data)
-            res = calc.get_result(raw, thresh, skel, fill, corner, ellipse, circle, ellipse_circle, skel_fill, crossing, endpoint, line, chull)
+            
             # feed the data into the various models to get voted
             # calculate the results based on kb effectiveness
             # assemble a response with explainability
+            res = calc.get_result(raw, thresh, skel, fill, corner, ellipse, circle, ellipse_circle, skel_fill, crossing, endpoint, line, chull)
 
             return json.dumps(res)
         except JSONDecodeError:
