@@ -63,24 +63,30 @@ class CalcObject:
                     print("No match for:", n)
 
             if n != "skel-fill" and n != "thresh": # raw
+                print("property:", n)
                 # convert img to normalized
                 i = np.array(img).flatten().astype('float32')/255
 
-                pred = self.models[n].predict([i])
+                # was predict([i])
+                pred = self.models[n].predict_proba([i])
+                class_pred = np.argmax(pred[0])
+                print("prediction probability:", pred[0], ", prediction:", class_pred) #pred[0]
+ 
+                #eff = self.kb["stats"][n]["stats"][pred[0]]["accuracy"] * self.kb["stats"][n]["stats"][pred[0]]["sensitivity"] * self.kb["stats"][n]["stats"][pred[0]]["specificity"] * self.kb["stats"][n]["stats"][pred[0]]["precision"]
+                eff = self.kb["stats"][n]["stats"][class_pred]["t_product"]
 
-                eff = self.kb["stats"][n]["stats"][pred[0]]["accuracy"] * self.kb["stats"][n]["stats"][pred[0]]["sensitivity"] * self.kb["stats"][n]["stats"][pred[0]]["specificity"] * self.kb["stats"][n]["stats"][pred[0]]["precision"]
-                
-                print(n, pred, eff)
+                print("transform:", n, ", prediction:", class_pred, ", effectiveness:", eff, ", probability:", pred[0][class_pred])
 
                 buf = BytesIO()
                 imageio.imwrite(buf, img, format='png')
                 b64_img = base64.b64encode(buf.getbuffer()).decode('utf-8')
                 print("base 64 image:", b64_img)
 
-                vote_tally[pred[0]]["value"] += eff
+                # TODO also use probability
+                vote_tally[class_pred]["value"] += eff * pred[0][class_pred]
                 if n != "raw":
-                    vote_tally[pred[0]]["explainability"] += eff
-                vote_tally[pred[0]]["attributions"].append({"name": n, "effectiveness": eff, "image": b64_img}) #img.flatten().tolist()
+                    vote_tally[class_pred]["explainability"] += eff * pred[0][class_pred]
+                vote_tally[class_pred]["attributions"].append({"name": n, "effectiveness": eff, "image": b64_img}) #img.flatten().tolist()
 
             #self.kb.stats[n].stats[pred[0]].accuracy, self.kb.stats[n].stats[pred[0]].sensitivity,
             #self.kb.stats[n].stats[pred[0]].specificity, self.kb.stats[n].stats[pred[0]].precision

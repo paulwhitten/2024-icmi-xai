@@ -2,7 +2,7 @@
 
 This set of programs is for TODO provide a link to where this will be published
 
-## process
+## Process
 
 TODO: refine the documentation of the process
 
@@ -11,7 +11,7 @@ TODO: refine the documentation of the process
 1. Create a folder to store the ML models
 1. Train models using the program `train_svm_transforms.py` (support vector machines) or `train_nn_transforms.py` (multi-layer perceptrons) storing in the appropriate folder
 1. Creating a kb folder.
-1. Build the knowledgebase (kb) by running the program `build_kb.py` with output of the klb folder
+1. Build the knowledgebase (kb) by running the program `build_kb.py` with output of the kb folder
 1. Run copy <model_foler>/*.json <kb_folder>/
 1. Run the program `process_kb_conf_matrix.py` on the kb folder to generate confusion matrices and metrics
 1. Run the program `node process_kb.js` against the kb folder to get results against test data with various effectiveness metrics and compare mixed versus only explainable via command line options.

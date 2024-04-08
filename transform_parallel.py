@@ -457,6 +457,27 @@ def get_corners(image):
         set_neighborhood(corner_image, coord[1], coord[0], 1, 255)
     return corner_image
 
+def get_image_from_list(data):
+    pixel_count = len(data)
+    dimension = int(math.sqrt(pixel_count))
+    print("pixels:", pixel_count, "dimension:", dimension)
+    raw = np.zeros((dimension,dimension), np.uint8)
+    pixel = 0
+    for x in range(dimension):
+        for y in range(dimension):
+            raw[x,y] = data[pixel]
+            pixel += 1
+    return raw
+
+def image_data_to_list(data):
+    #return data.flatten().tolist()
+    l = []
+    shape = data.shape
+    for x in range(shape[0]):
+        for y in range(shape[1]):
+            l.append(data[x,y])
+    return l
+
 # gets the transforms from the passed array of image data
 def get_transforms(data):
     min_thresh = 100
