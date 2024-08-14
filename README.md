@@ -1,6 +1,7 @@
 # 2024-icmi-xai
 
-This set of programs is for TODO provide a link to where this will be published
+This set of programs is for
+[An AI Architecture with the Capability to Explain Recognition Results](https://doi.org/10.1109/ICMI60790.2024.10586116), also at [arxiv](https://arxiv.org/abs/2406.08740).
 
 ## Process
 
