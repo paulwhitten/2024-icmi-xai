@@ -32,35 +32,34 @@ class CalcObject:
             vote_tally.append({"class": i, "value": 0.0, "explainability": 0.0, "attributions": []})
 
         for n in TransformNames:
-            match n:
-                case "raw":
-                    img = raw
-                case "thresh":
-                    img = thresh
-                case "skel":
-                    img = skel
-                case "fill":
-                    img = fill
-                case "corner":
-                    img = corner
-                case "ellipse":
-                    img = ellipse
-                case "circle":
-                    img = circle
-                case "ellipse-circle":
-                    img = ellipse_circle
-                case "skel-fill":
-                    img = skel_fill
-                case "crossing":
-                    img = crossing
-                case "endpoint":
-                    img = endpoint
-                case "line":
-                    img = line
-                case "chull":
-                    img = chull
-                case _:
-                    print("No match for:", n)
+            if n == "raw":
+                img = raw
+            elif n == "thresh":
+                img = thresh
+            elif n == "skel":
+                img = skel
+            elif n == "fill":
+                img = fill
+            elif n == "corner":
+                img = corner
+            elif n == "ellipse":
+                img = ellipse
+            elif n == "circle":
+                img = circle
+            elif n == "ellipse-circle":
+                img = ellipse_circle
+            elif n == "skel-fill":
+                img = skel_fill
+            elif n == "crossing":
+                img = crossing
+            elif n == "endpoint":
+                img = endpoint
+            elif n == "line":
+                img = line
+            elif n == "chull":
+                img = chull
+            else:
+                print("No match for:", n)
 
             if n != "skel-fill" and n != "thresh": # raw
                 print("property:", n)

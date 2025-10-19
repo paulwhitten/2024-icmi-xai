@@ -45,7 +45,7 @@ logging.debug('This message should appear on the console')
 
 #CalcObject("models_svm_mnist", "kb_svm_mnist")
 #CalcObject("models/mnist/mlp", "kb/mnist/mlp")
-calc = CalcObject("models/mnist/mlp", "kb/mnist/mlp")
+calc = CalcObject("models/mlp", "kb/mlp")
 
 app = FastAPI()
 router = APIRouter()
