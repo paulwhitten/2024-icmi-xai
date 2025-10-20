@@ -1,0 +1,12 @@
+[Unit]
+Description=ICMI XAI Web Service
+After=network.target
+
+[Service]
+User=pcw
+WorkingDirectory=/home/pcw/dev/2024-icmi-xai
+Environment="PATH=/home/pcw/dev/2024-icmi-xai/.venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/home/pcw/dev/2024-icmi-xai/.venv/bin/python -m uvicorn main_api:app --host 0.0.0.0 --port 8000
+
+[Install]
+WantedBy=multi-user.target
