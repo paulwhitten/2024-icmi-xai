@@ -1,8 +1,6 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="styles.css">
-    </head>
     <script type="text/javascript">
+
     // from https://stackoverflow.com/questions/2368784/draw-on-html5-canvas-using-a-mouse
     // https://stackoverflow.com/questions/10673122/how-to-save-canvas-as-an-image-with-canvas-todataurl
     var canvas, ctx, flag = false,
@@ -12,8 +10,8 @@
         currY = 0,
         dot_flag = false;
 
-    const x = "white"
-        y = 16;
+    const x = "white";
+    const y = 16;
     
     function init() {
         canvas = document.getElementById('can');
@@ -88,16 +86,6 @@
         document.getElementById('fill').src = "";
         document.getElementById('raw').src = "";
 
-    }
-
-    function characterize_confidence(conf) {
-        if (conf >= 0.750) {
-            return "high";
-        } else if ( conf >= 0.250 ) {
-            return "medium"
-        } else {
-            return "low"
-        }
     }
     
     function submit() {
@@ -176,13 +164,13 @@
             let count = 0
             for (let v of tally) {
                 v.pred = v.value / total;
-                let res = "<br>The digit " + v. class
+                let res = "The digit " + v. class
                 if (count == 0) {
                     res += " won"
                 } else {
                     res += " was an alternative"
                 }
-                res += " with " + characterize_confidence(v.pred) + " confidence, " + v.pred.toPrecision(3) + ", and " + characterize_confidence(v.exp) +  " explainability, " + v.exp.toPrecision(3) + ", due to the "
+                res += " with confidence " + v.pred.toPrecision(3) + " and explainability " + v.exp.toPrecision(3) + " due to the "
                 let prop_ix = 0;
                 for (let a of v.attributions) {
                     if (a.image) {
@@ -222,9 +210,6 @@
                 } else {
                     res += "y"
                 }
-                res += "."
-                res += v.failures
-                res += "\n<br><hr>"
                 if (count < 4 && v.value > 0.0) {
                     document.getElementById('label' + count).innerHTML = res;
                 }
@@ -238,6 +223,14 @@
 
     }
     
+    function getCanvasCoords(e) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+        };
+    }
+
     function findxy(res, e) {
         // Normalize coordinates to canvas space.
         const pos = getCanvasCoords(e);
@@ -275,21 +268,9 @@
         }
     }
 
-    // Helper: return {x,y} relative to the canvas's coordinate space.
-    function getCanvasCoords(e) {
-        const rect = canvas.getBoundingClientRect();
-        // PointerEvent has clientX/clientY; TouchEvents have touches (not used now because we use pointer events)
-        const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] && e.touches[0].clientX);
-        const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] && e.touches[0].clientY);
-        return {
-            x: (clientX - rect.left) * (canvas.width / rect.width),
-            y: (clientY - rect.top) * (canvas.height / rect.height)
-        };
-    }
     </script>
     <body onload="init()">
-        <div>
-        <div>Property-Based Explainability - Draw a digit</div>
+        <div>Draw a digit</div>
         <br>
         <div><canvas id="can" width="280" height="280"></canvas></div>
         <br>
@@ -345,14 +326,11 @@
         <div><label id="label2"></label> </div>
         <div><label id="label3"></label> </div>
 
-        
-        <div  style="position: absolute; top: 0; right: 10;">
+        <div  style="position: absolute; bottom: 0;">
             <p>
-                Copyright &copy; 2025
+                Copyright &copy; 2024
             </p>
         </div>
-        </div>
-        
     </body>
     </html>
 
